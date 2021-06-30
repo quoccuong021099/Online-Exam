@@ -1,0 +1,81 @@
+header {
+  border: 1px solid #eee !important;
+  .header {
+    max-width: 1110px;
+    margin: 0 auto !important;
+    padding: 15px 0;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 76px;
+    &__logo {
+      flex-basis: 203px;
+      img {
+        width: 186;
+        height: 26px;
+      }
+      padding-right: 15px;
+    }
+    &__nav {
+      flex-basis: 730px;
+      &-link {
+        display: inline-block;
+        line-height: 1.5;
+        font-size: 12px;
+        font-weight: 400;
+        margin: 0 15px;
+        &::after {
+          display: block;
+          content: "";
+          width: 0px;
+          height: 4px;
+          background-color: #3a4bcd;
+        }
+      }
+      &-item {
+        display: inline-block;
+        &:hover a::after {
+          width: 100%;
+          transition: all 0.3s ease-in 0s;
+        }
+        &.active a::after {
+          width: 100%;
+        }
+      }
+    }
+    &__login {
+      flex-basis: 179px;
+      text-align: right;
+
+      a {
+        background: #b2deff;
+        width: 141px;
+        height: 44px;
+        display: inline-block;
+        line-height: 44px;
+        border-radius: 22px;
+      }
+      span {
+        font-family: "Nunito", sans-serif;
+        font-size: 13px;
+        line-height: 1.1;
+        font-weight: 700;
+        color: #065592;
+        padding-left: 10px;
+      }
+      &-icon {
+        background: url(https://s.tracnghiem.net/assets/images/header/user-icon.png)
+          no-repeat center #065592;
+        float: right;
+        width: 37px;
+        height: 37px;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        -khtml-border-radius: 50%;
+        margin: 4px 4px 4px 9px;
+      }
+    }
+  }
+}
