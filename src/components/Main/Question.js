@@ -1,15 +1,27 @@
-import React from "react";
-
-export default function Question() {
+// import React, { useState } from "react";
+import Input from "../../common/Input";
+export default function Question({ dataItem, getResult }) {
   return (
     <div>
       <ul className="exam">
-        <h4>Câu 1:</h4>
-        <p>Cho a,b là hai số thực dương bất kì. Mệnh đề nào dưới đây đúng?</p>
-        <li>A. 1</li>
-        <li>B. 2</li>
-        <li>C. 3</li>
-        <li>D. 4</li>
+        <h4>{dataItem.name}:</h4>
+        <p>{dataItem.content}</p>
+        {dataItem.answer.map((i) => (
+          <label
+            htmlFor={`id${i.id_answer}`}
+            className="exam__result"
+            key={`result${i.id_answer}`}
+          >
+            <Input
+              id={`id${i.id_answer}`}
+              name={dataItem.id}
+              type="radio"
+              value={i.result}
+              onChange={() => getResult(i)}
+            />
+            <label htmlFor={`id${i.id_answer}`}>{i.content_answer}</label>
+          </label>
+        ))}
       </ul>
     </div>
   );

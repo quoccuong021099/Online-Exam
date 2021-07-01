@@ -130,3 +130,16 @@ a {
 li {
   list-style-type: none;
 }
+
+.btn {
+  padding: 15px;
+  border: none;
+  background-color: #ee9f16;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 51px;
+}
+.btn:hover {
+  background-color: #c38314;
+}

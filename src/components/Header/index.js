@@ -50,7 +50,7 @@ export default function Header() {
           </ul>
           <div className="header__login">
             <a href="/#">
-              <span className="header__login-name">Đăng nhập</span>
+              <span className="header__login-name">Quốc Cường</span>
               <span className="header__login-icon"></span>
             </a>
           </div>

@@ -16,6 +16,28 @@ main {
       padding: 34px;
       border: solid 1px #d9d9d9;
       border-radius: 8px;
+      &-alarm {
+        position: fixed;
+        left: 13%;
+        width: 80px;
+        height: 80px;
+        color: #fff;
+        background-color: #3a4bcd;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        svg {
+          display: block;
+          fill: #fff;
+          margin-bottom: 5px;
+        }
+        &:hover {
+          background-color: #1f31b4;
+        }
+        animation: upAndDown 0.5s ease-in-out 0s infinite;
+      }
       &-title {
         h2 {
           font-family: "Nunito", sans-serif;
@@ -57,41 +79,64 @@ main {
           margin-top: 24px;
           height: auto;
           font-family: "Nunito", sans-serif;
+          font-size: 20px;
           h4 {
-            font-size: 16px;
             line-height: 22px;
             font-weight: 700;
           }
           p {
-            font-size: 16px;
             line-height: 22px;
             font-weight: 400;
+            margin: 8px 0;
           }
           li {
             font-size: 16px;
             line-height: 22px;
             font-weight: 400;
           }
-          &__footer {
+          &__pagination {
             display: flex;
             justify-content: space-between;
+            margin-top: 30px;
+            &-prev,
+            &-next,
+            &-submit {
+              width: 50px;
+              border-radius: 100%;
+            }
+            &-submit {
+              width: 180px;
+              border-radius: 5px;
+              background-color: rgb(6, 167, 14);
+              &:hover {
+                background-color: rgb(11, 119, 16);
+              }
+            }
+            &-next {
+              background-color: #3a4bcd;
+              &:hover {
+                background-color: #1f31b4;
+              }
+            }
+          }
+          &__result {
+            display: block;
+            margin: 20px 0;
+            border: solid 1px #d9d9d9;
+            border-radius: 5px;
+            padding: 10px;
+            line-height: 24px;
+            font-weight: 400;
+
+            input {
+              margin: 5px;
+            }
+          }
+          &__footer {
+            display: flex;
+            justify-content: flex-end;
             padding: 0 30px;
             padding-top: 34px;
-            button {
-              width: 49%;
-              padding: 15px 0;
-              border: none;
-              color: #fff;
-              border-radius: 5px;
-              cursor: pointer;
-              height: 51px;
-            }
-            &-start {
-              background-color: #ffb83c;
-            }
-            &-share {
-              background-color: #375aab;
-            }
           }
         }
       }
@@ -249,5 +294,20 @@ main {
         }
       }
     }
+  }
+}
+
+@keyframes upAndDown {
+  0% {
+    top: 116px;
+    background-color: red;
+  }
+  50% {
+    top: 120px;
+    background-color: rgb(34, 240, 6);
+  }
+  100% {
+    top: 116px;
+    background-color: rgb(24, 9, 241);
   }
 }
