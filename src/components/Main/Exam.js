@@ -1,31 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Question from "./Question";
 export default function Exam({ dataTest }) {
-  // const [resultArr, setResultArr] = useState([]);
+  const [resultArr, setResultArr] = useState([]);
 
-  const question2 = dataTest.map((i) => ({
+  const question = dataTest.map((i) => ({
     id: i.id,
     content: i.content,
-    answer: i.answer,
+    answer: null,
   }));
-
+  
   const getResult = (data) => {
-    console.log("data", data);
-    // setResultArr([...resultArr, data]);
-    console.log(question2);
-    const index = question2.findIndex((i) => i.answer === data.id_parent);
-    if (index >= 0) {
-      question2[index].answer = data;
-      // setResultArr([...resultArr, question2])
-    }
+    console.log(data);
+    const index = question.findIndex((item) => item.id === data.id_parent);
+    console.log(index);
+    if (index >= 0) question[index].answer = data;
   };
 
   return (
     <div>
-      {/* {console.log("resultArr: ", resultArr)} */}
-      {/* {console.log("question2: ", question2)} */}
-      {dataTest.map((i) => (
-        <Question key={`question${i.id}`} dataItem={i} getResult={getResult} />
+      {console.log("resultArr:", resultArr)}
+      {dataTest.map((item) => (
+        <Question
+          key={`question${item.id}`}
+          dataItem={item}
+          getResult={getResult}
+        />
       ))}
     </div>
   );
