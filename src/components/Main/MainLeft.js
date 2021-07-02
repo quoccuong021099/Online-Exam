@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Exam from "./Exam";
-import Button from "../../common/Button";
 export default function MainLeft() {
   const [dataTest, setDataTest] = useState([]);
   useEffect(() => {
@@ -55,18 +54,8 @@ export default function MainLeft() {
         </div>
       </div>
       <div className="main__left-content">
-        <Exam dataTest={dataTest} />
-        <div className="exam__pagination">
-          <Button
-            className="exam__pagination-prev"
-            value={<i className="fas fa-arrow-left"></i>}
-          />
-          <Button className="exam__pagination-submit" value="NỘP BÀI" />
-          <Button
-            className="exam__pagination-next"
-            value={<i className="fas fa-arrow-right"></i>}
-          />
-        </div>
+        {dataTest.length > 0 && <Exam dataTest={dataTest} />}
+        
       </div>
     </div>
   );

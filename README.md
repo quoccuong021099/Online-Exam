@@ -3,3 +3,5 @@
 - Code layout Page Online Exam
 
 # Day 2
+
+- Push result to arr

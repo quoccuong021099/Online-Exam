@@ -21,6 +21,7 @@ export default function Input({
         onClick={onClick}
         onChange={onChange}
         checked={checked}
+        required
       />
     </>
   );
