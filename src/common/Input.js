@@ -9,6 +9,7 @@ export default function Input({
   onClick,
   checked,
   onChange,
+  ...rest
 }) {
   return (
     <>
@@ -21,6 +22,7 @@ export default function Input({
         onClick={onClick}
         onChange={onChange}
         checked={checked}
+        {...rest}
       />
     </>
   );

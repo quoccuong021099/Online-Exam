@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from "react";
 import Exam from "./Exam";
 import Button from "../../common/Button";
+import Spinner from '../Spinner'
 export default function MainLeft() {
+
+
   const [dataTest, setDataTest] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const sleep = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
   useEffect(() => {
-    fetch("http://localhost:3000/question")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setDataTest(result);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    const fetchQuestion = async () => {
+      setIsLoading(true);
+      await sleep(200);
+      const responseJson = await fetch("http://localhost:5000/question");
+      const response = await responseJson.json();
+      setDataTest(response)
+      setIsLoading(false);
+    }
+    fetchQuestion()
   }, []);
 
   return (
@@ -54,8 +62,9 @@ export default function MainLeft() {
           </span>
         </div>
       </div>
-      <div className="main__left-content">
-        <Exam dataTest={dataTest} />
+      <div className="main__left-content" style={{position: 'relative', minHeight: 500}}>
+        {isLoading && <Spinner />}
+        {dataTest.length > 0 &&  <Exam dataTest={dataTest} /> }
         <div className="exam__pagination">
           <Button
             className="exam__pagination-prev"

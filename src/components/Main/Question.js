@@ -1,6 +1,12 @@
 // import React, { useState } from "react";
 import Input from "../../common/Input";
-export default function Question({ dataItem, getResult }) {
+export default function Question({
+  dataItem,
+  handleChecked,
+  isSelected,
+  selected,
+  handleChange,
+}) {
   return (
     <div>
       <ul className="exam">
@@ -13,11 +19,18 @@ export default function Question({ dataItem, getResult }) {
             key={`result${i.id_answer}`}
           >
             <Input
+              type={dataItem.type}
               id={`id${i.id_answer}`}
               name={dataItem.id}
-              type="radio"
               value={i.result}
-              onChange={() => getResult(i)}
+              onChange={
+                dataItem.type === "checkbox"
+                  ? (e) => handleChecked(e, i.id_answer)
+                  : () => handleChange(i.id_answer, dataItem.answer)
+              }
+              checked={
+                dataItem.type === "checkbox" ? isSelected(i.id_answer) : null
+              }
             />
             <label htmlFor={`id${i.id_answer}`}>{i.content_answer}</label>
           </label>
