@@ -38,6 +38,28 @@ main {
         }
         animation: upAndDown 0.5s ease-in-out 0s infinite;
       }
+      .done {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h1 {
+          padding: 20px;
+          font-size: 28px;
+          font-weight: 600;
+          line-height: 40px;
+          font-family: "Nunito", sans-serif;
+          color: #1f31b4;
+        }
+        h2 {
+          user-select: none;
+          margin-top: 150px;
+          font-size: 250px;
+          font-weight: 600;
+          line-height: 40px;
+          font-family: "Nunito", sans-serif;
+          color: #1f31b4;
+        }
+      }
       &-title {
         h2 {
           font-family: "Nunito", sans-serif;
@@ -96,14 +118,16 @@ main {
           }
           &__pagination {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             margin-top: 30px;
+            // &-prev,
+            // &-next,
+            // &-submit {
+            //   width: 50px;
+            //   border-radius: 100%;
+            // }
+
             &-prev,
-            &-next,
-            &-submit {
-              width: 50px;
-              border-radius: 100%;
-            }
             &-submit {
               width: 180px;
               border-radius: 5px;
@@ -112,12 +136,18 @@ main {
                 background-color: rgb(11, 119, 16);
               }
             }
-            &-next {
-              background-color: #3a4bcd;
+            &-prev {
+              background-color: #f3b242;
               &:hover {
-                background-color: #1f31b4;
+                background-color: #d89118;
               }
             }
+            // &-next {
+            //   background-color: #3a4bcd;
+            //   &:hover {
+            //     background-color: #1f31b4;
+            //   }
+            // }
           }
           &__result {
             display: block;

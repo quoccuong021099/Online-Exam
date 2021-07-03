@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Question from "./Question";
-import Button from "../../common/Button";
+import Button from "../../../common/Button";
 import ResultModal from "./ResultModal";
 
-export default function Exam({ dataTest, timeDown, seconds_to, turnExam }) {
+export default function Exam({
+  dataTest,
+  timeDown,
+  seconds_to,
+  turnExam,
+  doStart,
+}) {
   const [selectedRadio, setSelectedRadio] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [yourResult, setYourResult] = useState({
@@ -53,6 +59,7 @@ export default function Exam({ dataTest, timeDown, seconds_to, turnExam }) {
           selectedRadio={selectedRadio}
           timeDown={timeDown}
           seconds_to={seconds_to}
+          dataTest={dataTest}
         />
       )}
 
@@ -65,10 +72,11 @@ export default function Exam({ dataTest, timeDown, seconds_to, turnExam }) {
           />
         ))}
         <div className="exam__pagination">
-          {/* <Button
+          <Button
             className="exam__pagination-prev"
-            value={<i className="fas fa-arrow-left"></i>}
-          /> */}
+            value="TRỞ VỀ"
+            onClick={doStart}
+          />
           <div onClick={turnExam}>
             <Button
               className="exam__pagination-submit"

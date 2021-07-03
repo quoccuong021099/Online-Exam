@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Exam from "./Exam";
-export default function MainLeft() {
+import Done from "./Done";
+export default function MainLeft({ doStart }) {
   const [dataTest, setDataTest] = useState([]);
   const [timeDown, setTimeDown] = useState(600);
   const [turn, setTurn] = useState(0);
+  const [flag, setFlag] = useState(false);
 
   const seconds_to = (sec) => {
     var hours = Math.floor(sec / 3600);
@@ -18,14 +20,15 @@ export default function MainLeft() {
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
-      const a = timeDown;
-      if (a > 0) setTimeDown(a - 1);
+      const timer = timeDown;
+      if (timer > 0) setTimeDown(timer - 1);
     }, 1000);
+    if (flag) clearInterval(timeInterval);
 
     return () => {
       clearInterval(timeInterval);
     };
-  }, [timeDown]);
+  }, [timeDown, flag]);
 
   useEffect(() => {
     fetch("http://localhost:5000/question")
@@ -42,6 +45,7 @@ export default function MainLeft() {
 
   const turnExam = () => {
     setTurn(turn + 1);
+    setFlag(true);
   };
 
   return (
@@ -90,6 +94,7 @@ export default function MainLeft() {
             seconds_to={seconds_to}
             timeDown={timeDown}
             turnExam={turnExam}
+            doStart={doStart}
           />
         )}
       </div>

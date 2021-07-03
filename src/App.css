@@ -3,6 +3,11 @@
   margin: 0;
   padding: 0;
 }
+* ::selection {
+  background: #1f31b4;
+  color: #fff;
+  text-shadow: none;
+}
 .app {
   max-width: 100%;
   margin: 0 auto;
