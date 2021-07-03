@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Question from "./Question";
 import Button from "../../common/Button";
+import ResultModal from "./ResultModal";
 
-export default function Exam({ dataTest }) {
+export default function Exam({ dataTest, timeDown, seconds_to, turnExam }) {
   const [selectedRadio, setSelectedRadio] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [yourResult, setYourResult] = useState({
+    result_True: 0,
+    result_False: 0,
+  });
 
   const handleChange = (data) => {
     if (selectedRadio.length > 0) {
       const index = selectedRadio.findIndex(
         (item) => item.parent_id === data.parent_id
       );
-      console.log("data:", data);
-      console.log("index: ", index);
       if (index >= 0) {
         selectedRadio[index] = data;
         setSelectedRadio([...selectedRadio]);
-        console.log("selectedRadio với index >= 0: ", selectedRadio);
       } else {
         setSelectedRadio([...selectedRadio, data]);
-        console.log("selectedRadio với index < 0: ", selectedRadio);
       }
     } else {
       setSelectedRadio([...selectedRadio, data]);
@@ -34,18 +36,26 @@ export default function Exam({ dataTest }) {
       if (newArr[i].result === false) ++resultFalse;
       else ++resultTrue;
     }
-    // const result = newArr.map((i) => i.result);
-    console.log(
-      "resultTrue: ",
-      resultTrue,
-      " và ",
-      "resultFalse ",
-      resultFalse
-    );
+    setYourResult({ result_True: resultTrue, result_False: resultFalse });
+    setOpenModal(!openModal);
   };
+
+  const handleOpenModal = () => {
+    setOpenModal(!openModal);
+  };
+
   return (
     <div>
-      {console.log("selectedRadio RENDER ", selectedRadio)}
+      {openModal && (
+        <ResultModal
+          handleOpenModal={handleOpenModal}
+          yourResult={yourResult}
+          selectedRadio={selectedRadio}
+          timeDown={timeDown}
+          seconds_to={seconds_to}
+        />
+      )}
+
       <form onSubmit={doneExam}>
         {dataTest.map((item) => (
           <Question
@@ -59,11 +69,13 @@ export default function Exam({ dataTest }) {
             className="exam__pagination-prev"
             value={<i className="fas fa-arrow-left"></i>}
           /> */}
-          <Button
-            className="exam__pagination-submit"
-            value="NỘP BÀI"
-            type="submit"
-          />
+          <div onClick={turnExam}>
+            <Button
+              className="exam__pagination-submit"
+              value="NỘP BÀI"
+              type="submit"
+            />
+          </div>
           {/* <Button
             className="exam__pagination-next"
             value={<i className="fas fa-arrow-right"></i>}

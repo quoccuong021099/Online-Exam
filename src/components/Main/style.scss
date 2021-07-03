@@ -140,6 +140,76 @@ main {
           }
         }
       }
+      .modal {
+        position: relative;
+        .overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          background-color: rgba(58, 75, 205, 0.5);
+        }
+        &-result {
+          width: 720px;
+          position: fixed;
+          top: 30%;
+          left: 410px;
+          transform: translateY(-30%);
+          z-index: 10;
+          background-color: #fff;
+          border-radius: 10px;
+          overflow: hidden;
+        }
+        &-header {
+          text-align: center;
+          font-size: 20px;
+          font-weight: 700;
+          padding: 20px;
+          background-color: #3a4bcd;
+          color: #fff;
+        }
+        &-body {
+          color: #000;
+          padding: 20px;
+          &__title {
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto 30px;
+            font-size: 18px;
+            font-weight: 600;
+          }
+          &__table {
+            h2 {
+              border-top: solid 1px #cfcfe9;
+              padding: 30px 0;
+              text-align: center;
+              font-size: 18px;
+              font-weight: 500;
+            }
+            &-result {
+              width: 100%;
+              padding: 15px 0 30px;
+              span {
+                display: inline-block;
+                border: 1px solid #cfcfe9;
+                padding: 5px;
+                width: 10%;
+              }
+            }
+          }
+        }
+        &-footer {
+          background-color: #ffb83c;
+          padding: 20px;
+          a {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+          }
+        }
+      }
     }
     &__right {
       flex-basis: 300px;
@@ -300,14 +370,14 @@ main {
 @keyframes upAndDown {
   0% {
     top: 116px;
-    background-color: red;
+    // background-color: red;
   }
   50% {
     top: 120px;
-    background-color: rgb(34, 240, 6);
+    // background-color: rgb(34, 240, 6);
   }
   100% {
     top: 116px;
-    background-color: rgb(24, 9, 241);
+    // background-color: rgb(24, 9, 241);
   }
 }
