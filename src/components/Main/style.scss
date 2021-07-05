@@ -116,39 +116,7 @@ main {
             line-height: 22px;
             font-weight: 400;
           }
-          &__pagination {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            // &-prev,
-            // &-next,
-            // &-submit {
-            //   width: 50px;
-            //   border-radius: 100%;
-            // }
 
-            &-prev,
-            &-submit {
-              width: 180px;
-              border-radius: 5px;
-              background-color: rgb(6, 167, 14);
-              &:hover {
-                background-color: rgb(11, 119, 16);
-              }
-            }
-            &-prev {
-              background-color: #f3b242;
-              &:hover {
-                background-color: #d89118;
-              }
-            }
-            // &-next {
-            //   background-color: #3a4bcd;
-            //   &:hover {
-            //     background-color: #1f31b4;
-            //   }
-            // }
-          }
           &__result {
             display: block;
             margin: 20px 0;
@@ -203,7 +171,7 @@ main {
           color: #000;
           padding: 20px;
           &__title {
-            width: 80%;
+            width: 100%;
             display: flex;
             justify-content: space-between;
             margin: 0 auto 30px;
@@ -409,5 +377,67 @@ main {
   100% {
     top: 116px;
     // background-color: rgb(24, 9, 241);
+  }
+}
+
+.choose-question {
+  max-width: 100%;
+  background-color: #1f31b4;
+  color: #000;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 30px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    span {
+      background-color: #fff;
+      display: inline-block;
+      margin: 4px 2px;
+      padding: 5px;
+      width: 9%;
+      cursor: pointer;
+      text-align: center;
+      border-radius: 5px;
+      &:hover,
+      &.active {
+        background-color: #ffb83c;
+        color: #fff;
+      }
+    }
+  }
+  button {
+    // padding: 10px;
+    height: 30px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    color: #000;
+    &:hover {
+      background-color: #ffb83c;
+      color: #fff;
+    }
+    &:disabled {
+      background-color: #d0d3e9;
+      color: #959595;
+    }
+  }
+  .exam__pagination {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    width: 25%;
   }
 }

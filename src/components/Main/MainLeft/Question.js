@@ -1,5 +1,7 @@
 import Input from "../../../common/Input";
-export default function Question({ dataItem, handleChange }) {
+export default function Question({ dataItem, handleChange, selectedRadio }) {
+  const activeAnswer = selectedRadio.map((i) => i.answer_id);
+
   return (
     <div>
       <ul className="exam">
@@ -15,7 +17,7 @@ export default function Question({ dataItem, handleChange }) {
               id={`id${i.answer_id}`}
               name={dataItem.id}
               type="radio"
-              value={i.result}
+              defaultChecked={activeAnswer.includes(i.answer_id)}
               onChange={() => handleChange(i)}
             />
             <label htmlFor={`id${i.answer_id}`}>{i.content_answer}</label>

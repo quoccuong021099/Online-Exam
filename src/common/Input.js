@@ -7,8 +7,9 @@ export default function Input({
   name,
   id,
   onClick,
-  checked,
+  defaultChecked,
   onChange,
+  defaultValue ,
 }) {
   return (
     <>
@@ -20,8 +21,9 @@ export default function Input({
         placeholder={placeholder}
         onClick={onClick}
         onChange={onChange}
-        checked={checked}
+        defaultChecked={defaultChecked}
         required
+        defaultValue ={defaultValue }
       />
     </>
   );

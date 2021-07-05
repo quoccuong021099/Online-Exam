@@ -3,11 +3,8 @@ export default function ResultModal({
   handleOpenModal,
   yourResult,
   selectedRadio,
-  timeDown,
-  seconds_to,
   dataTest,
 }) {
-  const timer = timeDown;
   const [resultFinal, setResultFinal] = useState([]);
 
   useEffect(() => {
@@ -15,6 +12,7 @@ export default function ResultModal({
     dataTest.map((item) =>
       item.answers.map((i) => i.result === true && result.push(i))
     );
+
     setResultFinal(result);
   }, [dataTest]);
   return (
@@ -25,7 +23,8 @@ export default function ResultModal({
           <h1 className="modal-header">KẾT QUẢ</h1>
           <div className="modal-body">
             <div className="modal-body__title">
-              <p>Thời gian: {seconds_to(600 - timer)}</p>
+              <p>Thời gian: 00:00</p>
+              <p>Tổng điểm: {yourResult.result_True} điểm</p>
               <p>Số câu đúng: {yourResult.result_True}</p>
               <p>Số câu Sai: {yourResult.result_False}</p>
             </div>
@@ -44,9 +43,7 @@ export default function ResultModal({
               <div className="modal-body__table-result">
                 {resultFinal.map((item, index) => (
                   <span key={index}>
-                    {item.content_answer.length <= 4
-                      ? `${index + 1} - ${item.content_answer}`.slice(0, -3)
-                      : `${index + 1} - ${item.content_answer}`.slice(0, -4)}
+                    {`${index + 1} - ${item.content_answer.slice(0, 1)}`}
                   </span>
                 ))}
               </div>
