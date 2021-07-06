@@ -43,11 +43,7 @@ export default function MainLeft() {
   };
   return (
     <div className="main__left">
-      <Oclock
-        pause={pause}
-        getTimeDown={getTimeDown}
-        seconds_to={seconds_to}
-      />
+      <Oclock pause={pause} getTimeDown={getTimeDown} seconds_to={seconds_to} />
       <div className="main__left-title">
         <div className="left">
           <h2>Đề thi thử THPT QG năm 2021 môn Toán</h2>

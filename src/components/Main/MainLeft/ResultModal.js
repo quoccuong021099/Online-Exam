@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 export default function ResultModal({
-  handleOpenModal,
   yourResult,
   selectedRadio,
   dataTest,
   timer,
   seconds_to,
+  onOpenDone,
 }) {
   const [resultFinal, setResultFinal] = useState([]);
 
@@ -20,7 +20,7 @@ export default function ResultModal({
   return (
     <>
       <div className="modal">
-        <div className="overlay" onClick={handleOpenModal}></div>
+        <div className="overlay" onClick={onOpenDone}></div>
         <div className="modal-result">
           <h1 className="modal-header">KẾT QUẢ</h1>
           <div className="modal-body">
@@ -63,7 +63,7 @@ export default function ResultModal({
             </div>
           </div>
           <div className="modal-footer">
-            <a href="/#" onClick={handleOpenModal}>
+            <a href="/#" onClick={onOpenDone}>
               <i className="fas fa-angle-left"></i> Kết Thúc
             </a>
           </div>

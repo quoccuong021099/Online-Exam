@@ -10,9 +10,8 @@ export default function Oclock({ pause, getTimeDown, seconds_to }) {
     }, 1000);
     if (pause) {
       clearInterval(timeInterval);
-      getTimeDown(timeDown);
     }
-
+    getTimeDown(timeDown);
     return () => {
       clearInterval(timeInterval);
     };
