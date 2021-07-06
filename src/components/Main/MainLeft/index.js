@@ -5,11 +5,11 @@ import "./style.scss";
 
 export default function MainLeft() {
   const [dataTest, setDataTest] = useState([]);
-  const [flag, setFlag] = useState(false);
+  const [pause, setPause] = useState(false);
   const [turn, setTurn] = useState(0);
   const [timer, setTimer] = useState(0);
 
-  const setTimerOclock = (data) => {
+  const getTimeDown = (data) => {
     setTimer(data);
   };
 
@@ -39,13 +39,13 @@ export default function MainLeft() {
 
   const turnExam = () => {
     setTurn(turn + 1);
-    setFlag(true);
+    setPause(true);
   };
   return (
     <div className="main__left">
       <Oclock
-        flag={flag}
-        setTimerOclock={setTimerOclock}
+        pause={pause}
+        getTimeDown={getTimeDown}
         seconds_to={seconds_to}
       />
       <div className="main__left-title">
