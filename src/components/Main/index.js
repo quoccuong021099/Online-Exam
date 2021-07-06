@@ -1,5 +1,5 @@
-import MainRight from "./MainRight/MainRight";
-import MainLeft from "./MainLeft/MainLeft";
+import MainRight from "./MainRight";
+import MainLeft from "./MainLeft";
 import "./style.scss";
 export default function Main() {
   return (

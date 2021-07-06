@@ -4,6 +4,8 @@ export default function ResultModal({
   yourResult,
   selectedRadio,
   dataTest,
+  timer,
+  seconds_to,
 }) {
   const [resultFinal, setResultFinal] = useState([]);
 
@@ -23,10 +25,10 @@ export default function ResultModal({
           <h1 className="modal-header">KẾT QUẢ</h1>
           <div className="modal-body">
             <div className="modal-body__title">
-              <p>Thời gian: 00:00</p>
+              <p>Thời gian: {seconds_to(600 - timer)}</p>
               <p>
                 Tổng điểm:{" "}
-                {((10 / dataTest.length) * yourResult.result_True).toFixed(2)}
+                {((10 / dataTest.length) * yourResult.result_True).toFixed(2)}{" "}
                 điểm
               </p>
               <p>Số câu đúng: {yourResult.result_True}</p>
@@ -62,7 +64,7 @@ export default function ResultModal({
           </div>
           <div className="modal-footer">
             <a href="/#" onClick={handleOpenModal}>
-              <i className="fas fa-angle-left"></i> Quay lại
+              <i className="fas fa-angle-left"></i> Kết Thúc
             </a>
           </div>
         </div>

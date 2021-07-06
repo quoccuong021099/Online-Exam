@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.scss";
 export default function MainRight() {
   return (
     <div className="main__right">
