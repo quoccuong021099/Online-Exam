@@ -1,11 +1,11 @@
+import { useContext } from "react";
 import Input from "../../../common/Input";
+import { examContainerContext } from "./Exam";
+export default function Question({ dataItem }) {
+  // get context
+  const contextExam = useContext(examContainerContext);
 
-export default function Question({
-  dataItem,
-  handleChangeResult,
-  selectedRadio,
-}) {
-  const activeAnswer = selectedRadio.map((i) => i.answer_id);
+  const activeAnswer = contextExam.selectedRadio.map((i) => i.answer_id);
   return (
     <div>
       <ul className="exam">
@@ -22,7 +22,7 @@ export default function Question({
               name={dataItem.id}
               type="radio"
               defaultChecked={activeAnswer.includes(i.answer_id)}
-              onChange={() => handleChangeResult(i)}
+              onChange={() => contextExam.handleChangeResult(i)}
             />
             <label htmlFor={`id${i.answer_id}`}>{i.content_answer}</label>
           </label>

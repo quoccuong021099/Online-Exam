@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from "react";
-export default function ResultModal({
-  yourResult,
-  selectedRadio,
-  dataTest,
-  timer,
-  seconds_to,
-  onOpenDone,
-}) {
+import React, { useContext, useEffect, useState } from "react";
+import { mainLeftExam } from "./index";
+import { examContainerContext } from "./Exam";
+export default function ResultModal({ yourResult, onOpenDone }) {
+  // context
+  const context = useContext(mainLeftExam);
+  const contextExam = useContext(examContainerContext);
+
   const [resultFinal, setResultFinal] = useState([]);
 
   useEffect(() => {
     const result = [];
-    dataTest.map((item) =>
+    context.dataTest.map((item) =>
       item.answers.map((i) => i.result === true && result.push(i))
     );
 
     setResultFinal(result);
-  }, [dataTest]);
+  }, [context.dataTest]);
   return (
     <>
       <div className="modal">
@@ -25,10 +24,13 @@ export default function ResultModal({
           <h1 className="modal-header">KẾT QUẢ</h1>
           <div className="modal-body">
             <div className="modal-body__title">
-              <p>Thời gian: {seconds_to(600 - timer)}</p>
+              <p>Thời gian: {context.seconds_to(600 - context.timer)}</p>
               <p>
                 Tổng điểm:{" "}
-                {((10 / dataTest.length) * yourResult.result_True).toFixed(2)}{" "}
+                {(
+                  (10 / context.dataTest.length) *
+                  yourResult.result_True
+                ).toFixed(2)}{" "}
                 điểm
               </p>
               <p>Số câu đúng: {yourResult.result_True}</p>
@@ -37,7 +39,7 @@ export default function ResultModal({
             <div className="modal-body__table">
               <h2>Đáp án của bạn</h2>
               <div className="modal-body__table-result">
-                {selectedRadio.map(
+                {contextExam.selectedRadio.map(
                   (i, index) => (
                     // selectedRadio.map((i) => (
                     <span key={index}>

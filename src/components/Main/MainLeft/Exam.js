@@ -1,11 +1,15 @@
-import React, { useState } from "react";
-import Question from "./Question";
-import Button from "../../../common/Button";
+import React, { useContext, useState } from "react";
 import ResultModal from "./ResultModal";
-import Notify from "./Notify";
 import Done from "./Done";
+import ExamContainer from "./ExamContainer";
+import { mainLeftExam } from "./index";
 
-export default function Exam({ dataTest, turnExam, timer, seconds_to }) {
+export const examContainerContext = React.createContext();
+export default function Exam() {
+  // Get context
+  let context = useContext(mainLeftExam);
+
+  // Local state
   const [selectedRadio, setSelectedRadio] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [openconfirm, setOpenconfirm] = useState(false);
@@ -18,12 +22,15 @@ export default function Exam({ dataTest, turnExam, timer, seconds_to }) {
   const [flagListQuestion, setFlagListQuestion] = useState(false);
   const [reviews, setReviews] = useState([]);
 
+  // Mảng chứa những parent_id đã được chọn
   const activeAnswer = selectedRadio.map((i) => i.parent_id);
 
+  // Hàm thay đổi cờ list question dùng để list các số câu hỏi ở control panel
   const handleFlagListQuestion = () => {
     setFlagListQuestion(!flagListQuestion);
   };
 
+  // Hàm push những đáp án mà người dùng chọn
   const handleChangeResult = (data) => {
     if (selectedRadio.length > 0) {
       const index = selectedRadio.findIndex(
@@ -39,13 +46,14 @@ export default function Exam({ dataTest, turnExam, timer, seconds_to }) {
       setSelectedRadio([...selectedRadio, data]);
     }
     setTimeout(() => {
-      if (count < dataTest.length - 1) {
+      if (count < context.dataTest.length - 1) {
         const a = count + 1;
         setCount(a);
       } else return;
     }, 500);
   };
 
+  // Hàm khi được nộp bài
   const doneExam = (e) => {
     e.preventDefault();
     const newArr = selectedRadio;
@@ -59,152 +67,97 @@ export default function Exam({ dataTest, turnExam, timer, seconds_to }) {
     setOpenModal(!openModal);
     setOpenconfirm(!openconfirm);
   };
+
+  // hàm đóng mở xác nhận nộp bài
   const onChangeConfirm = () => {
     setOpenconfirm(!openconfirm);
   };
+
+  // hàm tiếp tục làm bài
   const onContinue = () => {
     setOpenconfirm(!openconfirm);
   };
 
+  // hàm đóng modal kết quả
   const handleOpenModal = () => {
     setOpenModal(!openModal);
   };
 
+  // hàm mở cửa sổ kết thúc bài làm sau khi nhận được kết quả
   const onOpenDone = () => {
     setOpenDone(!openDone);
     setOpenModal(!openModal);
   };
 
+  // hàm chuyển trang
   const nextPagination = () => {
-    if (count < dataTest.length) {
+    if (count < context.dataTest.length) {
       const a = count + 1;
       setCount(a);
     }
   };
+
+  // hàm chuyển trang
   const prevPagination = () => {
-    if (count > 0 || count < dataTest.length) {
+    if (count > 0 || count < context.dataTest.length) {
       const a = count - 1;
       setCount(a);
     } else {
       return;
     }
   };
+
+  // hàm chọn câu hỏi ở control panel
   const chooseQuestion = (data) => {
     setCount(data);
   };
 
+  // hàm 'xem lại'
   const handleChangeChecked = (id) => {
-    let a = document.querySelector("#review");
-    if (a.checked) {
+    let idReview = document.querySelector("#review");
+    if (idReview.checked) {
       setReviews([...reviews, id]);
     } else {
       reviews.splice(reviews.indexOf(id), 1);
       setReviews([...reviews]);
     }
   };
+
+  // list context exam
+  const listContextExam = {
+    selectedRadio: selectedRadio,
+    handleChangeResult: handleChangeResult,
+    onContinue: onContinue,
+  };
   return (
     <div>
-      {openModal && (
-        <ResultModal
-          handleOpenModal={handleOpenModal}
-          yourResult={yourResult}
-          selectedRadio={selectedRadio}
-          dataTest={dataTest}
-          timer={timer}
-          seconds_to={seconds_to}
-          onOpenDone={onOpenDone}
-        />
-      )}
-      {openDone ? (
-        <Done />
-      ) : (
-        <form onSubmit={doneExam}>
-          {dataTest.map(
-            (item, index) =>
-              index === count && (
-                <Question
-                  key={`question${item.id}`}
-                  dataItem={item}
-                  handleChangeResult={handleChangeResult}
-                  selectedRadio={selectedRadio}
-                />
-              )
-          )}
-
-          {openconfirm && (
-            <Notify
-              onContinue={onContinue}
-              turnExam={turnExam}
-              timer={timer}
-              seconds_to={seconds_to}
-            />
-          )}
-
-          <div className="choose-question">
-            <div className="choose-question__header">
-              <div className="review">
-                <Button
-                  className="exam__pagination-submit"
-                  value="NỘP BÀI"
-                  type="button"
-                  onClick={onChangeConfirm}
-                />
-
-                {dataTest.map(
-                  (item, index) =>
-                    index === count && (
-                      <label htmlFor="review" key={index}>
-                        <input
-                          type="checkbox"
-                          id="review"
-                          defaultChecked={reviews.includes(item.id)}
-                          onChange={() => handleChangeChecked(item.id)}
-                        />
-                        <span>Xem Lại</span>
-                      </label>
-                    )
-                )}
-              </div>
-              <div className="exam__pagination">
-                <Button
-                  className="exam__pagination-prev"
-                  value={<i className="fas fa-arrow-left"></i>}
-                  type="button"
-                  onClick={prevPagination}
-                  disabled={count > 0 ? false : true}
-                />
-                <Button
-                  className="exam__pagination-next"
-                  type="button"
-                  value={<i className="fas fa-arrow-right"></i>}
-                  onClick={nextPagination}
-                  disabled={count < dataTest.length - 1 ? false : true}
-                />
-                <Button
-                  className="exam__pagination-list"
-                  type="button"
-                  value={<i className="fas fa-ellipsis-h"></i>}
-                  onClick={handleFlagListQuestion}
-                />
-              </div>
-            </div>
-            {flagListQuestion && (
-              <div className="choose-question__list">
-                {dataTest.map((item, index) => (
-                  <span
-                    id={reviews.includes(item.id) ? "active" : ""}
-                    className={activeAnswer.includes(item.id) ? "active" : ""}
-                    key={index}
-                    onClick={() => chooseQuestion(index)}
-                  >
-                    {index + 1}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-        </form>
-      )}
+      <examContainerContext.Provider value={listContextExam}>
+        {openModal && (
+          <ResultModal
+            handleOpenModal={handleOpenModal}
+            yourResult={yourResult}
+            onOpenDone={onOpenDone}
+          />
+        )}
+        {openDone ? (
+          <Done />
+        ) : (
+          <ExamContainer
+            nextPagination={nextPagination}
+            chooseQuestion={chooseQuestion}
+            handleFlagListQuestion={handleFlagListQuestion}
+            prevPagination={prevPagination}
+            handleChangeChecked={handleChangeChecked}
+            reviews={reviews}
+            onChangeConfirm={onChangeConfirm}
+            openconfirm={openconfirm}
+            doneExam={doneExam}
+            count={count}
+            activeAnswer={activeAnswer}
+            flagListQuestion={flagListQuestion}
+          />
+        )}
+      </examContainerContext.Provider>
     </div>
   );
 }

@@ -3,16 +3,21 @@ import Exam from "./Exam";
 import Oclock from "../../Oclock";
 import "./style.scss";
 
+export const mainLeftExam = React.createContext();
+
 export default function MainLeft() {
+  // List state
   const [dataTest, setDataTest] = useState([]);
   const [pause, setPause] = useState(false);
   const [turn, setTurn] = useState(0);
   const [timer, setTimer] = useState(0);
 
+  // Hàm lấy thời gian và gắn cho timer
   const getTimeDown = (data) => {
     setTimer(data);
   };
 
+  // Hàm định dạng hh:mm:ss
   const seconds_to = (sec) => {
     var hours = Math.floor(sec / 3600);
     hours >= 1 ? (sec = sec - hours * 3600) : (hours = "00");
@@ -24,6 +29,7 @@ export default function MainLeft() {
     return hours + ":" + min + ":" + sec;
   };
 
+  // fetch API
   useEffect(() => {
     fetch("http://localhost:5000/question")
       .then((res) => res.json())
@@ -37,13 +43,22 @@ export default function MainLeft() {
       );
   }, []);
 
+  // Hàm tăng lượt người làm bài và pause thời gian làm bài
   const turnExam = () => {
     setTurn(turn + 1);
     setPause(true);
   };
+
+  // list context
+  const listContext = {
+    dataTest: dataTest,
+    turnExam: turnExam,
+    seconds_to: seconds_to,
+    timer: timer,
+  };
+
   return (
     <div className="main__left">
-      <Oclock pause={pause} getTimeDown={getTimeDown} seconds_to={seconds_to} />
       <div className="main__left-title">
         <div className="left">
           <h2>Đề thi thử THPT QG năm 2021 môn Toán</h2>
@@ -69,16 +84,12 @@ export default function MainLeft() {
           </span>
         </div>
       </div>
-      <div className="main__left-content">
-        {dataTest.length > 0 && (
-          <Exam
-            dataTest={dataTest}
-            turnExam={turnExam}
-            timer={timer}
-            seconds_to={seconds_to}
-          />
-        )}
-      </div>
+      <mainLeftExam.Provider value={listContext}>
+        <Oclock pause={pause} getTimeDown={getTimeDown} />
+        <div className="main__left-content">
+          {dataTest.length > 0 && <Exam />}
+        </div>
+      </mainLeftExam.Provider>
     </div>
   );
 }

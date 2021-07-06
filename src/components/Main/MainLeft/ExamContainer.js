@@ -1,28 +1,59 @@
-import React from "react";
-import 
-export default function ControlPanel({selectedRadio,handleChangeResult,doneExam,dataTest,}) {
+import React, { useContext } from "react";
+import Question from "./Question";
+import Notify from "./Notify";
+import Button from "../../../common/Button";
+import { mainLeftExam } from "./index";
+export default function ExamContainer({
+  flagListQuestion,
+  handleFlagListQuestion,
+  handleChangeChecked,
+  onChangeConfirm,
+  openconfirm,
+  prevPagination,
+  nextPagination,
+  chooseQuestion,
+  reviews,
+  doneExam,
+  count,
+  activeAnswer,
+}) {
+  // context
+  let context = useContext(mainLeftExam);
   return (
     <form onSubmit={doneExam}>
-      {dataTest.map(
+      {context.dataTest.map(
         (item, index) =>
           index === count && (
-            <Question
-              key={`question${item.id}`}
-              dataItem={item}
-              handleChangeResult={handleChangeResult}
-              selectedRadio={selectedRadio}
-            />
+            <Question key={`question${item.id}`} dataItem={item} />
           )
       )}
 
+      {openconfirm && <Notify />}
+
       <div className="choose-question">
         <div className="choose-question__header">
-          <div onClick={turnExam}>
+          <div className="review">
             <Button
               className="exam__pagination-submit"
               value="NỘP BÀI"
-              type="submit"
+              type="button"
+              onClick={onChangeConfirm}
             />
+
+            {context.dataTest.map(
+              (item, index) =>
+                index === count && (
+                  <label htmlFor="review" key={index}>
+                    <input
+                      type="checkbox"
+                      id="review"
+                      defaultChecked={reviews.includes(item.id)}
+                      onChange={() => handleChangeChecked(item.id)}
+                    />
+                    <span>Xem Lại</span>
+                  </label>
+                )
+            )}
           </div>
           <div className="exam__pagination">
             <Button
@@ -37,7 +68,7 @@ export default function ControlPanel({selectedRadio,handleChangeResult,doneExam,
               type="button"
               value={<i className="fas fa-arrow-right"></i>}
               onClick={nextPagination}
-              disabled={count < dataTest.length - 1 ? false : true}
+              disabled={count < context.dataTest.length - 1 ? false : true}
             />
             <Button
               className="exam__pagination-list"
@@ -49,8 +80,9 @@ export default function ControlPanel({selectedRadio,handleChangeResult,doneExam,
         </div>
         {flagListQuestion && (
           <div className="choose-question__list">
-            {dataTest.map((item, index) => (
+            {context.dataTest.map((item, index) => (
               <span
+                id={reviews.includes(item.id) ? "active" : ""}
                 className={activeAnswer.includes(item.id) ? "active" : ""}
                 key={index}
                 onClick={() => chooseQuestion(index)}
