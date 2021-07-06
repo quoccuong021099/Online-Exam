@@ -13,6 +13,8 @@ export default function Exam({ dataTest, turnExam }) {
   });
   const [flagListQuestion, setFlagListQuestion] = useState(false);
 
+  const activeAnswer = selectedRadio.map((i) => i.parent_id);
+
   const handleFlagListQuestion = () => {
     setFlagListQuestion(!flagListQuestion);
   };
@@ -73,7 +75,6 @@ export default function Exam({ dataTest, turnExam }) {
   const chooseQuestion = (data) => {
     setCount(data);
   };
-
   return (
     <div>
       <a href="/#" className="main__left-alarm">
@@ -145,7 +146,11 @@ export default function Exam({ dataTest, turnExam }) {
           {flagListQuestion && (
             <div className="choose-question__list">
               {dataTest.map((item, index) => (
-                <span key={index} onClick={() => chooseQuestion(index)}>
+                <span
+                  className={activeAnswer.includes(item.id) ? "active" : ""}
+                  key={index}
+                  onClick={() => chooseQuestion(index)}
+                >
                   {index + 1}
                 </span>
               ))}

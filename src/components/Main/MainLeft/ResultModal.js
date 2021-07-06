@@ -24,18 +24,29 @@ export default function ResultModal({
           <div className="modal-body">
             <div className="modal-body__title">
               <p>Thời gian: 00:00</p>
-              <p>Tổng điểm: {yourResult.result_True} điểm</p>
+              <p>
+                Tổng điểm:{" "}
+                {((10 / dataTest.length) * yourResult.result_True).toFixed(2)}
+                điểm
+              </p>
               <p>Số câu đúng: {yourResult.result_True}</p>
               <p>Số câu Sai: {yourResult.result_False}</p>
             </div>
             <div className="modal-body__table">
               <h2>Đáp án của bạn</h2>
               <div className="modal-body__table-result">
-                {selectedRadio.map((item, index) => (
-                  <span key={index}>
-                    {item.result ? `${index + 1} - Đ` : `${index + 1} - S`}
-                  </span>
-                ))}
+                {selectedRadio.map(
+                  (i, index) => (
+                    // selectedRadio.map((i) => (
+                    <span key={index}>
+                      {i.result
+                        ? `${i.parent_id.slice(-1)} - Đ`
+                        : `${i.parent_id.slice(-1)} - S`}
+                    </span>
+                  )
+                  // ))
+                )}
+                <br />
               </div>
             </div>
             <div className="modal-body__table">

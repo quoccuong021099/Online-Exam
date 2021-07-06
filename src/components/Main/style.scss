@@ -409,11 +409,14 @@ main {
       cursor: pointer;
       text-align: center;
       border-radius: 5px;
-      &:hover,
-      &.active {
+      &:hover {
         background-color: #ffb83c;
         color: #fff;
       }
+    }
+    .active {
+      background-color: rgb(157, 213, 251);
+      color: #fff;
     }
   }
   button {

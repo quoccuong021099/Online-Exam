@@ -1,4 +1,5 @@
 import Input from "../../../common/Input";
+
 export default function Question({ dataItem, handleChange, selectedRadio }) {
   const activeAnswer = selectedRadio.map((i) => i.answer_id);
 
