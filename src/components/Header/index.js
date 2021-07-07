@@ -1,14 +1,15 @@
 import React from "react";
 import Logo from "../Image/logo.png";
 import "./style.scss";
+import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <>
       <header>
         <div className="header">
-          <a href="/#">
+          <Link to="/">
             <img src={Logo} alt="" className="header__logo" />
-          </a>
+          </Link>
 
           <ul className="header__nav">
             <li className="header__nav-item active">
@@ -48,10 +49,10 @@ export default function Header() {
             </li>
           </ul>
           <div className="header__login">
-            <a href="/#">
+            <Link to="/Login">
               <span className="header__login-name">Đăng nhập</span>
               <span className="header__login-icon"></span>
-            </a>
+            </Link>
           </div>
         </div>
       </header>

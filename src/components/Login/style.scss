@@ -20,31 +20,30 @@
       text-align: center;
     }
     .login-or {
+      width: 100%;
       position: relative;
-      color: #aaa;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      hr {
-        height: 1px;
-        margin-top: 0px !important;
-        margin-bottom: 0px !important;
-      }
-      span {
-        display: block;
+      h5 {
         position: absolute;
+        top: -8px;
         left: 50%;
-        top: 2px;
-        margin-left: -25px;
-        background-color: #fff;
+        transform: translateX(-50%);
         width: 50px;
+        background-color: #fff;
+        color: #5d5d5d;
         text-align: center;
       }
     }
     .group-form {
       padding: 20px;
       position: relative;
+      display: flex;
+      justify-content: space-between;
+      .firstname {
+        flex-basis: 220px;
+      }
+      .lastname {
+        flex-basis: 380px;
+      }
       input {
         padding: 15px 30px;
         width: 100%;
@@ -52,6 +51,7 @@
         font-size: 15px;
         border: solid 1px #e1e1e1;
         color: #000;
+        border-radius: 5px;
       }
       input[type="submit"],
       input[type="button"] {
@@ -64,7 +64,7 @@
         color: #fff;
         font-size: 18px;
         line-height: 1.79;
-        margin-top: 44px;
+        margin-top: 10px;
         padding: initial;
         font-weight: normal;
       }
@@ -78,6 +78,9 @@
         color: red;
         font-weight: 600;
       }
+      .placeholer-name {
+        margin-left: 260px;
+      }
     }
     .forget-password,
     .signup {
@@ -87,6 +90,7 @@
         line-height: 1.1;
         font-weight: 600;
         color: #2d5dcf;
+        margin-right: 20px;
       }
     }
     .signup {

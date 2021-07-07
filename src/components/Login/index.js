@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import "./style.scss";
 import Input from "../../common/Input";
+import { Link } from "react-router-dom";
 export default function Login() {
   const {
     register,
@@ -19,31 +20,31 @@ export default function Login() {
         <div className=" group-form">
           <div className="login-or">
             <hr />
-            <span>hoặc</span>
+            <h5>hoặc</h5>
           </div>
         </div>
         <div className="group-form">
           <Input
-            {...register("firstName", { required: true })}
-            placeholder="Nhập tên đăng nhập"
+            {...register("userName", { required: true })}
+            placeholder="Nhập tên đăng nhập/ Email"
           />
-          {errors.firstName && <p>Bạn phải nhập tên đăng nhập.</p>}
+          {errors.userName && <p>Bạn phải nhập tên đăng nhập/ Email.</p>}
         </div>
         <div className="group-form">
           <Input
-            {...register("lastName", { required: true })}
+            {...register("password", { required: true })}
             placeholder="Nhập mật khẩu"
           />
-          {errors.lastName && <p>Bạn phải nhập tên mật khẩu.</p>}
+          {errors.password && <p>Bạn phải nhập tên mật khẩu.</p>}
         </div>
-        <p class="forget-password">
+        <p className="forget-password">
           Quên mật khẩu? <a href="/#"> Nhấn vào đây</a>
         </p>
         <div className="group-form">
           <Input type="submit" value="ĐĂNG NHẬP" />
         </div>
-        <p class="signup">
-          Nếu bạn chưa có tài khoản? <a href="/#"> Đăng ký ngay</a>
+        <p className="signup">
+          Nếu bạn chưa có tài khoản? <Link to="/Register"> Đăng ký ngay</Link>
         </p>
       </form>
     </div>
