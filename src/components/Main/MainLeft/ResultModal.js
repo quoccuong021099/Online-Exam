@@ -6,6 +6,7 @@ export default function ResultModal({ yourResult, onOpenDone }) {
   const context = useContext(mainLeftExam);
   const contextExam = useContext(examContainerContext);
 
+  // state
   const [resultFinal, setResultFinal] = useState([]);
 
   useEffect(() => {
@@ -16,6 +17,7 @@ export default function ResultModal({ yourResult, onOpenDone }) {
 
     setResultFinal(result);
   }, [context.dataTest]);
+  const totalPoint = (10 / context.dataTest.length) * yourResult.result_True;
   return (
     <>
       <div className="modal">
@@ -26,11 +28,8 @@ export default function ResultModal({ yourResult, onOpenDone }) {
             <div className="modal-body__title">
               <p>Thời gian: {context.seconds_to(600 - context.timer)}</p>
               <p>
-                Tổng điểm:{" "}
-                {(
-                  (10 / context.dataTest.length) *
-                  yourResult.result_True
-                ).toFixed(2)}{" "}
+                Tổng điểm:
+                {totalPoint.toFixed(2)}
                 điểm
               </p>
               <p>Số câu đúng: {yourResult.result_True}</p>
@@ -39,17 +38,13 @@ export default function ResultModal({ yourResult, onOpenDone }) {
             <div className="modal-body__table">
               <h2>Đáp án của bạn</h2>
               <div className="modal-body__table-result">
-                {contextExam.selectedRadio.map(
-                  (i, index) => (
-                    // selectedRadio.map((i) => (
-                    <span key={index}>
-                      {i.result
-                        ? `${i.parent_id.slice(-1)} - Đ`
-                        : `${i.parent_id.slice(-1)} - S`}
-                    </span>
-                  )
-                  // ))
-                )}
+                {contextExam.selectedRadio.map((i, index) => (
+                  <span key={index}>
+                    {i.result
+                      ? `${i.parent_id.slice(-1)} - Đ`
+                      : `${i.parent_id.slice(-1)} - S`}
+                  </span>
+                ))}
                 <br />
               </div>
             </div>

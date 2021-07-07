@@ -50,7 +50,7 @@ export default function Exam() {
         const a = count + 1;
         setCount(a);
       } else return;
-    }, 500);
+    }, 200);
   };
 
   // Hàm khi được nộp bài
@@ -92,18 +92,16 @@ export default function Exam() {
   // hàm chuyển trang
   const nextPagination = () => {
     if (count < context.dataTest.length) {
-      const a = count + 1;
-      setCount(a);
+      setCount((count) => count + 1);
     }
   };
 
   // hàm chuyển trang
   const prevPagination = () => {
-    if (count > 0 || count < context.dataTest.length) {
-      const a = count - 1;
-      setCount(a);
-    } else {
+    if (count <= 0 || count > context.dataTest.length) {
       return;
+    } else {
+      setCount((count) => count + 1);
     }
   };
 
@@ -129,6 +127,7 @@ export default function Exam() {
     handleChangeResult: handleChangeResult,
     onContinue: onContinue,
   };
+
   return (
     <div>
       <examContainerContext.Provider value={listContextExam}>

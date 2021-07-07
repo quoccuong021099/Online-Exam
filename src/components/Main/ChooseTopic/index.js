@@ -2,7 +2,7 @@ import React from "react";
 import "./style.scss";
 import Button from "../../../common/Button";
 
-export default function ChooseTopic({ doStart }) {
+export default function ChooseTopic({ handleStart }) {
   const onChange = () => {};
   return (
     <div className="choose-topic">
@@ -57,7 +57,7 @@ export default function ChooseTopic({ doStart }) {
         <Button
           className="btn-step3"
           value="BẮT ĐẦU LÀM BÀI"
-          onClick={doStart}
+          onClick={handleStart}
         />
       </div>
     </div>
