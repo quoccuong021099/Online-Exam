@@ -47,7 +47,7 @@ header {
     &__login {
       flex-basis: 179px;
       text-align: right;
-
+      position: relative;
       a {
         background: #b2deff;
         width: 141px;
@@ -76,6 +76,23 @@ header {
         border-radius: 50%;
         -khtml-border-radius: 50%;
         margin: 4px 4px 4px 9px;
+      }
+      .logout {
+        z-index: 2;
+        cursor: pointer;
+        background-color: #fff;
+        border: 1px solid #eee;
+        text-align: left;
+        color: #000;
+        width: 80%;
+        padding: 15px 15px 15px 30px;
+        border-radius: 5px;
+        position: absolute;
+        top: 110%;
+        right: 0;
+        &:hover {
+          background-color: #eee;
+        }
       }
     }
   }

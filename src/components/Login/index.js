@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { contextApp } from "../../App";
 import { useForm } from "react-hook-form";
 import "./style.scss";
 import Input from "../../common/Input";
 import { Link, useHistory } from "react-router-dom";
-export default function Login() {
-  const [listUser, setListUser] = useState([]);
-  const history = useHistory();
-  useEffect(() => {
-    if (
-      JSON.parse(localStorage.getItem("user")) &&
-      JSON.parse(localStorage.getItem("user")).length > 0
-    ) {
-      setListUser(JSON.parse(localStorage.getItem("user")));
-    }
-  }, []);
 
+export default function Login() {
+  // context
+  const context_App = useContext(contextApp);
+  // use form
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const history = useHistory();
+
+  // submit form
   const onSubmit = (data) => {
-    const duplicateUserName = listUser.some(
-      (i) => i.userName === data.userName && i.password === data.password
+    const duplicateUserName = context_App.listUsers.find(
+      (i) => i.username === data.username && i.password === data.password
     );
     if (duplicateUserName) {
       history.push("/");
       alert("Đăng nhập thành công");
+      localStorage.setItem("user-info", JSON.stringify(duplicateUserName));
+      context_App.reset("login");
     } else {
       alert("Sai tên đăng nhập hoặc mật khẩu");
     }
@@ -46,10 +46,10 @@ export default function Login() {
         </div>
         <div className="group-form">
           <Input
-            {...register("userName", { required: true })}
+            {...register("username", { required: true })}
             placeholder="Nhập tên đăng nhập/ Email"
           />
-          {errors.userName && <p>Bạn phải nhập tên đăng nhập/ Email.</p>}
+          {errors.username && <p>Bạn phải nhập tên đăng nhập/ Email.</p>}
         </div>
         <div className="group-form">
           <Input
@@ -65,7 +65,7 @@ export default function Login() {
           <Input type="submit" value="ĐĂNG NHẬP" />
         </div>
         <p className="signup">
-          Nếu bạn chưa có tài khoản? <Link to="/Register"> Đăng ký ngay</Link>
+          Nếu bạn chưa có tài khoản? <Link to="/SignUp"> Đăng ký ngay</Link>
         </p>
       </form>
     </div>

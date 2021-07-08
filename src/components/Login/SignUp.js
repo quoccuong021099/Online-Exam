@@ -2,7 +2,12 @@ import { useForm } from "react-hook-form";
 import "./style.scss";
 import Input from "../../common/Input";
 import { useHistory } from "react-router";
-export default function Register() {
+import { v4 } from "uuid";
+import { contextApp } from "../../App";
+import { useContext } from "react";
+export default function SignUp() {
+  const context_App = useContext(contextApp);
+
   const history = useHistory();
 
   const {
@@ -11,33 +16,22 @@ export default function Register() {
     formState: { errors },
   } = useForm();
 
-  // const onSubmit = async (data) => {
-  //   console.log(data);
-  //   const requestOptions = {
-  //     method: 'POST',
-  //     Accept: "application/json",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       // "Accept": "application/json",
-  //     },
-  //     body: JSON.stringify(data),
-  //   };
-  //   let result = await fetch("http://localhost:3000/users", requestOptions);
-  //   result = await result.json();
-  //   localStorage.setItem("user-info", JSON.stringify(result));
-  //   history.push("/");
-  // };
-  async function onSubmit(data) {
-    const requestOptions = {
+  const onSubmit = async (data) => {
+    data.id = v4();
+    let result = await fetch("http://localhost:5000/users", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
-    };
-    const response = await fetch("http://localhost:3000/users", requestOptions);
-    const result = await response.json();
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    result = await result.json();
     localStorage.setItem("user-info", JSON.stringify(result));
+    context_App.reset(data);
     history.push("/");
-  }
+  };
+
   return (
     <div className="wrapper-login">
       <form onSubmit={handleSubmit(onSubmit)}>

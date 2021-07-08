@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Logo from "../Image/logo.png";
 import "./style.scss";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { contextApp } from "../../App";
 export default function Header() {
+  // context
+  const context_App = useContext(contextApp);
+
+  const history = useHistory();
+
+  const [logout, setLogout] = useState(false);
+
+  const data = JSON.parse(localStorage.getItem("user-info"));
+
+  const displayLogout = () => {
+    setLogout(!logout);
+  };
+
+  const logoutUser = () => {
+    localStorage.removeItem("user-info");
+    context_App.reset("logout");
+    setLogout(!logout);
+    history.push("/login");
+  };
+
   return (
     <>
       <header>
@@ -49,10 +70,17 @@ export default function Header() {
             </li>
           </ul>
           <div className="header__login">
-            <Link to="/Login">
-              <span className="header__login-name">Đăng nhập</span>
+            <Link to={data ? "#" : "/Login"} onClick={data && displayLogout}>
+              <span className="header__login-name">
+                {data ? data.firstname : "Đăng nhập"}
+              </span>
               <span className="header__login-icon"></span>
             </Link>
+            {logout && (
+              <div className="logout" onClick={logoutUser}>
+                Logout
+              </div>
+            )}
           </div>
         </div>
       </header>

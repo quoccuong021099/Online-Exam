@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./style.scss";
 import Button from "../../../common/Button";
 
 export default function ChooseTopic({ handleStart }) {
+
   const onChange = () => {};
   return (
     <div className="choose-topic">
