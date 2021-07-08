@@ -27,22 +27,15 @@ export default function Register() {
   //   localStorage.setItem("user-info", JSON.stringify(result));
   //   history.push("/");
   // };
-  function onSubmit(data) {
-    console.log(data);
+  async function onSubmit(data) {
     const requestOptions = {
       method: "POST",
-      Accept: "application/json",
-      headers: {
-        "Content-Type": "application/json",
-        // "Accept": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     };
-    fetch("http://localhost:3000/users", requestOptions).then((response) =>
-      response.json()
-    );
-    // result =  result.json();
-    // localStorage.setItem("user-info", JSON.stringify(result));
+    const response = await fetch("http://localhost:3000/users", requestOptions);
+    const result = await response.json();
+    localStorage.setItem("user-info", JSON.stringify(result));
     history.push("/");
   }
   return (
