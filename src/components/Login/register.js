@@ -11,22 +11,40 @@ export default function Register() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
+  // const onSubmit = async (data) => {
+  //   console.log(data);
+  //   const requestOptions = {
+  //     method: 'POST',
+  //     Accept: "application/json",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       // "Accept": "application/json",
+  //     },
+  //     body: JSON.stringify(data),
+  //   };
+  //   let result = await fetch("http://localhost:3000/users", requestOptions);
+  //   result = await result.json();
+  //   localStorage.setItem("user-info", JSON.stringify(result));
+  //   history.push("/");
+  // };
+  function onSubmit(data) {
     console.log(data);
     const requestOptions = {
       method: "POST",
       Accept: "application/json",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        // "Accept": "application/json",
       },
       body: JSON.stringify(data),
     };
-    let result = await fetch("http://localhost:3000/users", requestOptions);
-    result = await result.json();
-    localStorage.setItem("user-info", JSON.stringify(result));
+    fetch("http://localhost:3000/users", requestOptions).then((response) =>
+      response.json()
+    );
+    // result =  result.json();
+    // localStorage.setItem("user-info", JSON.stringify(result));
     history.push("/");
-  };
+  }
   return (
     <div className="wrapper-login">
       <form onSubmit={handleSubmit(onSubmit)}>
