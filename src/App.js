@@ -6,7 +6,7 @@ import Login from "./components/Login";
 import SignUp from "./components/Login/SignUp";
 import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 export const contextApp = React.createContext();
 
@@ -37,7 +37,13 @@ function App() {
         <Header />
         <Switch>
           <Route path="/" exact component={Main} />
-          {!user ? <Route path="/Login" component={Login} /> : <NotFound />}
+          {/* {!user ? <Route path="/Login" component={Login} /> : <Main />} */}
+          <Route
+            path="/Login"
+            render={() => {
+              return !user ? <Login /> : <Redirect to="/" />;
+            }}
+          />
           <Route path="/SignUp" component={SignUp} />
         </Switch>
         <Footer />
