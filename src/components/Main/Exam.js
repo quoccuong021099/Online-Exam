@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Question from "./Question";
-export default function Exam({ dataTest }) {
 
+export default function Exam({ dataTest }) {
   const [selected, setSelected] = useState([]);
   const [selectedRadio, setSelectedRadio] = useState([]);
-  
   // checked checkbox
   const handleChecked = (e, id) => {
     const selectedIndex = selected.indexOf(id);
@@ -24,19 +23,19 @@ export default function Exam({ dataTest }) {
     setSelected(newSelected);
   };
 
-
   // checked radio
   const handleChange = (id, arr) => {
     const index = arr.findIndex((item) => item.id_answer === id);
     if (index >= 0) {
       const answerId = arr[index].id_answer;
-      setSelectedRadio([answerId])
-    } 
+      setSelectedRadio([answerId]);
+    }
   };
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
-  console.log("selected", [...selected, ...selectedRadio]);
+  const arrChecked = [...selected, ...selectedRadio];
+  console.log("selected", arrChecked);
   return (
     <div>
       {dataTest.map((i) => (

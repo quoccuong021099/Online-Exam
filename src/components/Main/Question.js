@@ -21,12 +21,12 @@ export default function Question({
             <Input
               type={dataItem.type}
               id={`id${i.id_answer}`}
+              value={i.id_answer}
               name={dataItem.id}
-              value={i.result}
               onChange={
                 dataItem.type === "checkbox"
                   ? (e) => handleChecked(e, i.id_answer)
-                  : () => handleChange(i.id_answer, dataItem.answer)
+                  : (e) => handleChange(i.id_answer, dataItem.answer)
               }
               checked={
                 dataItem.type === "checkbox" ? isSelected(i.id_answer) : null
