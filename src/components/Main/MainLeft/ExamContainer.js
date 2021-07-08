@@ -3,6 +3,7 @@ import Question from "./Question";
 import Notify from "./Notify";
 import Button from "../../../common/Button";
 import { mainLeftExam } from "./index";
+import InputWithLabel from "../../../common/InputWithLabel";
 export default function ExamContainer({
   flagListQuestion,
   handleFlagListQuestion,
@@ -29,6 +30,7 @@ export default function ExamContainer({
       )}
 
       {openconfirm && <Notify />}
+      {context.timer === 0 && <Notify />}
 
       <div className="choose-question">
         <div className="choose-question__header">
@@ -43,15 +45,15 @@ export default function ExamContainer({
             {context.dataTest.map(
               (item, index) =>
                 index === count && (
-                  <label htmlFor="review" key={index}>
-                    <input
-                      type="checkbox"
-                      id="review"
-                      defaultChecked={reviews.includes(item.id)}
-                      onChange={() => handleChangeChecked(item.id)}
-                    />
-                    <span>Xem Lại</span>
-                  </label>
+                  <InputWithLabel
+                    htmlFor="review"
+                    key={index}
+                    type="checkbox"
+                    idInput="review"
+                    defaultChecked={reviews.includes(item.id)}
+                    onChangeInput={() => handleChangeChecked(item.id)}
+                    spanText="Xem Lại"
+                  />
                 )
             )}
           </div>

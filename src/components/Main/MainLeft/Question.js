@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import Input from "../../../common/Input";
 import { examContainerContext } from "./Exam";
+import InputWithLabel from "../../../common/InputWithLabel";
 export default function Question({ dataItem }) {
   // get context
   const contextExam = useContext(examContainerContext);
@@ -12,20 +12,17 @@ export default function Question({ dataItem }) {
         <h4>{dataItem.name}:</h4>
         <p>{dataItem.content}</p>
         {dataItem.answers.map((i) => (
-          <label
+          <InputWithLabel
             htmlFor={`id${i.answer_id}`}
-            className="exam__result"
+            classNameLable="exam__result"
             key={`result${i.answer_id}`}
-          >
-            <Input
-              id={`id${i.answer_id}`}
-              name={dataItem.id}
-              type="radio"
-              defaultChecked={activeAnswer.includes(i.answer_id)}
-              onChange={() => contextExam.handleChangeResult(i)}
-            />
-            <label htmlFor={`id${i.answer_id}`}>{i.content_answer}</label>
-          </label>
+            idInput={`id${i.answer_id}`}
+            nameInput={dataItem.id}
+            type="radio"
+            defaultChecked={activeAnswer.includes(i.answer_id)}
+            onChangeInput={() => contextExam.handleChangeResult(i)}
+            spanText={i.content_answer}
+          />
         ))}
       </ul>
     </div>

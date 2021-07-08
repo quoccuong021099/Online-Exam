@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Exam from "./Exam";
 import Oclock from "../../Oclock";
 import "./style.scss";
-
+import Spinner from "../../Spinner";
 export const mainLeftExam = React.createContext();
 
 export default function MainLeft() {
@@ -11,6 +11,11 @@ export default function MainLeft() {
   const [pause, setPause] = useState(false);
   const [turn, setTurn] = useState(0);
   const [timer, setTimer] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const sleep = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
 
   // Hàm lấy thời gian và gắn cho timer
   const getTimeDown = (data) => {
@@ -31,16 +36,15 @@ export default function MainLeft() {
 
   // fetch API
   useEffect(() => {
-    fetch("http://localhost:5000/question")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setDataTest(result);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    const fetchQuestion = async () => {
+      setIsLoading(true);
+      await sleep(500);
+      const responseJson = await fetch("http://localhost:5000/question");
+      const response = await responseJson.json();
+      setDataTest(response);
+      setIsLoading(false);
+    };
+    fetchQuestion();
   }, []);
 
   // Hàm tăng lượt người làm bài và pause thời gian làm bài
@@ -56,7 +60,6 @@ export default function MainLeft() {
     seconds_to: seconds_to,
     timer: timer,
   };
-
   return (
     <div className="main__left">
       <div className="main__left-title">
@@ -86,9 +89,13 @@ export default function MainLeft() {
       </div>
       <mainLeftExam.Provider value={listContext}>
         <Oclock pause={pause} getTimeDown={getTimeDown} />
-        <div className="main__left-content">
-          {dataTest.length > 0 && <Exam />}
-        </div>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <div className="main__left-content">
+            {dataTest.length > 0 && <Exam />}
+          </div>
+        )}
       </mainLeftExam.Provider>
     </div>
   );

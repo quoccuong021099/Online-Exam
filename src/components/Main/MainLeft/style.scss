@@ -6,6 +6,7 @@
   border: solid 1px #d9d9d9;
   border-radius: 8px;
   &-alarm {
+    user-select: none;
     position: fixed;
     left: 13%;
     width: 80px;
@@ -233,6 +234,7 @@
     flex-wrap: wrap;
     margin-top: 20px;
     span {
+      user-select: none;
       background-color: #fff;
       display: inline-block;
       margin: 4px 2px;
@@ -334,6 +336,16 @@
       &:hover {
         background-color: #0e1d8f;
       }
+    }
+  }
+  .time-out {
+    h1 {
+      font-size: 18px;
+    }
+    button {
+      margin-top: 20px;
+      width: 150px;
+      height: 50px;
     }
   }
 }

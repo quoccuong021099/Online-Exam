@@ -1,0 +1,13 @@
+
+GET http://localhost:5001/users
+
+
+###
+POST http://localhost:5001/users
+Content-Type: application/json
+{
+     "firstname": "Le1",
+    "lastname": "Cuong1",
+    "username": "cuong1",
+    "password": "1231"
+}

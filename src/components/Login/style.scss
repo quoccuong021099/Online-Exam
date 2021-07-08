@@ -1,0 +1,100 @@
+.wrapper-login {
+  max-width: 1110px;
+  height: 100vh;
+  background-color: transparent;
+  margin: 0 auto 10px;
+  padding: 30px 0;
+  form {
+    width: 70%;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 50px;
+    h2 {
+      font-size: 30px;
+      line-height: 40px;
+      font-weight: 600;
+      color: #0a22d1;
+      text-align: center;
+    }
+    .login-or {
+      width: 100%;
+      position: relative;
+      h5 {
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        background-color: #fff;
+        color: #5d5d5d;
+        text-align: center;
+      }
+    }
+    .group-form {
+      padding: 20px;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      .firstname {
+        flex-basis: 220px;
+      }
+      .lastname {
+        flex-basis: 380px;
+      }
+      input {
+        padding: 15px 30px;
+        width: 100%;
+        outline: none;
+        font-size: 15px;
+        border: solid 1px #e1e1e1;
+        color: #000;
+        border-radius: 5px;
+      }
+      input[type="submit"],
+      input[type="button"] {
+        cursor: pointer;
+        background-color: #f86060;
+        width: 100%;
+        height: 57px;
+        border-radius: 4px;
+        border: none;
+        color: #fff;
+        font-size: 18px;
+        line-height: 1.79;
+        margin-top: 10px;
+        padding: initial;
+        font-weight: normal;
+      }
+      input[type="button"] {
+        background-color: #375aab;
+      }
+      p {
+        position: absolute;
+        top: 80px;
+        left: 40px;
+        color: red;
+        font-weight: 600;
+      }
+      .placeholer-name {
+        margin-left: 260px;
+      }
+    }
+    .forget-password,
+    .signup {
+      text-align: right;
+      font-family: "Nunito", sans-serif;
+      a {
+        line-height: 1.1;
+        font-weight: 600;
+        color: #2d5dcf;
+        margin-right: 20px;
+      }
+    }
+    .signup {
+      text-align: center;
+    }
+  }
+}
