@@ -1,14 +1,32 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import "./style.scss";
 import Input from "../../common/Input";
-export default function Login() {
+import { useHistory } from "react-router";
+export default function Register() {
+  const history = useHistory();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    const requestOptions = {
+      method: "POST",
+      Accept: "application/json",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    let result = await fetch("http://localhost:3000/users", requestOptions);
+    result = await result.json();
+    localStorage.setItem("user-info", JSON.stringify(result));
+    history.push("/");
+  };
   return (
     <div className="wrapper-login">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -25,28 +43,28 @@ export default function Login() {
         <div className="group-form">
           <div className="firstname">
             <Input
-              {...register("firstName", { required: true })}
+              {...register("firstname", { required: true })}
               placeholder="Họ"
             />
-            {errors.firstName && <p>Bạn phải nhập họ.</p>}
+            {errors.firstname && <p>Bạn phải nhập họ.</p>}
           </div>
           <div className="lastname">
             <Input
-              {...register("lastName", { required: true })}
+              {...register("lastname", { required: true })}
               placeholder="Tên"
             />
-            {errors.firstName && (
+            {errors.lastName && (
               <p className="placeholer-name">Bạn phải nhập tên.</p>
             )}
           </div>
         </div>
         <div className="group-form">
           <Input
-            {...register("email", { required: true })}
+            {...register("username", { required: true })}
             placeholder="Nhập tên đăng nhập/ Email"
-            type="email"
+            type="text"
           />
-          {errors.firstName && <p>Bạn phải nhập tên đăng nhập/ Email.</p>}
+          {errors.username && <p>Bạn phải nhập tên đăng nhập/ Email.</p>}
         </div>
         <div className="group-form">
           <Input
@@ -54,7 +72,7 @@ export default function Login() {
             placeholder="Nhập mật khẩu"
             type="password"
           />
-          {errors.lastName && <p>Bạn phải nhập mật khẩu.</p>}
+          {errors.password && <p>Bạn phải nhập mật khẩu.</p>}
         </div>
         <div className="group-form">
           <Input type="submit" value="ĐĂNG KÝ NGAY" />

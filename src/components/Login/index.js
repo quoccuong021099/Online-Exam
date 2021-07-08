@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./style.scss";
 import Input from "../../common/Input";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 export default function Login() {
+  const [listUser, setListUser] = useState([]);
+  const history = useHistory();
+  useEffect(() => {
+    if (
+      JSON.parse(localStorage.getItem("user")) &&
+      JSON.parse(localStorage.getItem("user")).length > 0
+    ) {
+      setListUser(JSON.parse(localStorage.getItem("user")));
+    }
+  }, []);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const duplicateUserName = listUser.some(
+      (i) => i.userName === data.userName && i.password === data.password
+    );
+    if (duplicateUserName) {
+      history.push("/");
+      alert("Đăng nhập thành công");
+    } else {
+      alert("Sai tên đăng nhập hoặc mật khẩu");
+    }
+  };
   return (
     <div className="wrapper-login">
       <form onSubmit={handleSubmit(onSubmit)}>

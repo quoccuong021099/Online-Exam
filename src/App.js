@@ -10,11 +10,6 @@ function App() {
   return (
     <div className="app">
       <Header />
-      {/* <Switch> */}
-      {/* <Main />
-                <Login />
-                  <Register /> */}
-      {/* <Switch /> */}
       <Switch>
         <Route path="/" exact component={Main} />
         <Route path="/Login" component={Login} />

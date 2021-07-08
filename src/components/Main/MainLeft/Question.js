@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import Input from "../../../common/Input";
 import { examContainerContext } from "./Exam";
 import InputWithLabel from "../../../common/InputWithLabel";
 export default function Question({ dataItem }) {
