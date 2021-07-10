@@ -3,14 +3,11 @@ import ResultModal from "./ResultModal";
 import Done from "./Done";
 import ExamContainer from "./ExamContainer";
 import { mainExam } from "../index";
-import { useHistory } from "react-router";
 
 export const examContainerContext = React.createContext();
 export default function Exam() {
   // Get context
   let context = useContext(mainExam);
-
-  const history = useHistory();
 
   // Local state
   const [selectedRadio, setSelectedRadio] = useState([]);
