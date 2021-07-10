@@ -2,12 +2,15 @@ import React, { useContext, useState } from "react";
 import ResultModal from "./ResultModal";
 import Done from "./Done";
 import ExamContainer from "./ExamContainer";
-import { mainLeftExam } from "./index";
+import { mainExam } from "../index";
+import { useHistory } from "react-router";
 
 export const examContainerContext = React.createContext();
 export default function Exam() {
   // Get context
-  let context = useContext(mainLeftExam);
+  let context = useContext(mainExam);
+
+  const history = useHistory();
 
   // Local state
   const [selectedRadio, setSelectedRadio] = useState([]);
@@ -101,7 +104,7 @@ export default function Exam() {
     if (count <= 0 || count > context.dataTest.length) {
       return;
     } else {
-      setCount((count) => count + 1);
+      setCount((count) => count - 1);
     }
   };
 

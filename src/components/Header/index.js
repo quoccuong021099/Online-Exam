@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Logo from "../Image/logo.png";
 import "./style.scss";
 import { Link, useHistory } from "react-router-dom";
 import { contextApp } from "../../App";
 export default function Header() {
   // context
-  const context_App = useContext(contextApp);
+  const contextOfApp = useContext(contextApp);
 
   const history = useHistory();
 
@@ -13,17 +13,12 @@ export default function Header() {
 
   const data = JSON.parse(localStorage.getItem("user-info"));
 
-  const displayLogout = () => {
-    setLogout(!logout);
-  };
-
   const logoutUser = () => {
     localStorage.removeItem("user-info");
-    context_App.reset("logout");
+    contextOfApp.reset("logout");
     setLogout(!logout);
     history.push("/login");
   };
-
   return (
     <>
       <header>
@@ -70,13 +65,13 @@ export default function Header() {
             </li>
           </ul>
           <div className="header__login">
-            <Link to={data ? "#" : "/Login"} onClick={data && displayLogout}>
+            <Link to={data ? "#" : "/Login"} className="link">
               <span className="header__login-name">
                 {data ? data.firstname : "Đăng nhập"}
               </span>
               <span className="header__login-icon"></span>
             </Link>
-            {logout && (
+            {data && (
               <div className="logout" onClick={logoutUser}>
                 Logout
               </div>

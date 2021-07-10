@@ -1,24 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
-import { mainLeftExam } from "../Main/MainLeft/index";
+import { mainExam } from "../Main/index";
 export default function Oclock({ pause, getTimeDown }) {
   // Context
-  const context = useContext(mainLeftExam);
-
+  const context = useContext(mainExam);
   const [timeDown, setTimeDown] = useState(600);
-
   useEffect(() => {
     const timeInterval = setInterval(() => {
       const timer = timeDown;
       if (timer > 0) setTimeDown(timer - 1);
     }, 1000);
-    if (pause) {
+    if (context.pause) {
       clearInterval(timeInterval);
     }
-    getTimeDown(timeDown);
+    context.getTimeDown(timeDown);
     return () => {
       clearInterval(timeInterval);
     };
-  }, [timeDown, pause, getTimeDown]);
+  }, [timeDown, context]);
   return (
     <div className="main__left-alarm">
       <svg

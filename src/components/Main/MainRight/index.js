@@ -1,6 +1,27 @@
-import React from "react";
+// import React, { useContext, useEffect, useState } from "react";
 import "./style.scss";
+// import { mainExam } from "../index";
 export default function MainRight() {
+  // const context = useContext(mainExam);
+
+  // const [listTime, setListTime] = useState([]);
+  // const [listPoint, setListPoint] = useState([]);
+
+  // useEffect(() => {
+  //   if (context.rank) {
+  //     context.rank.map((i) => {
+  //       setListTime([...listTime, i.time]);
+  //       setListPoint([...listPoint, i.point]);
+  //     });
+  //   }
+  //   console.log(listTime);
+  // }, [context.rank]);
+  // function compare(a, b) {
+  //   return a - b;
+  // }
+  // if (context.rank) {
+  //   console.log(listTime, listPoint);
+  // }
   return (
     <div className="main__right">
       <div className="empty"></div>

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Question from "./Question";
 import Notify from "./Notify";
 import Button from "../../../common/Button";
-import { mainLeftExam } from "./index";
+import { mainExam } from "../index";
 import InputWithLabel from "../../../common/InputWithLabel";
 export default function ExamContainer({
   flagListQuestion,
@@ -19,7 +19,7 @@ export default function ExamContainer({
   activeAnswer,
 }) {
   // context
-  let context = useContext(mainLeftExam);
+  let context = useContext(mainExam);
   return (
     <form onSubmit={doneExam}>
       {context.dataTest.map(

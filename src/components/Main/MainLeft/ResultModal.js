@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { mainLeftExam } from "./index";
+import { mainExam } from "../index";
 import { examContainerContext } from "./Exam";
 export default function ResultModal({ yourResult, onOpenDone }) {
   // context
-  const context = useContext(mainLeftExam);
+  const context = useContext(mainExam);
   const contextExam = useContext(examContainerContext);
 
   // state
@@ -60,9 +60,9 @@ export default function ResultModal({ yourResult, onOpenDone }) {
             </div>
           </div>
           <div className="modal-footer">
-            <a href="/#" onClick={onOpenDone}>
+            <p onClick={onOpenDone}>
               <i className="fas fa-angle-left"></i> Kết Thúc
-            </a>
+            </p>
           </div>
         </div>
       </div>

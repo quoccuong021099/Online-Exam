@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { contextApp } from "../../App";
 import { useForm } from "react-hook-form";
 import "./style.scss";
@@ -7,7 +7,7 @@ import { Link, useHistory } from "react-router-dom";
 
 export default function Login() {
   // context
-  const context_App = useContext(contextApp);
+  const contextOfApp = useContext(contextApp);
   // use form
   const {
     register,
@@ -19,14 +19,14 @@ export default function Login() {
 
   // submit form
   const onSubmit = (data) => {
-    const duplicateUserName = context_App.listUsers.find(
+    const duplicateUserName = contextOfApp.listUsers.find(
       (i) => i.username === data.username && i.password === data.password
     );
     if (duplicateUserName) {
       history.push("/");
       alert("Đăng nhập thành công");
       localStorage.setItem("user-info", JSON.stringify(duplicateUserName));
-      context_App.reset("login");
+      contextOfApp.reset("login");
     } else {
       alert("Sai tên đăng nhập hoặc mật khẩu");
     }
@@ -36,7 +36,11 @@ export default function Login() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2>Đăng Nhập</h2>
         <div className="group-form">
-          <Input type="button" value="ĐĂNG NHẬP BẰNG FACEBOOK" />
+          <Input
+            type="button"
+            value="ĐĂNG NHẬP BẰNG FACEBOOK"
+            autoComplete="true"
+          />
         </div>
         <div className=" group-form">
           <div className="login-or">
@@ -48,6 +52,7 @@ export default function Login() {
           <Input
             {...register("username", { required: true })}
             placeholder="Nhập tên đăng nhập/ Email"
+            autoComplete="true"
           />
           {errors.username && <p>Bạn phải nhập tên đăng nhập/ Email.</p>}
         </div>
@@ -55,6 +60,8 @@ export default function Login() {
           <Input
             {...register("password", { required: true })}
             placeholder="Nhập mật khẩu"
+            type="password"
+            autoComplete="true"
           />
           {errors.password && <p>Bạn phải nhập tên mật khẩu.</p>}
         </div>

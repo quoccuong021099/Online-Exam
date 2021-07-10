@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import Button from "../../../common/Button";
-import { mainLeftExam } from "./index";
+import { mainExam } from "../index";
 import { examContainerContext } from "./Exam";
 export default function Notify() {
-  const context = useContext(mainLeftExam);
+  const context = useContext(mainExam);
   const contextExam = useContext(examContainerContext);
   return (
     <>
@@ -34,7 +34,7 @@ export default function Notify() {
         ) : (
           <>
             <div className="time-out">
-            <h1>Đã hết thời gian vui lòng nhấn nút nộp bài</h1>
+              <h1>Đã hết thời gian vui lòng nhấn nút nộp bài</h1>
               <Button
                 type="submit"
                 value="Nộp bài"

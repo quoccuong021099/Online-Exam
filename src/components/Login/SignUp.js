@@ -6,7 +6,7 @@ import { v4 } from "uuid";
 import { contextApp } from "../../App";
 import { useContext } from "react";
 export default function SignUp() {
-  const context_App = useContext(contextApp);
+  const contextOfApp = useContext(contextApp);
 
   const history = useHistory();
 
@@ -28,7 +28,7 @@ export default function SignUp() {
     });
     result = await result.json();
     localStorage.setItem("user-info", JSON.stringify(result));
-    context_App.reset(data);
+    contextOfApp.reset(data);
     history.push("/");
   };
 
@@ -48,6 +48,7 @@ export default function SignUp() {
         <div className="group-form">
           <div className="firstname">
             <Input
+              autoComplete="true"
               {...register("firstname", { required: true })}
               placeholder="Họ"
             />
@@ -55,16 +56,18 @@ export default function SignUp() {
           </div>
           <div className="lastname">
             <Input
+              autoComplete="true"
               {...register("lastname", { required: true })}
               placeholder="Tên"
             />
-            {errors.lastName && (
+            {errors.lastname && (
               <p className="placeholer-name">Bạn phải nhập tên.</p>
             )}
           </div>
         </div>
         <div className="group-form">
           <Input
+            autoComplete="true"
             {...register("username", { required: true })}
             placeholder="Nhập tên đăng nhập/ Email"
             type="text"
@@ -73,6 +76,7 @@ export default function SignUp() {
         </div>
         <div className="group-form">
           <Input
+            autoComplete="true"
             {...register("password", { required: true })}
             placeholder="Nhập mật khẩu"
             type="password"

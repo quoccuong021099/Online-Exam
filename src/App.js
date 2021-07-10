@@ -5,7 +5,7 @@ import Main from "./components/Main";
 import Login from "./components/Login";
 import SignUp from "./components/Login/SignUp";
 import Footer from "./components/Footer";
-import NotFound from "./components/NotFound";
+import ChooseTopic from "./components/Main/ChooseTopic";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 export const contextApp = React.createContext();
@@ -13,6 +13,9 @@ export const contextApp = React.createContext();
 function App() {
   const [listUsers, setListUsers] = useState([]);
   const [reFetch, setReFecth] = useState(null);
+  // const [start, setStart] = useState(false);
+
+  // const history = useHistory();
 
   const reset = (data) => {
     setReFecth(data);
@@ -27,6 +30,15 @@ function App() {
     fetchQuestion();
   }, [reFetch]);
 
+  // const handleStart = () => {
+  //   if (user) {
+  //     setStart(true);
+  //   } else {
+  //     history.push("/login");
+  //   }
+  //   console.log("a");
+  // };
+
   const listContextApp = { listUsers: listUsers, reset: reset };
 
   const user = localStorage.getItem("user-info");
@@ -36,8 +48,18 @@ function App() {
       <contextApp.Provider value={listContextApp}>
         <Header />
         <Switch>
-          <Route path="/" exact component={Main} />
-          {/* {!user ? <Route path="/Login" component={Login} /> : <Main />} */}
+          <Route
+            path="/"
+            exact
+            component={ChooseTopic}
+            // render={(props) => <ChooseTopic {...props}
+          />
+          <Route
+            path="/exam"
+            render={() => {
+              return !user ? <Login /> : <Main to="/exam" />;
+            }}
+          />
           <Route
             path="/Login"
             render={() => {
