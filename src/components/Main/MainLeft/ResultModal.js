@@ -9,14 +9,16 @@ export default function ResultModal({ yourResult, onOpenDone }) {
   // state
   const [resultFinal, setResultFinal] = useState([]);
 
+  // hàm trả về đáp án đúng của bộ đề
   useEffect(() => {
     const result = [];
     context.dataTest.map((item) =>
       item.answers.map((i) => i.result === true && result.push(i))
     );
-
     setResultFinal(result);
   }, [context.dataTest]);
+
+  // Tổng điểm
   const totalPoint = (10 / context.dataTest.length) * yourResult.result_True;
   return (
     <>
@@ -26,7 +28,7 @@ export default function ResultModal({ yourResult, onOpenDone }) {
           <h1 className="modal-header">KẾT QUẢ</h1>
           <div className="modal-body">
             <div className="modal-body__title">
-              <p>Thời gian: {context.seconds_to(600 - context.timer)}</p>
+              <p>Thời gian: {context.formatTime(600 - context.timeDown)}</p>
               <p>
                 Tổng điểm:
                 {totalPoint.toFixed(2)}

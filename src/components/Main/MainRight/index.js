@@ -1,27 +1,55 @@
-// import React, { useContext, useEffect, useState } from "react";
 import "./style.scss";
-// import { mainExam } from "../index";
+import { contextApp } from "../../../App";
+import { useContext, useEffect, useState } from "react";
+import RatingItem from "./RatingItem";
 export default function MainRight() {
-  // const context = useContext(mainExam);
+  const AppContext = useContext(contextApp);
+  const user = JSON.parse(localStorage.getItem("user-info"));
 
-  // const [listTime, setListTime] = useState([]);
-  // const [listPoint, setListPoint] = useState([]);
+  // list state
+  const [number, setNumber] = useState(3);
+
+  // hàm xem thêm
+  const handleSeeMore = () => {
+    setNumber(10);
+  };
+
+  // hàm ẩn bớt
+  const handleHideNumber = () => {
+    setNumber(3);
+  };
 
   // useEffect(() => {
-  //   if (context.rank) {
-  //     context.rank.map((i) => {
-  //       setListTime([...listTime, i.time]);
-  //       setListPoint([...listPoint, i.point]);
-  //     });
-  //   }
-  //   console.log(listTime);
-  // }, [context.rank]);
-  // function compare(a, b) {
-  //   return a - b;
-  // }
-  // if (context.rank) {
-  //   console.log(listTime, listPoint);
-  // }
+  // data.id = v4();
+  // let result = await fetch("http://localhost:5000/users", {
+  //   method: "POST",
+  //   body: JSON.stringify(data),
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     Accept: "application/json",
+  //   },
+  // });
+  // const userNow = AppContext.listUsers.find(
+  //   (i) => i.username === user.username
+  // );
+  // userNow.point = 8;
+  // userNow.time = 320;
+  // console.log(user);
+  // }, []);
+
+  // data.id = v4();
+  // let result = await fetch("http://localhost:5000/users", {
+  //   method: "POST",
+  //   body: JSON.stringify(data),
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     Accept: "application/json",
+  //   },
+  // });
+  // result = await result.json();
+  // localStorage.setItem("user-info", JSON.stringify(result));
+  // contextOfApp.reset(data);
+  // history.push("/");
   return (
     <div className="main__right">
       <div className="empty"></div>
@@ -37,40 +65,27 @@ export default function MainRight() {
               <li>Thời gian</li>
             </ul>
           </li>
-          <li className="cart__group-item">
-            <ul className="cart__group-item-rank">
-              <li> Bùi Trần Đức Duy</li>
-              <li>9đ</li>
-              <li>5:58</li>
-            </ul>
-          </li>
-          <li className="cart__group-item">
-            <ul className="cart__group-item-rank">
-              <li> Mangum Seiryu</li>
-              <li>9đ</li>
-              <li>32:20</li>
-            </ul>
-          </li>
-          <li className="cart__group-item">
-            <ul className="cart__group-item-rank">
-              <li> Bùi Đạt</li>
-              <li>9đ</li>
-              <li>53:50</li>
-            </ul>
-          </li>
+          {AppContext.listUsers.map(
+            (item, index) =>
+              index < number && (
+                <RatingItem
+                  key={item.id}
+                  name={`${item.firstname} ${item.lastname}`}
+                />
+              )
+          )}
         </ul>
-        <div className="cart__group-footer">
-          <button>Xem thêm</button>
-        </div>
-      </div>
-      <div className="try-it-now">
-        <p>Bạn có muốn chinh phục đề thi này</p>
-        <a href="/#" className="yes-btn">
-          Có, tôi muốn!
-        </a>
-        <a href="/#" className="facebook-btn">
-          Chia sẻ Facebook
-        </a>
+
+        {number < 10 && (
+          <div className="cart__group-footer">
+            <button onClick={handleSeeMore}>Xem thêm</button>
+          </div>
+        )}
+        {number >= 10 && (
+          <div className="cart__group-footer">
+            <button onClick={handleHideNumber}>Ẩn bớt</button>
+          </div>
+        )}
       </div>
     </div>
   );

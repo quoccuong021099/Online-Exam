@@ -6,13 +6,13 @@ import { contextApp } from "../../App";
 export default function Header() {
   // context
   const contextOfApp = useContext(contextApp);
-
+  // history
   const history = useHistory();
-
+  // list state
   const [logout, setLogout] = useState(false);
-
+  // get item từ localStorage
   const data = JSON.parse(localStorage.getItem("user-info"));
-
+  // hàm logout
   const logoutUser = () => {
     localStorage.removeItem("user-info");
     contextOfApp.reset("logout");

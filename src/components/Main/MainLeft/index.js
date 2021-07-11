@@ -5,6 +5,7 @@ import "./style.scss";
 import Spinner from "../../Spinner";
 import { mainExam } from "../index";
 export default function MainLeft() {
+  // context
   const mainExamContext = useContext(mainExam);
 
   return (

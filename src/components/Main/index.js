@@ -7,17 +7,14 @@ export const mainExam = React.createContext();
 export default function Main() {
   // List state
   const [dataTest, setDataTest] = useState([]);
-  // const [start, setStart] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [pause, setPause] = useState(false);
   const [turn, setTurn] = useState(0);
-  const [timer, setTimer] = useState(0);
-  const [rank, setRank] = useState([]);
+  const [timeDown, setTimeDown] = useState(0);
 
-  // Hàm lấy thời gian và gắn cho timer
-
+  // Hàm lấy thời gian đếm ngược và gắn cho timeDown
   const getTimeDown = (data) => {
-    setTimer(data);
+    setTimeDown(data);
   };
 
   // hàm loading
@@ -27,12 +24,12 @@ export default function Main() {
 
   // Hàm tăng lượt người làm bài và pause thời gian làm bài
   const turnExam = () => {
-    setTurn(turn + 1);
     setPause(true);
+    setTurn(turn + 1);
   };
 
   // Hàm định dạng hh:mm:ss
-  const seconds_to = (sec) => {
+  const formatTime = (sec) => {
     var hours = Math.floor(sec / 3600);
     hours >= 1 ? (sec = sec - hours * 3600) : (hours = "00");
     var min = Math.floor(sec / 60);
@@ -43,7 +40,7 @@ export default function Main() {
     return hours + ":" + min + ":" + sec;
   };
 
-  // fetch API
+  // fetch API question
   useEffect(() => {
     const fetchQuestion = async () => {
       setIsLoading(true);
@@ -56,27 +53,16 @@ export default function Main() {
     fetchQuestion();
   }, []);
 
-  // get rank
-  const getResult = (time, point) => {
-    setRank([...rank, { time: time, point: point }]);
-    localStorage.setItem(
-      "rank",
-      JSON.stringify([...rank, { time: time, point: point }])
-    );
-  };
-
   // list context
   const listContext = {
     dataTest: dataTest,
     turnExam: turnExam,
-    seconds_to: seconds_to,
-    timer: timer,
+    formatTime: formatTime,
+    timeDown: timeDown,
     getTimeDown: getTimeDown,
     isLoading: isLoading,
     pause: pause,
     turn: turn,
-    rank: rank,
-    getResult: getResult,
   };
   return (
     <mainExam.Provider value={listContext}>

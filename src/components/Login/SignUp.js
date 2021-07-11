@@ -5,17 +5,47 @@ import { useHistory } from "react-router";
 import { v4 } from "uuid";
 import { contextApp } from "../../App";
 import { useContext } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+// validation
+const schema = yup.object().shape({
+  firstname: yup
+    .string()
+    .required("Bạn phải nhập họ!")
+    .min(3, "Họ phải từ 3-30 ký tự")
+    .max(30, "Họ phải từ 3-30 ký tự"),
+  lastname: yup
+    .string()
+    .required("Bạn phải nhập tên!")
+    .min(3, "Tên phải từ 3-30 ký tự")
+    .max(30, "Tên phải từ 3-30 ký tự"),
+  username: yup
+    .string()
+    .email("Email không hợp lệ")
+    .required("Bạn phải nhập tên đăng nhập!"),
+  password: yup
+    .string()
+    .required("Bạn chưa nhập trường này!")
+    .min(3, "Mật khẩu phải từ 3-30 ký tự")
+    .max(30, "Mật khẩu phải từ 3-30 ký tự"),
+});
+
 export default function SignUp() {
+  // list context
   const contextOfApp = useContext(contextApp);
 
+  // use history
   const history = useHistory();
 
+  // use form
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ resolver: yupResolver(schema) });
 
+  // submit form
   const onSubmit = async (data) => {
     data.id = v4();
     let result = await fetch("http://localhost:5000/users", {
@@ -52,7 +82,7 @@ export default function SignUp() {
               {...register("firstname", { required: true })}
               placeholder="Họ"
             />
-            {errors.firstname && <p>Bạn phải nhập họ.</p>}
+            <p>{errors.firstname?.message}</p>
           </div>
           <div className="lastname">
             <Input
@@ -60,9 +90,7 @@ export default function SignUp() {
               {...register("lastname", { required: true })}
               placeholder="Tên"
             />
-            {errors.lastname && (
-              <p className="placeholer-name">Bạn phải nhập tên.</p>
-            )}
+            <p className="placeholer-name">{errors.lastname?.message}</p>
           </div>
         </div>
         <div className="group-form">
@@ -72,7 +100,7 @@ export default function SignUp() {
             placeholder="Nhập tên đăng nhập/ Email"
             type="text"
           />
-          {errors.username && <p>Bạn phải nhập tên đăng nhập/ Email.</p>}
+          <p>{errors.username?.message}</p>
         </div>
         <div className="group-form">
           <Input
@@ -81,7 +109,7 @@ export default function SignUp() {
             placeholder="Nhập mật khẩu"
             type="password"
           />
-          {errors.password && <p>Bạn phải nhập mật khẩu.</p>}
+          <p>{errors.password?.message}</p>
         </div>
         <div className="group-form">
           <Input type="submit" value="ĐĂNG KÝ NGAY" />

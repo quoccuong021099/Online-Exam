@@ -2,6 +2,7 @@ import "./style.scss";
 import Button from "../../../common/Button";
 import { Link } from "react-router-dom";
 export default function ChooseTopic({ handleStart }) {
+  // get item từ localStorage
   const user = localStorage.getItem("user-info");
 
   const onChange = () => {};
@@ -57,12 +58,11 @@ export default function ChooseTopic({ handleStart }) {
       </div>
       <div className="choose-topic__step3">
         <Link to={user ? "/exam" : "/login"}>
-          {" "}
           <Button
             className="btn-step3"
             value="BẮT ĐẦU LÀM BÀI"
             onClick={handleStart}
-          />{" "}
+          />
         </Link>
       </div>
     </div>

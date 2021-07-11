@@ -5,6 +5,7 @@ export default function Question({ dataItem }) {
   // get context
   const contextExam = useContext(examContainerContext);
 
+  // Hàm trả về id những câu đã được chọn
   const activeAnswer = contextExam.selectedRadio.map((i) => i.answer_id);
   return (
     <div>

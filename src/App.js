@@ -13,14 +13,13 @@ export const contextApp = React.createContext();
 function App() {
   const [listUsers, setListUsers] = useState([]);
   const [reFetch, setReFecth] = useState(null);
-  // const [start, setStart] = useState(false);
 
-  // const history = useHistory();
-
+  // Hàm refecth lại khi data thay đổi
   const reset = (data) => {
     setReFecth(data);
   };
 
+  // Fetch API user
   useEffect(() => {
     const fetchQuestion = async () => {
       const responseJson = await fetch("http://localhost:5000/users");
@@ -30,17 +29,10 @@ function App() {
     fetchQuestion();
   }, [reFetch]);
 
-  // const handleStart = () => {
-  //   if (user) {
-  //     setStart(true);
-  //   } else {
-  //     history.push("/login");
-  //   }
-  //   console.log("a");
-  // };
-
+  // List context
   const listContextApp = { listUsers: listUsers, reset: reset };
 
+  // lấy user trong localStorage
   const user = localStorage.getItem("user-info");
 
   return (
@@ -48,12 +40,7 @@ function App() {
       <contextApp.Provider value={listContextApp}>
         <Header />
         <Switch>
-          <Route
-            path="/"
-            exact
-            component={ChooseTopic}
-            // render={(props) => <ChooseTopic {...props}
-          />
+          <Route path="/" exact component={ChooseTopic} />
           <Route
             path="/exam"
             render={() => {

@@ -73,11 +73,6 @@ export default function Exam() {
     setOpenconfirm(!openconfirm);
   };
 
-  // hàm tiếp tục làm bài
-  const onContinue = () => {
-    setOpenconfirm(!openconfirm);
-  };
-
   // hàm đóng modal kết quả
   const handleOpenModal = () => {
     setOpenModal(!openModal);
@@ -125,7 +120,7 @@ export default function Exam() {
   const listContextExam = {
     selectedRadio: selectedRadio,
     handleChangeResult: handleChangeResult,
-    onContinue: onContinue,
+    onChangeConfirm: onChangeConfirm,
   };
 
   return (

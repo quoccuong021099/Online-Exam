@@ -3,7 +3,7 @@
   --secondary: #13d2b8;
   --purple: #bd93f9;
   --pink: #ff6bcb;
-  --blue: #8be9fd;
+  --orange: #ffb83c;
   --gray: #333;
   --font: "Poppins", sans-serif;
   --gradient: linear-gradient(40deg, #ff6ec4, #7873f5);
@@ -60,18 +60,18 @@ button {
 }
 .dashed-loading:before {
   z-index: 5;
-  border: 3px dashed var(--blue);
-  border-left: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-  -webkit-animation: dashed 1s linear infinite;
+  border: 5px dashed var(--orange);
+  border-left: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  -webkit-animation: solid 1s linear infinite;
   animation: dashed 1s linear infinite;
 }
 .dashed-loading:after {
   z-index: 10;
-  border: 3px solid var(--blue);
-  border-left: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-  -webkit-animation: dashed 1s ease infinite;
+  border: 5px solid var(--orange);
+  border-left: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  -webkit-animation: solid 1s ease infinite;
   animation: dashed 1s ease infinite;
 }
 @keyframes dashed {

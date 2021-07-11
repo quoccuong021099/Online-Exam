@@ -3,19 +3,34 @@ import { contextApp } from "../../App";
 import { useForm } from "react-hook-form";
 import "./style.scss";
 import Input from "../../common/Input";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { Link, useHistory } from "react-router-dom";
+
+// validation
+const schema = yup.object().shape({
+  username: yup
+    .string()
+    // .email("Email không hợp lệ")
+    .required("Bạn phải nhập tên đăng nhập!"),
+  password: yup.string().required("Bạn phải nhập mật khẩu!"),
+  // .min(3, "Mật khẩu phải từ 3-30 ký tự")
+  // .max(30, "Mật khẩu phải từ 3-30 ký tự"),
+});
 
 export default function Login() {
   // context
   const contextOfApp = useContext(contextApp);
+
+  // use history
+  const history = useHistory();
+
   // use form
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-
-  const history = useHistory();
+  } = useForm({ resolver: yupResolver(schema) });
 
   // submit form
   const onSubmit = (data) => {
@@ -50,20 +65,18 @@ export default function Login() {
         </div>
         <div className="group-form">
           <Input
-            {...register("username", { required: true })}
+            {...register("username")}
             placeholder="Nhập tên đăng nhập/ Email"
-            autoComplete="true"
           />
-          {errors.username && <p>Bạn phải nhập tên đăng nhập/ Email.</p>}
+          <p> {errors.username?.message}</p>
         </div>
         <div className="group-form">
           <Input
-            {...register("password", { required: true })}
+            {...register("password")}
             placeholder="Nhập mật khẩu"
             type="password"
-            autoComplete="true"
           />
-          {errors.password && <p>Bạn phải nhập tên mật khẩu.</p>}
+          <p> {errors.password?.message}</p>
         </div>
         <p className="forget-password">
           Quên mật khẩu? <a href="/#"> Nhấn vào đây</a>

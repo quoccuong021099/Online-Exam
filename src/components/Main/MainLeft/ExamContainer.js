@@ -20,6 +20,7 @@ export default function ExamContainer({
 }) {
   // context
   let context = useContext(mainExam);
+
   return (
     <form onSubmit={doneExam}>
       {context.dataTest.map(
@@ -30,7 +31,7 @@ export default function ExamContainer({
       )}
 
       {openconfirm && <Notify />}
-      {context.timer === 0 && <Notify />}
+      {context.timeDown === 0 && <Notify />}
 
       <div className="choose-question">
         <div className="choose-question__header">
