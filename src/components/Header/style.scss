@@ -48,6 +48,12 @@ header {
       flex-basis: 179px;
       text-align: right;
       position: relative;
+      span &-name {
+        width: 60px !important; // chiều rộng bằng khối bao nó
+        white-space: nowrap;
+        overflow: hidden; // ẩn các nội dung khi kích thước lớn hơn chiều rộng khối bên ngoài
+        text-overflow: ellipsis; //thêm 3 dấu chấm ở cuối
+      }
       .logout {
         display: none;
         z-index: 2;
@@ -97,7 +103,6 @@ header {
         line-height: 1.1;
         font-weight: 700;
         color: #065592;
-        padding-left: 10px;
       }
       &-icon {
         background: url(https://s.tracnghiem.net/assets/images/header/user-icon.png)

@@ -24,7 +24,7 @@ export default function Notify() {
               <Button
                 type="submit"
                 value="Nộp bài"
-                onClick={context.turnExam}
+                onClick={context.pauseTime}
               />
               <Button
                 type="button"
@@ -38,7 +38,7 @@ export default function Notify() {
             <div className="time-out">
               <h1>Đã hết thời gian vui lòng nhấn nút nộp bài</h1>
               <Button
-                onClick={context.turnExam}
+                onClick={context.pauseTime}
                 type="submit"
                 value="Nộp bài"
               />

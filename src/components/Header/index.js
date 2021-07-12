@@ -67,7 +67,7 @@ export default function Header() {
           <div className="header__login">
             <Link to={data ? "#" : "/Login"} className="link">
               <span className="header__login-name">
-                {data ? data.firstname : "Đăng nhập"}
+                {data ? `Hi! ${data.lastname}` : "Đăng nhập"}
               </span>
               <span className="header__login-icon"></span>
             </Link>

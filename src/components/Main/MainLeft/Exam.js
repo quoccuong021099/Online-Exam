@@ -15,12 +15,12 @@ export default function Exam() {
   const [openconfirm, setOpenconfirm] = useState(false);
   const [openDone, setOpenDone] = useState(false);
   const [count, setCount] = useState(0);
+  const [flagListQuestion, setFlagListQuestion] = useState(false);
+  const [reviews, setReviews] = useState([]);
   const [yourResult, setYourResult] = useState({
     result_True: 0,
     result_False: 0,
   });
-  const [flagListQuestion, setFlagListQuestion] = useState(false);
-  const [reviews, setReviews] = useState([]);
 
   // Mảng chứa những parent_id đã được chọn
   const activeAnswer = selectedRadio.map((i) => i.parent_id);

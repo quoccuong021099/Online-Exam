@@ -4,10 +4,11 @@ import Oclock from "../../Oclock";
 import "./style.scss";
 import Spinner from "../../Spinner";
 import { mainExam } from "../index";
+import { contextApp } from "../../../App";
 export default function MainLeft() {
   // context
   const mainExamContext = useContext(mainExam);
-
+  const appContext = useContext(contextApp);
   return (
     <div className="main__left">
       <div className="main__left-title">
@@ -31,7 +32,7 @@ export default function MainLeft() {
         <div className="num-attempt">
           <span>
             <i className="fa fa-user" aria-hidden="true"></i>
-            {mainExamContext.turn} lượt thi
+            {appContext.charts?.length} lượt thi
           </span>
         </div>
       </div>

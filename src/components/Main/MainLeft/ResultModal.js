@@ -1,13 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { mainExam } from "../index";
 import { examContainerContext } from "./Exam";
+import { contextApp } from "../../../App";
+import { v4 } from "uuid";
 export default function ResultModal({ yourResult, onOpenDone }) {
   // context
   const context = useContext(mainExam);
   const contextExam = useContext(examContainerContext);
+  const appContext = useContext(contextApp);
 
   // state
   const [resultFinal, setResultFinal] = useState([]);
+
+  // lấy user trong localStorage
+  const user = JSON.parse(localStorage.getItem("user-info"));
 
   // hàm trả về đáp án đúng của bộ đề
   useEffect(() => {
@@ -20,6 +26,29 @@ export default function ResultModal({ yourResult, onOpenDone }) {
 
   // Tổng điểm
   const totalPoint = (10 / context.dataTest.length) * yourResult.result_True;
+
+  // POST dữ liệu charts lên API
+  const getRank = async () => {
+    let data = {
+      id: v4(),
+      lastname: user.lastname,
+      firstname: user.firstname,
+      point: totalPoint.toFixed(2),
+      time: JSON.stringify(600 - context.timeDown),
+    };
+    let result = await fetch("http://localhost:5000/charts", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    result = await result.json();
+    localStorage.setItem("charts", JSON.stringify(result));
+    appContext.reset(data);
+  };
+
   return (
     <>
       <div className="modal">
@@ -61,7 +90,7 @@ export default function ResultModal({ yourResult, onOpenDone }) {
               </div>
             </div>
           </div>
-          <div className="modal-footer">
+          <div className="modal-footer" onClick={getRank}>
             <p onClick={onOpenDone}>
               <i className="fas fa-angle-left"></i> Kết Thúc
             </p>

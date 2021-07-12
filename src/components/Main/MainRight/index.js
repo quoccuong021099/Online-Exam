@@ -1,11 +1,11 @@
 import "./style.scss";
 import { contextApp } from "../../../App";
-import { useContext, useEffect, useState } from "react";
+import { mainExam } from "../index";
+import { useContext, useState } from "react";
 import RatingItem from "./RatingItem";
 export default function MainRight() {
-  const AppContext = useContext(contextApp);
-  const user = JSON.parse(localStorage.getItem("user-info"));
-
+  const appContext = useContext(contextApp);
+  const mainExamContext = useContext(mainExam);
   // list state
   const [number, setNumber] = useState(3);
 
@@ -19,43 +19,16 @@ export default function MainRight() {
     setNumber(3);
   };
 
-  // useEffect(() => {
-  // data.id = v4();
-  // let result = await fetch("http://localhost:5000/users", {
-  //   method: "POST",
-  //   body: JSON.stringify(data),
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Accept: "application/json",
-  //   },
-  // });
-  // const userNow = AppContext.listUsers.find(
-  //   (i) => i.username === user.username
-  // );
-  // userNow.point = 8;
-  // userNow.time = 320;
-  // console.log(user);
-  // }, []);
+  const descendingSort = appContext.charts
+    ?.sort((a, b) => Number(a.time) - Number(b.time))
+    .sort((a, b) => b.point - a.point);
 
-  // data.id = v4();
-  // let result = await fetch("http://localhost:5000/users", {
-  //   method: "POST",
-  //   body: JSON.stringify(data),
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Accept: "application/json",
-  //   },
-  // });
-  // result = await result.json();
-  // localStorage.setItem("user-info", JSON.stringify(result));
-  // contextOfApp.reset(data);
-  // history.push("/");
   return (
     <div className="main__right">
       <div className="empty"></div>
       <div className="cart__group">
         <div className="cart__group-header">
-          <h2>Top 10/188 lượt thi</h2>
+          <h2>Top 3/{appContext.charts?.length} lượt thi</h2>
         </div>
         <ul className="cart__group-body">
           <li className="cart__group-item">
@@ -65,12 +38,14 @@ export default function MainRight() {
               <li>Thời gian</li>
             </ul>
           </li>
-          {AppContext.listUsers.map(
+          {descendingSort?.map(
             (item, index) =>
               index < number && (
                 <RatingItem
                   key={item.id}
                   name={`${item.firstname} ${item.lastname}`}
+                  point={item.point}
+                  time={mainExamContext.formatTime(item.time).slice(-5)}
                 />
               )
           )}

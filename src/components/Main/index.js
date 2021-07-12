@@ -9,9 +9,7 @@ export default function Main() {
   const [dataTest, setDataTest] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [pause, setPause] = useState(false);
-  const [turn, setTurn] = useState(0);
   const [timeDown, setTimeDown] = useState(0);
-
   // Hàm lấy thời gian đếm ngược và gắn cho timeDown
   const getTimeDown = (data) => {
     setTimeDown(data);
@@ -22,10 +20,9 @@ export default function Main() {
     return new Promise((resolve) => setTimeout(resolve, ms));
   };
 
-  // Hàm tăng lượt người làm bài và pause thời gian làm bài
-  const turnExam = () => {
+  // Hàm pause thời gian làm bài
+  const pauseTime = () => {
     setPause(true);
-    setTurn(turn + 1);
   };
 
   // Hàm định dạng hh:mm:ss
@@ -56,13 +53,12 @@ export default function Main() {
   // list context
   const listContext = {
     dataTest: dataTest,
-    turnExam: turnExam,
+    pauseTime: pauseTime,
     formatTime: formatTime,
     timeDown: timeDown,
     getTimeDown: getTimeDown,
     isLoading: isLoading,
     pause: pause,
-    turn: turn,
   };
   return (
     <mainExam.Provider value={listContext}>

@@ -13,11 +13,25 @@ export const contextApp = React.createContext();
 function App() {
   const [listUsers, setListUsers] = useState([]);
   const [reFetch, setReFecth] = useState(null);
+  // const [ranks, setRanks] = useState(null);
+  const [charts, setCharts] = useState(null);
+
+  // lấy user trong localStorage
+  const user = JSON.parse(localStorage.getItem("user-info"));
 
   // Hàm refecth lại khi data thay đổi
   const reset = (data) => {
     setReFecth(data);
   };
+
+  const fetchCharts = async () => {
+    const responseJson = await fetch("http://localhost:5000/charts");
+    const response = await responseJson.json();
+    setCharts(response);
+  };
+
+  // Hàm sắp xếp theo điểm
+  // const descendingSort = (a, b) => b - a;
 
   // Fetch API user
   useEffect(() => {
@@ -27,13 +41,15 @@ function App() {
       setListUsers(response);
     };
     fetchQuestion();
+    fetchCharts();
   }, [reFetch]);
 
   // List context
-  const listContextApp = { listUsers: listUsers, reset: reset };
-
-  // lấy user trong localStorage
-  const user = localStorage.getItem("user-info");
+  const listContextApp = {
+    listUsers: listUsers,
+    reset: reset,
+    charts: charts,
+  };
 
   return (
     <div className="app">
