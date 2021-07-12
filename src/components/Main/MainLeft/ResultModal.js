@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { mainExam } from "../index";
 import { examContainerContext } from "./Exam";
 import { contextApp } from "../../../App";
-import { v4 } from "uuid";
+// import { v4 } from "uuid";
 export default function ResultModal({ yourResult, onOpenDone }) {
   // context
   const context = useContext(mainExam);
@@ -29,24 +29,49 @@ export default function ResultModal({ yourResult, onOpenDone }) {
 
   // POST dữ liệu charts lên API
   const getRank = async () => {
-    let data = {
-      id: v4(),
-      lastname: user.lastname,
-      firstname: user.firstname,
-      point: totalPoint.toFixed(2),
-      time: JSON.stringify(600 - context.timeDown),
-    };
-    let result = await fetch("http://localhost:5000/charts", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    result = await result.json();
-    localStorage.setItem("charts", JSON.stringify(result));
-    appContext.reset(data);
+    const sortUp = appContext.charts.find((i) => i.id === user.id);
+    if (!sortUp) {
+      let data = {
+        id: user.id,
+        lastname: user.lastname,
+        firstname: user.firstname,
+        point: totalPoint.toFixed(2),
+        time: JSON.stringify(600 - context.timeDown),
+      };
+      let result = await fetch("http://localhost:5000/charts", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+      result = await result.json();
+      localStorage.setItem("charts", JSON.stringify(result));
+      appContext.reset(data);
+    } else {
+      if (
+        JSON.parse(sortUp.point) < totalPoint.toFixed(2) ||
+        (JSON.parse(sortUp.point) < totalPoint.toFixed(2) &&
+          sortUp.time >= 600 - context.timeDown)
+      ) {
+        sortUp.lastname = user.lastname;
+        sortUp.firstname = user.firstname;
+        sortUp.point = totalPoint.toFixed(2);
+        sortUp.time = JSON.stringify(600 - context.timeDown);
+        let result = await fetch(`http://localhost:5000/charts/${sortUp.id}`, {
+          method: "PATCH",
+          body: JSON.stringify(sortUp),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        });
+        result = await result.json();
+        localStorage.setItem("charts", JSON.stringify(result));
+        appContext.reset(sortUp);
+      }
+    }
   };
 
   return (

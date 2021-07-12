@@ -11,7 +11,7 @@ import { Link, useHistory } from "react-router-dom";
 const schema = yup.object().shape({
   username: yup
     .string()
-    // .email("Email không hợp lệ")
+    .email("Email không hợp lệ")
     .required("Bạn phải nhập tên đăng nhập!"),
   password: yup.string().required("Bạn phải nhập mật khẩu!"),
   // .min(3, "Mật khẩu phải từ 3-30 ký tự")

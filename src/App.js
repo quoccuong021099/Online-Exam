@@ -30,9 +30,6 @@ function App() {
     setCharts(response);
   };
 
-  // Hàm sắp xếp theo điểm
-  // const descendingSort = (a, b) => b - a;
-
   // Fetch API user
   useEffect(() => {
     const fetchQuestion = async () => {
@@ -69,7 +66,12 @@ function App() {
               return !user ? <Login /> : <Redirect to="/" />;
             }}
           />
-          <Route path="/SignUp" component={SignUp} />
+          <Route
+            path="/SignUp"
+            render={() => {
+              return !user ? <SignUp /> : <Redirect to="/exam" />;
+            }}
+          />
         </Switch>
         <Footer />
       </contextApp.Provider>

@@ -47,21 +47,24 @@ export default function SignUp() {
 
   // submit form
   const onSubmit = async (data) => {
-    data.id = v4();
-    let result = await fetch("http://localhost:5000/users", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    result = await result.json();
-    localStorage.setItem("user-info", JSON.stringify(result));
-    contextOfApp.reset(data);
-    history.push("/");
+    if (!contextOfApp.listUsers.find((i) => i.username === data.username)) {
+      data.id = v4();
+      let result = await fetch("http://localhost:5000/users", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+      result = await result.json();
+      localStorage.setItem("user-info", JSON.stringify(result));
+      contextOfApp.reset(data);
+      history.push("/");
+    } else {
+      alert("Tên đăng nhập bị trùng");
+    }
   };
-
   return (
     <div className="wrapper-login">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -105,7 +108,7 @@ export default function SignUp() {
         <div className="group-form">
           <Input
             autoComplete="true"
-            {...register("password", { required: true })}
+            {...register("password")}
             placeholder="Nhập mật khẩu"
             type="password"
           />
