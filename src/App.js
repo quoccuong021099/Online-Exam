@@ -7,7 +7,6 @@ import SignUp from "./components/Login/SignUp";
 import Footer from "./components/Footer";
 import ChooseTopic from "./components/Main/ChooseTopic";
 import { Switch, Route, Redirect } from "react-router-dom";
-
 export const contextApp = React.createContext();
 
 function App() {

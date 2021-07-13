@@ -2,6 +2,7 @@ import MainRight from "./MainRight";
 import MainLeft from "./MainLeft";
 import "./style.scss";
 import React, { useEffect, useState } from "react";
+import Box from "@material-ui/core/Box";
 export const mainExam = React.createContext();
 
 export default function Main() {
@@ -63,10 +64,10 @@ export default function Main() {
   return (
     <mainExam.Provider value={listContext}>
       <main>
-        <div className="main">
+        <Box className="main">
           <MainLeft />
           <MainRight />
-        </div>
+        </Box>
       </main>
     </mainExam.Provider>
   );

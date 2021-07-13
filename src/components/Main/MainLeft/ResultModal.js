@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { mainExam } from "../index";
 import { examContainerContext } from "./Exam";
 import { contextApp } from "../../../App";
-// import { v4 } from "uuid";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+
 export default function ResultModal({ yourResult, onOpenDone }) {
   // context
   const context = useContext(mainExam);
@@ -76,24 +78,32 @@ export default function ResultModal({ yourResult, onOpenDone }) {
 
   return (
     <>
-      <div className="modal">
-        <div className="overlay" onClick={onOpenDone}></div>
-        <div className="modal-result">
-          <h1 className="modal-header">KẾT QUẢ</h1>
-          <div className="modal-body">
-            <div className="modal-body__title">
-              <p>Thời gian: {context.formatTime(600 - context.timeDown)}</p>
-              <p>
+      <Box className="modal">
+        <Box className="overlay" onClick={onOpenDone}></Box>
+        <Box className="modal-result">
+          <Typography component="h1" className="modal-header">
+            KẾT QUẢ
+          </Typography>
+          <Box className="modal-body">
+            <Box className="modal-body__title">
+              <Typography component="p">
+                Thời gian: {context.formatTime(600 - context.timeDown)}
+              </Typography>
+              <Typography component="p">
                 Tổng điểm:
                 {totalPoint.toFixed(2)}
                 điểm
-              </p>
-              <p>Số câu đúng: {yourResult.result_True}</p>
-              <p>Số câu Sai: {yourResult.result_False}</p>
-            </div>
-            <div className="modal-body__table">
-              <h2>Đáp án của bạn</h2>
-              <div className="modal-body__table-result">
+              </Typography>
+              <Typography component="p">
+                Số câu đúng: {yourResult.result_True}
+              </Typography>
+              <Typography component="p">
+                Số câu Sai: {yourResult.result_False}
+              </Typography>
+            </Box>
+            <Box className="modal-body__table">
+              <Typography component="h2">Đáp án của bạn</Typography>
+              <Box className="modal-body__table-result">
                 {contextExam.selectedRadio.map((i, index) => (
                   <span key={index}>
                     {i.result
@@ -102,26 +112,26 @@ export default function ResultModal({ yourResult, onOpenDone }) {
                   </span>
                 ))}
                 <br />
-              </div>
-            </div>
-            <div className="modal-body__table">
-              <h2>Đáp án đúng</h2>
-              <div className="modal-body__table-result">
+              </Box>
+            </Box>
+            <Box className="modal-body__table">
+              <Typography component="h2">Đáp án đúng</Typography>
+              <Box className="modal-body__table-result">
                 {resultFinal.map((item, index) => (
                   <span key={index}>
                     {`${index + 1} - ${item.content_answer.slice(0, 1)}`}
                   </span>
                 ))}
-              </div>
-            </div>
-          </div>
-          <div className="modal-footer" onClick={getRank}>
-            <p onClick={onOpenDone}>
+              </Box>
+            </Box>
+          </Box>
+          <Box className="modal-footer" onClick={getRank}>
+            <Typography component="p" onClick={onOpenDone}>
               <i className="fas fa-angle-left"></i> Kết Thúc
-            </p>
-          </div>
-        </div>
-      </div>
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
     </>
   );
 }

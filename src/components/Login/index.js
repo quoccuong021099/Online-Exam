@@ -2,11 +2,13 @@ import React, { useContext } from "react";
 import { contextApp } from "../../App";
 import { useForm } from "react-hook-form";
 import "./style.scss";
-import Input from "../../common/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Link, useHistory } from "react-router-dom";
-
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 // validation
 const schema = yup.object().shape({
   username: yup
@@ -14,8 +16,6 @@ const schema = yup.object().shape({
     .email("Email không hợp lệ")
     .required("Bạn phải nhập tên đăng nhập!"),
   password: yup.string().required("Bạn phải nhập mật khẩu!"),
-  // .min(3, "Mật khẩu phải từ 3-30 ký tự")
-  // .max(30, "Mật khẩu phải từ 3-30 ký tự"),
 });
 
 export default function Login() {
@@ -47,47 +47,59 @@ export default function Login() {
     }
   };
   return (
-    <div className="wrapper-login">
+    <Box className="wrapper-login">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2>Đăng Nhập</h2>
-        <div className="group-form">
-          <Input
-            type="button"
-            value="ĐĂNG NHẬP BẰNG FACEBOOK"
-            autoComplete="true"
-          />
-        </div>
-        <div className=" group-form">
-          <div className="login-or">
+        <Typography component="h2">Đăng Nhập</Typography>
+        <Box className="group-form">
+          <Button variant="contained" color="primary" fullWidth size="large">
+            ĐĂNG NHẬP BẰNG FACEBOOK
+          </Button>
+        </Box>
+        <Box className=" group-form">
+          <Box className="login-or">
             <hr />
-            <h5>hoặc</h5>
-          </div>
-        </div>
-        <div className="group-form">
-          <Input
+            <Typography component="h5">hoặc</Typography>
+          </Box>
+        </Box>
+        <Box className="group-form">
+          <TextField
+            id="outlined-basic"
+            label="Nhập tên đăng nhập/ Email"
+            variant="outlined"
             {...register("username")}
-            placeholder="Nhập tên đăng nhập/ Email"
+            fullWidth
           />
-          <p> {errors.username?.message}</p>
-        </div>
-        <div className="group-form">
-          <Input
+          <Typography component="p"> {errors.username?.message}</Typography>
+        </Box>
+        <Box className="group-form">
+          <TextField
+            id="outlined-basic"
+            label="Nhập mật khẩu"
+            variant="outlined"
             {...register("password")}
-            placeholder="Nhập mật khẩu"
             type="password"
+            fullWidth
           />
-          <p> {errors.password?.message}</p>
-        </div>
-        <p className="forget-password">
+          <Typography component="p"> {errors.password?.message}</Typography>
+        </Box>
+        <Typography component="p" className="forget-password">
           Quên mật khẩu? <a href="/#"> Nhấn vào đây</a>
-        </p>
-        <div className="group-form">
-          <Input type="submit" value="ĐĂNG NHẬP" />
-        </div>
-        <p className="signup">
+        </Typography>
+        <Box className="group-form">
+          <Button
+            variant="contained"
+            color="secondary"
+            fullWidth
+            size="large"
+            type="submit"
+          >
+            ĐĂNG NHẬP
+          </Button>
+        </Box>
+        <Typography component="p" className="signup">
           Nếu bạn chưa có tài khoản? <Link to="/SignUp"> Đăng ký ngay</Link>
-        </p>
+        </Typography>
       </form>
-    </div>
+    </Box>
   );
 }

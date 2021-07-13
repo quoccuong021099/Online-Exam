@@ -1,3 +1,5 @@
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 import React, { useContext } from "react";
 import Button from "../../../common/Button";
 import { mainExam } from "../index";
@@ -9,18 +11,20 @@ export default function Notify() {
 
   return (
     <>
-      <div className="overlay"></div>
-      <div className="notify">
+      <Box className="overlay"></Box>
+      <Box className="notify">
         {context.timeDown !== 0 ? (
           <>
-            <h1>
+            <Typography component="h1">
               Bạn còn{" "}
               {context.dataTest.length - contextExam.selectedRadio.length} câu
               chưa trả lời
-            </h1>
-            <p>Thời gian còn {context.formatTime(context.timeDown)}</p>
-            <p>Bạn đồng ý nộp bài chư ?</p>
-            <div className="buttons">
+            </Typography>
+            <Typography component="p">
+              Thời gian còn {context.formatTime(context.timeDown)}
+            </Typography>
+            <Typography component="p">Bạn đồng ý nộp bài chư ?</Typography>
+            <Box className="buttons">
               <Button
                 type="submit"
                 value="Nộp bài"
@@ -31,21 +35,23 @@ export default function Notify() {
                 value="Làm tiếp"
                 onClick={contextExam.onChangeConfirm}
               />
-            </div>
+            </Box>
           </>
         ) : (
           <>
-            <div className="time-out">
-              <h1>Đã hết thời gian vui lòng nhấn nút nộp bài</h1>
+            <Box className="time-out">
+              <Typography component="h1">
+                Đã hết thời gian vui lòng nhấn nút nộp bài
+              </Typography>
               <Button
                 onClick={context.pauseTime}
                 type="submit"
                 value="Nộp bài"
               />
-            </div>
+            </Box>
           </>
         )}
-      </div>
+      </Box>
     </>
   );
 }

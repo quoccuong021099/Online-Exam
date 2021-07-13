@@ -8,7 +8,7 @@
   &-alarm {
     user-select: none;
     position: fixed;
-    left: 13%;
+    left: 10vw;
     width: 80px;
     height: 80px;
     color: #fff;
@@ -142,9 +142,9 @@
     &-result {
       width: 720px;
       position: fixed;
-      top: 30%;
-      left: 410px;
-      transform: translateY(-30%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       z-index: 10;
       background-color: #fff;
       border-radius: 10px;
@@ -220,7 +220,6 @@
       align-items: center;
       label {
         display: inline-block;
-        margin-left: 10px;
         color: #fff;
         span {
           user-select: none;
@@ -254,7 +253,7 @@
       color: #fff;
     }
     #active {
-      background-color: rgb(161, 190, 29);
+      background-color: orange;
       color: #fff;
       &:hover {
         background-color: #ffb83c;
@@ -262,29 +261,33 @@
       }
     }
   }
-  button {
-    // padding: 10px;
-    height: 30px;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    color: #000;
-    &:hover {
-      background-color: #ffb83c;
-      color: #fff;
-    }
-    &:disabled {
-      background-color: #d0d3e9;
-      color: #959595;
-    }
+  // button {
+  //   // padding: 10px;
+  //   height: 30px;
+  //   font-size: 18px;
+  //   display: flex;
+  //   align-items: center;
+  //   background-color: #fff;
+  //   color: #000;
+  //   &:hover {
+  //     background-color: #ffb83c;
+  //     color: #fff;
+  //   }
+  //   &:disabled {
+  //     background-color: #d0d3e9;
+  //     color: #959595;
+  //   }
+  // }
+  .MuiCheckbox-colorSecondary.Mui-checked {
+    color: orange;
   }
   .exam__pagination {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     align-content: center;
     justify-content: space-between;
-    width: 25%;
+    width: 30%;
   }
 }
 

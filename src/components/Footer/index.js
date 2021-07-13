@@ -1,13 +1,14 @@
 import React from "react";
 import "./style.scss";
 import Logo from "../Image/logo__footer.png";
+import Box from "@material-ui/core/Box";
 export default function Footer() {
   return (
     <footer>
-      <div className="footer">
-        <div className="footer__logo">
+      <Box className="footer">
+        <Box className="footer__logo">
           <img src={Logo} alt="" />
-        </div>
+        </Box>
         <ul className="list__infor">
           <li className="list__infor-item">
             <ul className="list__subject">
@@ -106,10 +107,10 @@ export default function Footer() {
             </ul>
           </li>
         </ul>
-        <div className="footer__copyright">
+        <Box className="footer__copyright">
           Copyright © 2020 by Tracnghiem.net
-        </div>
-      </div>
+        </Box>
+      </Box>
     </footer>
   );
 }

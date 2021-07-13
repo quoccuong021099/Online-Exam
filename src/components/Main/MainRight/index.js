@@ -3,9 +3,30 @@ import { contextApp } from "../../../App";
 import { mainExam } from "../index";
 import { useContext, useState } from "react";
 import RatingItem from "./RatingItem";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import clsx from "clsx";
+import { useButton } from "../../../common/Btn";
+const useStyle = makeStyles({
+  Button: {
+    width: "100px",
+    fontSize: "14px",
+    margin: "0 auto",
+    display: "block",
+  },
+});
+
 export default function MainRight() {
+  // material
+  const classes = useStyle();
+  const classesBtn = useButton();
+
+  // context
   const appContext = useContext(contextApp);
   const mainExamContext = useContext(mainExam);
+
   // list state
   const [number, setNumber] = useState(3);
 
@@ -24,12 +45,14 @@ export default function MainRight() {
     .sort((a, b) => b.point - a.point);
 
   return (
-    <div className="main__right">
-      <div className="empty"></div>
-      <div className="cart__group">
-        <div className="cart__group-header">
-          <h2>Top 3/{appContext.charts?.length} lượt thi</h2>
-        </div>
+    <Box className="main__right">
+      <Box className="empty"></Box>
+      <Box className="cart__group">
+        <Box className="cart__group-header">
+          <Typography component="h2">
+            Top 3/{appContext.charts?.length} lượt thi
+          </Typography>
+        </Box>
         <ul className="cart__group-body">
           <li className="cart__group-item">
             <ul className="cart__group-item-title">
@@ -52,16 +75,26 @@ export default function MainRight() {
         </ul>
 
         {number < 10 && (
-          <div className="cart__group-footer">
-            <button onClick={handleSeeMore}>Xem thêm</button>
-          </div>
+          <Box width="100%" paddingBottom="15px">
+            <Button
+              className={clsx(classesBtn.Button, classes.Button)}
+              onClick={handleSeeMore}
+            >
+              Xem thêm
+            </Button>
+          </Box>
         )}
         {number >= 10 && (
-          <div className="cart__group-footer">
-            <button onClick={handleHideNumber}>Ẩn bớt</button>
-          </div>
+          <Box width="100%" paddingBottom="15px">
+            <Button
+              className={clsx(classes.Button, classesBtn.Button)}
+              onClick={handleHideNumber}
+            >
+              Ẩn bớt
+            </Button>
+          </Box>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

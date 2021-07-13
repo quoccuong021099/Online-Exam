@@ -89,26 +89,26 @@
     &-footer {
       width: 100%;
       padding-bottom: 15px;
-      button {
-        display: block;
-        margin: 0 auto;
-        padding: 0 26px;
-        height: 33px;
-        border: none;
-        border-radius: 5px;
+      // button {
+      //   display: block;
+      //   margin: 0 auto;
+      //   padding: 0 26px;
+      //   height: 33px;
+      //   border: none;
+      //   border-radius: 5px;
 
-        font-family: "Nunito", sans-serif;
-        font-size: 13px;
-        line-height: 31px;
-        font-weight: 700;
-        color: #535353;
-        background: #f1f1f1;
-        cursor: pointer;
-        &:hover {
-          background: #ffb83c;
-          color: #fff;
-        }
-      }
+      //   font-family: "Nunito", sans-serif;
+      //   font-size: 13px;
+      //   line-height: 31px;
+      //   font-weight: 700;
+      //   color: #535353;
+      //   background: #f1f1f1;
+      //   cursor: pointer;
+      //   &:hover {
+      //     background: #ffb83c;
+      //     color: #fff;
+      //   }
+      // }
     }
   }
   .try-it-now {
@@ -151,3 +151,4 @@
     }
   }
 }
+

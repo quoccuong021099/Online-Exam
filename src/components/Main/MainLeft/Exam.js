@@ -124,7 +124,7 @@ export default function Exam() {
   };
 
   return (
-    <div>
+    <>
       <examContainerContext.Provider value={listContextExam}>
         {openModal && (
           <ResultModal
@@ -152,6 +152,6 @@ export default function Exam() {
           />
         )}
       </examContainerContext.Provider>
-    </div>
+    </>
   );
 }

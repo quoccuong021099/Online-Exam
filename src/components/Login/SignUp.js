@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
 import "./style.scss";
-import Input from "../../common/Input";
 import { useHistory } from "react-router";
 import { v4 } from "uuid";
 import { contextApp } from "../../App";
 import { useContext } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 
 // validation
 const schema = yup.object().shape({
@@ -66,62 +69,79 @@ export default function SignUp() {
     }
   };
   return (
-    <div className="wrapper-login">
+    <Box className="wrapper-login">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h2>Đăng Ký</h2>
-        <div className="group-form">
-          <Input type="button" value="ĐĂNG KÝ BẰNG FACEBOOK" />
-        </div>
-        <div className=" group-form">
-          <div className="login-or">
+        <Typography component="h2">Đăng Ký</Typography>
+        <Box className="group-form">
+          <Button variant="contained" color="primary" fullWidth size="large">
+            ĐĂNG KÝ BẰNG FACEBOOK
+          </Button>
+        </Box>
+        <Box className=" group-form">
+          <Box className="login-or">
             <hr />
-            <h5>hoặc</h5>
-          </div>
-        </div>
-        <div className="group-form">
-          <div className="firstname">
-            <Input
-              autoComplete="true"
-              {...register("firstname", { required: true })}
-              placeholder="Họ"
+            <Typography component="h5">hoặc</Typography>
+          </Box>
+        </Box>
+        <Box className="group-form">
+          <Box className="firstname">
+            <TextField
+              id="outlined-basic"
+              label="Họ"
+              variant="outlined"
+              {...register("firstname")}
+              fullWidth
             />
-            <p>{errors.firstname?.message}</p>
-          </div>
-          <div className="lastname">
-            <Input
-              autoComplete="true"
-              {...register("lastname", { required: true })}
-              placeholder="Tên"
+            <Typography component="p">{errors.firstname?.message}</Typography>
+          </Box>
+          <Box className="lastname">
+            <TextField
+              id="outlined-basic"
+              label="Tên"
+              variant="outlined"
+              {...register("lastname")}
+              fullWidth
             />
             <p className="placeholer-name">{errors.lastname?.message}</p>
-          </div>
-        </div>
-        <div className="group-form">
-          <Input
-            autoComplete="true"
-            {...register("username", { required: true })}
-            placeholder="Nhập tên đăng nhập/ Email"
-            type="text"
+          </Box>
+        </Box>
+        <Box className="group-form">
+          <TextField
+            id="outlined-basic"
+            label="Nhập tên đăng nhập/ Email"
+            variant="outlined"
+            {...register("username")}
+            fullWidth
           />
-          <p>{errors.username?.message}</p>
-        </div>
-        <div className="group-form">
-          <Input
-            autoComplete="true"
+          <Typography component="p">{errors.username?.message}</Typography>
+        </Box>
+        <Box className="group-form">
+          <TextField
+            id="outlined-basic"
+            label="Nhập mật khẩu"
+            variant="outlined"
             {...register("password")}
-            placeholder="Nhập mật khẩu"
+            fullWidth
             type="password"
           />
-          <p>{errors.password?.message}</p>
-        </div>
-        <div className="group-form">
-          <Input type="submit" value="ĐĂNG KÝ NGAY" />
-        </div>
-        <p className="signup">
+          <Typography component="p">{errors.password?.message}</Typography>
+        </Box>
+        <Box className="group-form">
+          <Button
+            variant="contained"
+            color="secondary"
+            fullWidth
+            size="large"
+            type="submit"
+          >
+            ĐĂNG KÝ NGAY
+          </Button>
+        </Box>
+        <Typography component="p" className="signup">
           Khi bấm Đăng ký, bạn đã đồng ý với <a href="/#">chính sách</a> của
           tracnghiem.vn <a href="/#"> điều kiện sử dụng </a>
-        </p>
+        </Typography>
       </form>
-    </div>
+    </Box>
   );
 }
