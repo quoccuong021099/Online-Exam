@@ -50,6 +50,7 @@ export default function ChooseTopic({ handleStart }) {
               <Select
                 labelId="demo-controlled-open-select-label"
                 id="demo-controlled-open-select"
+                value="20"
               >
                 <MenuItem value={10}>Lớp 6</MenuItem>
                 <MenuItem value={20}>Lớp 7</MenuItem>
@@ -65,6 +66,7 @@ export default function ChooseTopic({ handleStart }) {
               <Select
                 labelId="demo-controlled-open-select-label"
                 id="demo-controlled-open-select"
+                value="20"
               >
                 <MenuItem value={10}>Toán</MenuItem>
                 <MenuItem value={20}>Lý</MenuItem>

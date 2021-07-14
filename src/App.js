@@ -7,6 +7,8 @@ import SignUp from "./components/Login/SignUp";
 import Footer from "./components/Footer";
 import ChooseTopic from "./components/Main/ChooseTopic";
 import { Switch, Route, Redirect } from "react-router-dom";
+import ExamTheme from "./ExamTheme";
+
 export const contextApp = React.createContext();
 
 function App() {
@@ -48,7 +50,7 @@ function App() {
   };
 
   return (
-    <div className="app">
+    <ExamTheme>
       <contextApp.Provider value={listContextApp}>
         <Header />
         <Switch>
@@ -74,7 +76,7 @@ function App() {
         </Switch>
         <Footer />
       </contextApp.Provider>
-    </div>
+    </ExamTheme>
   );
 }
 

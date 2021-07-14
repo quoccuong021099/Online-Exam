@@ -6,6 +6,7 @@ import Spinner from "../../Spinner";
 import { mainExam } from "../index";
 import Box from "@material-ui/core/Box";
 import { contextApp } from "../../../App";
+
 export default function MainLeft() {
   // context
   const mainExamContext = useContext(mainExam);
@@ -37,7 +38,6 @@ export default function MainLeft() {
           </span>
         </Box>
       </Box>
-
       <Oclock />
       {mainExamContext.isLoading ? (
         <Spinner />

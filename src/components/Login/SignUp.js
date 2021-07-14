@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import "./style.scss";
 import { useHistory } from "react-router";
 import { v4 } from "uuid";
 import { contextApp } from "../../App";
@@ -10,7 +9,9 @@ import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-
+import { useStyleLogin } from "./styleLogin";
+import clsx from "clsx";
+import { Container } from "@material-ui/core";
 // validation
 const schema = yup.object().shape({
   firstname: yup
@@ -35,6 +36,7 @@ const schema = yup.object().shape({
 });
 
 export default function SignUp() {
+  const classes = useStyleLogin();
   // list context
   const contextOfApp = useContext(contextApp);
 
@@ -68,65 +70,81 @@ export default function SignUp() {
       alert("Tên đăng nhập bị trùng");
     }
   };
+
   return (
-    <Box className="wrapper-login">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Typography component="h2">Đăng Ký</Typography>
-        <Box className="group-form">
-          <Button variant="contained" color="primary" fullWidth size="large">
+    <Container maxWidth="md">
+      <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+        <Typography component="h2" className={classes.h2}>
+          Đăng Ký
+        </Typography>
+        <Box className={classes.groupForm}>
+          <Button
+            variant="contained"
+            className={classes.BtnFb}
+            fullWidth
+            size="large"
+          >
             ĐĂNG KÝ BẰNG FACEBOOK
           </Button>
         </Box>
-        <Box className=" group-form">
-          <Box className="login-or">
-            <hr />
-            <Typography component="h5">hoặc</Typography>
-          </Box>
+        <Box className={classes.loginOr} padding={2}>
+          <hr />
+          <Typography component="h5" className={classes.h5}>
+            hoặc
+          </Typography>
         </Box>
-        <Box className="group-form">
-          <Box className="firstname">
+        <Box className={classes.groupForm}>
+          <Box className={classes.firstname}>
             <TextField
-              id="outlined-basic"
+              autoComplete="true"
               label="Họ"
               variant="outlined"
               {...register("firstname")}
               fullWidth
             />
-            <Typography component="p">{errors.firstname?.message}</Typography>
+            <Typography component="p" className={classes.p}>
+              {errors.firstname?.message}
+            </Typography>
           </Box>
-          <Box className="lastname">
+          <Box className={classes.lastname}>
             <TextField
-              id="outlined-basic"
+              autoComplete="true"
               label="Tên"
               variant="outlined"
               {...register("lastname")}
               fullWidth
             />
-            <p className="placeholer-name">{errors.lastname?.message}</p>
+            <p className={clsx(classes.p, classes.placeholerName)}>
+              {errors.lastname?.message}
+            </p>
           </Box>
         </Box>
-        <Box className="group-form">
+        <Box className={classes.groupForm}>
           <TextField
-            id="outlined-basic"
+            autoComplete="true"
             label="Nhập tên đăng nhập/ Email"
             variant="outlined"
             {...register("username")}
             fullWidth
           />
-          <Typography component="p">{errors.username?.message}</Typography>
+          <Typography component="p" className={classes.p}>
+            {errors.username?.message}
+          </Typography>
         </Box>
-        <Box className="group-form">
+        <Box className={classes.groupForm}>
           <TextField
-            id="outlined-basic"
             label="Nhập mật khẩu"
             variant="outlined"
             {...register("password")}
             fullWidth
             type="password"
+            autoComplete="true"
           />
-          <Typography component="p">{errors.password?.message}</Typography>
+          <Typography component="p" className={classes.p}>
+            {errors.password?.message}
+          </Typography>
         </Box>
-        <Box className="group-form">
+        <Box className={classes.groupForm}>
           <Button
             variant="contained"
             color="secondary"
@@ -137,11 +155,13 @@ export default function SignUp() {
             ĐĂNG KÝ NGAY
           </Button>
         </Box>
-        <Typography component="p" className="signup">
-          Khi bấm Đăng ký, bạn đã đồng ý với <a href="/#">chính sách</a> của
-          tracnghiem.vn <a href="/#"> điều kiện sử dụng </a>
+        <Typography component="p" className={classes.signup}>
+          Khi bấm Đăng ký, bạn đã đồng ý với{" "}
+          <a href="/#" className={classes.a}>
+            chính sách của tracnghiem.vn{" "}
+          </a>
         </Typography>
       </form>
-    </Box>
+    </Container>
   );
 }
