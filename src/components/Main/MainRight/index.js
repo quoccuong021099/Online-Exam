@@ -49,9 +49,7 @@ export default function MainRight() {
       <Box className="empty"></Box>
       <Box className="cart__group">
         <Box className="cart__group-header">
-          <Typography component="h2">
-            Top 3/{appContext.charts?.length} lượt thi
-          </Typography>
+          <Typography component="h2">Top 3</Typography>
         </Box>
         <ul className="cart__group-body">
           <li className="cart__group-item">

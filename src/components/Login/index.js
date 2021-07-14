@@ -9,7 +9,7 @@ import TextField from "@material-ui/core/TextField";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { useStyleLogin } from "./styleLogin";
-import { Container } from "@material-ui/core";
+import Container from "@material-ui/core/Container";
 // validation
 const schema = yup.object().shape({
   username: yup
