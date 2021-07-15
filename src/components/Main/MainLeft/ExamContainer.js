@@ -79,7 +79,7 @@ export default function ExamContainer({
                       <Checkbox
                         className={classes.checkbox}
                         id="review"
-                        onChange={() => handleChangeChecked(item.id)}
+                        onChange={(e) => handleChangeChecked(item.id, e)}
                       />
                     }
                   />

@@ -59,7 +59,7 @@ function App() {
             <Route
               path="/exam"
               render={() => {
-                return !user ? <Login /> : <Main to="/exam" />;
+                return !user ? <Login /> : <Main />;
               }}
             />
             <Route
@@ -71,7 +71,7 @@ function App() {
             <Route
               path="/SignUp"
               render={() => {
-                return !user ? <SignUp /> : <Redirect to="/exam" />;
+                return !user ? <SignUp /> : <Redirect />;
               }}
             />
           </Switch>

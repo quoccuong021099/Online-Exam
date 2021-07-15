@@ -10,7 +10,6 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { useStyleLogin } from "./styleLogin";
-import clsx from "clsx";
 import { Container } from "@material-ui/core";
 // validation
 const schema = yup.object().shape({
@@ -101,10 +100,9 @@ export default function SignUp() {
               variant="outlined"
               {...register("firstname")}
               fullWidth
+              error={errors.firstname && true}
+              helperText={errors.firstname && errors.firstname?.message}
             />
-            <Typography component="p" className={classes.p}>
-              {errors.firstname?.message}
-            </Typography>
           </Box>
           <Box className={classes.lastname}>
             <TextField
@@ -113,10 +111,9 @@ export default function SignUp() {
               variant="outlined"
               {...register("lastname")}
               fullWidth
+              error={errors.lastname && true}
+              helperText={errors.lastname && errors.lastname?.message}
             />
-            <p className={clsx(classes.p, classes.placeholerName)}>
-              {errors.lastname?.message}
-            </p>
           </Box>
         </Box>
         <Box className={classes.groupForm}>
@@ -126,10 +123,9 @@ export default function SignUp() {
             variant="outlined"
             {...register("username")}
             fullWidth
+            error={errors.username && true}
+            helperText={errors.username && errors.username?.message}
           />
-          <Typography component="p" className={classes.p}>
-            {errors.username?.message}
-          </Typography>
         </Box>
         <Box className={classes.groupForm}>
           <TextField
@@ -139,10 +135,9 @@ export default function SignUp() {
             fullWidth
             type="password"
             autoComplete="true"
+            error={errors.password && true}
+            helperText={errors.password && errors.password?.message}
           />
-          <Typography component="p" className={classes.p}>
-            {errors.password?.message}
-          </Typography>
         </Box>
         <Box className={classes.groupForm}>
           <Button

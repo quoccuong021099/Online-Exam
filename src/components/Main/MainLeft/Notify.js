@@ -1,10 +1,11 @@
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import React, { useContext } from "react";
-import Button from "../../../common/Button";
+import Button from "@material-ui/core/Button";
 import { mainExam } from "../index";
 import { examContainerContext } from "./Exam";
 export default function Notify() {
+  
   // context
   const context = useContext(mainExam);
   const contextExam = useContext(examContainerContext);
@@ -23,18 +24,22 @@ export default function Notify() {
             <Typography component="p">
               Thời gian còn {context.formatTime(context.timeDown)}
             </Typography>
-            <Typography component="p">Bạn đồng ý nộp bài chư ?</Typography>
+            <Typography component="p">Bạn đồng ý nộp bài chƯ?</Typography>
             <Box className="buttons">
               <Button
                 type="submit"
-                value="Nộp bài"
+                variant="contained"
                 onClick={context.pauseTime}
-              />
+              >
+                Nộp bài
+              </Button>
               <Button
-                type="button"
-                value="Làm tiếp"
                 onClick={contextExam.onChangeConfirm}
-              />
+                variant="contained"
+                color="primary"
+              >
+                Làm tiếp
+              </Button>
             </Box>
           </>
         ) : (

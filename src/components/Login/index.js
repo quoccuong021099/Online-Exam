@@ -78,11 +78,9 @@ export default function Login() {
             {...register("username")}
             fullWidth
             autoComplete="true"
+            error={errors.username && true}
+            helperText={errors.username && errors.username?.message}
           />
-          <Typography component="p" className={classes.p}>
-            {" "}
-            {errors.username?.message}
-          </Typography>
         </Box>
         <Box className={classes.groupForm}>
           <TextField
@@ -92,11 +90,9 @@ export default function Login() {
             type="password"
             fullWidth
             autoComplete="true"
+            error={errors.password  && true}
+            helperText={errors.password && errors.password?.message}
           />
-          <Typography component="p" className={classes.p}>
-            {" "}
-            {errors.password?.message}
-          </Typography>
         </Box>
         <Typography component="p">
           Quên mật khẩu?{" "}

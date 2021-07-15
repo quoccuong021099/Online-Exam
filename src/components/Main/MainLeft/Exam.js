@@ -106,9 +106,8 @@ export default function Exam() {
   };
 
   // hàm 'xem lại'
-  const handleChangeChecked = (id) => {
-    let idReview = document.querySelector("#review");
-    if (idReview.checked) {
+  const handleChangeChecked = (id, e) => {
+    if (e.target.checked) {
       setReviews([...reviews, id]);
     } else {
       reviews.splice(reviews.indexOf(id), 1);

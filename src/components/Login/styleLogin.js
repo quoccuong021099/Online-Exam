@@ -65,13 +65,7 @@ export const useStyleLogin = makeStyles((theme) => ({
   lastname: {
     flexBasis: "380px",
   },
-  p: {
-    position: "absolute",
-    top: theme.spacing(10),
-    left: "40px",
-    color: "red",
-    userSelect: "none",
-  },
+
   placeholerName: {
     marginLeft: "210px",
   },
