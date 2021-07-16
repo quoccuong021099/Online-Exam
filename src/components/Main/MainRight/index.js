@@ -1,14 +1,15 @@
-import "./style.scss";
-import { contextApp } from "../../../App";
-import { mainExam } from "../index";
 import { useContext, useState } from "react";
-import RatingItem from "./RatingItem";
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import clsx from "clsx";
+import { contextApp } from "../../../App";
 import { useButton } from "../../../common/Btn";
+import { mainExam } from "../index";
+import RatingItem from "./RatingItem";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+import "./style.scss";
+
 const useStyle = makeStyles({
   Button: {
     width: "100px",

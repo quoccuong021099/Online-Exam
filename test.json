@@ -309,37 +309,6 @@
           "result": false
         }
       ]
-    },
-    {
-      "id": "question_11",
-      "name": "Câu 11",
-      "content": "11 + 11 = ?",
-      "answers": [
-        {
-          "parent_id": "question_11",
-          "answer_id": "answer_11.1",
-          "content_answer": "A. 12",
-          "result": false
-        },
-        {
-          "parent_id": "question_11",
-          "answer_id": "answer_11.2",
-          "content_answer": "B. 4",
-          "result": false
-        },
-        {
-          "parent_id": "question_11",
-          "answer_id": "answer_11.3",
-          "content_answer": "C. 22",
-          "result": true
-        },
-        {
-          "parent_id": "question_11",
-          "answer_id": "answer_11.4",
-          "content_answer": "D. 16",
-          "result": false
-        }
-      ]
     }
   ],
   "users": [
@@ -419,6 +388,41 @@
       "username": "123@gmail.com",
       "password": "123",
       "id": "c6d6d120-d019-48ae-83f4-966f16bfaf47"
+    },
+    {
+      "firstname": "dsadasd",
+      "lastname": "ádasdasdasd",
+      "username": "bao1231@gmail.com",
+      "password": "12321312123",
+      "id": "685b9a7b-2122-4735-bf21-f538ad7657cf"
+    },
+    {
+      "firstname": "3213",
+      "lastname": "213213",
+      "username": "213213@mail.com",
+      "password": "12323123",
+      "id": "36633d07-cbdb-45cd-8bca-f9583015525a"
+    },
+    {
+      "firstname": "zdasda",
+      "lastname": "đâsdas",
+      "username": "dsadasd@gmail.com",
+      "password": "123",
+      "id": "56863039-02d6-4883-85d3-28d88e95ce5c"
+    },
+    {
+      "firstname": "aaa",
+      "lastname": "aaa",
+      "username": "aaa@gmail.com",
+      "password": "123",
+      "id": "381fabd2-788e-4333-8fc0-2577f73884a3"
+    },
+    {
+      "firstname": "bbb",
+      "lastname": "bbb",
+      "username": "bbb@gmail.com",
+      "password": "123",
+      "id": "40c5978e-2c70-4d1f-8c67-bbbf89aad328"
     }
   ],
   "charts": [
@@ -433,8 +437,8 @@
       "id": "1450054a-4d08-4a76-a80a-3dfd9cbe5786",
       "lastname": "Anh Bảo",
       "firstname": "Nguyễn",
-      "point": "0.00",
-      "time": "1"
+      "point": "2.00",
+      "time": "586"
     },
     {
       "id": "921a4533-a79c-425d-b1b5-7e016734df64",
@@ -442,6 +446,13 @@
       "firstname": "Lê",
       "point": "0.00",
       "time": "6"
+    },
+    {
+      "id": "809c18ee-a31a-45fc-ad48-1bc3710f771e",
+      "lastname": "Tảo",
+      "firstname": "Huỳnh",
+      "point": "9.00",
+      "time": "11"
     }
   ]
 }

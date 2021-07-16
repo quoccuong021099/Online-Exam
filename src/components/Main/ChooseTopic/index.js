@@ -30,6 +30,7 @@ const useStyles = makeStyles({
 export default function ChooseTopic({ handleStart }) {
   // Classes
   const classes = useStyles();
+
   // get item từ localStorage
   const user = localStorage.getItem("user-info");
 

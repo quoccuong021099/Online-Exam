@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
-import ResultModal from "./ResultModal";
 import Done from "./Done";
 import ExamContainer from "./ExamContainer";
 import { mainExam } from "../index";
+import DialogResult from "../../Dialog/DialogResult";
 
 export const examContainerContext = React.createContext();
+
 export default function Exam() {
   // Get context
   let context = useContext(mainExam);
@@ -56,6 +57,7 @@ export default function Exam() {
   // Hàm khi được nộp bài
   const doneExam = (e) => {
     e.preventDefault();
+    context.pauseTime();
     const newArr = selectedRadio;
     let resultTrue = 0;
     let resultFalse = 0;
@@ -71,11 +73,6 @@ export default function Exam() {
   // hàm đóng mở xác nhận nộp bài
   const onChangeConfirm = () => {
     setOpenconfirm(!openconfirm);
-  };
-
-  // hàm đóng modal kết quả
-  const handleOpenModal = () => {
-    setOpenModal(!openModal);
   };
 
   // hàm mở cửa sổ kết thúc bài làm sau khi nhận được kết quả
@@ -126,11 +123,7 @@ export default function Exam() {
     <>
       <examContainerContext.Provider value={listContextExam}>
         {openModal && (
-          <ResultModal
-            handleOpenModal={handleOpenModal}
-            yourResult={yourResult}
-            onOpenDone={onOpenDone}
-          />
+          <DialogResult yourResult={yourResult} onOpenDone={onOpenDone} />
         )}
         {openDone ? (
           <Done />

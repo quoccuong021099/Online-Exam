@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import Question from "./Question";
-import Notify from "./Notify";
 import Button from "@material-ui/core/Button";
 import { useButton } from "../../../common/Btn";
 import { mainExam } from "../index";
@@ -12,6 +11,10 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import Checkbox from "@material-ui/core/Checkbox";
+import DialogWarning from "../../Dialog/DialogWarning";
+import DialogWarningTimeout from "../../Dialog/DialogWarningTimeout";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+
 const useStyle = makeStyles({
   Button: {
     width: "100px",
@@ -20,11 +23,15 @@ const useStyle = makeStyles({
   },
   ButtonNav: {
     width: "60px",
+    "&:hover": {
+      backgroundColor: "orange",
+    },
   },
   checkbox: {
     color: "orange",
   },
 });
+
 export default function ExamContainer({
   flagListQuestion,
   handleFlagListQuestion,
@@ -45,7 +52,7 @@ export default function ExamContainer({
 
   // context
   let context = useContext(mainExam);
-
+  
   return (
     <form onSubmit={doneExam}>
       {context.dataTest.map(
@@ -55,8 +62,10 @@ export default function ExamContainer({
           )
       )}
 
-      {openconfirm && <Notify />}
-      {context.timeDown === 0 && <Notify />}
+      {openconfirm && context.timeDown !== 0 && (
+        <DialogWarning doneExam={doneExam} />
+      )}
+      {context.timeDown === 0 && <DialogWarningTimeout doneExam={doneExam} />}
 
       <Box className="choose-question">
         <Box className="choose-question__header">
@@ -108,7 +117,7 @@ export default function ExamContainer({
               size="small"
               onClick={handleFlagListQuestion}
             >
-              <i className="fas fa-ellipsis-h"></i>
+              <MoreHorizIcon />
             </Button>
           </Box>
         </Box>

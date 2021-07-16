@@ -22,7 +22,7 @@ export default function MainLeft() {
       <Box className="main__left-desc">
         <Box className="num-question">
           <span>
-            <i className="fas fa-check-square" aria-hidden="true"></i>20 câu
+            <i className="fas fa-check-square" aria-hidden="true"></i>10 câu
           </span>
         </Box>
         <Box className="num-minutes">

@@ -35,7 +35,7 @@ export const useStyleLogin = makeStyles((theme) => ({
     left: "50%",
     transform: "translateX(-50%)",
     width: "50px",
-    backgroundColor: theme.palette.common.white,
+    backgroundColor: "#fafafa",
     color: theme.palette.common.black,
     textAlign: "center",
   },
@@ -63,7 +63,8 @@ export const useStyleLogin = makeStyles((theme) => ({
   },
 
   lastname: {
-    flexBasis: "380px",
+    flexBasis: "370px",
+    marginLeft: "20px",
   },
 
   placeholerName: {

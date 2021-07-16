@@ -1,25 +1,26 @@
 import React, { useContext } from "react";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { contextApp } from "../../App";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { Link, useHistory } from "react-router-dom";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import { useStyleLogin } from "./styleLogin";
 import Container from "@material-ui/core/Container";
-// validation
-const schema = yup.object().shape({
-  username: yup
-    .string()
-    .email("Email không hợp lệ")
-    .required("Bạn phải nhập tên đăng nhập!"),
-  password: yup.string().required("Bạn phải nhập mật khẩu!"),
-});
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { useStyleLogin } from "./styleLogin";
 
 export default function Login() {
+  
+  // validation
+  const schema = yup.object().shape({
+    username: yup
+      .string()
+      .email("Email không hợp lệ")
+      .required("Bạn phải nhập tên đăng nhập!"),
+    password: yup.string().required("Bạn phải nhập mật khẩu!"),
+  });
   const classes = useStyleLogin();
 
   // context
@@ -42,7 +43,6 @@ export default function Login() {
     );
     if (duplicateUserName) {
       history.push("/");
-      alert("Đăng nhập thành công");
       localStorage.setItem("user-info", JSON.stringify(duplicateUserName));
       contextOfApp.reset("login");
     } else {
@@ -65,7 +65,7 @@ export default function Login() {
             ĐĂNG NHẬP BẰNG FACEBOOK
           </Button>
         </Box>
-        <Box className={classes.loginOr} padding={2}>
+        <Box className={classes.loginOr} padding="15px 20px">
           <hr />
           <Typography component="h5" className={classes.h5}>
             hoặc
@@ -90,17 +90,19 @@ export default function Login() {
             type="password"
             fullWidth
             autoComplete="true"
-            error={errors.password  && true}
+            error={errors.password && true}
             helperText={errors.password && errors.password?.message}
           />
         </Box>
-        <Typography component="p">
-          Quên mật khẩu?{" "}
-          <a href="/#" className={classes.a}>
-            {" "}
-            Nhấn vào đây
-          </a>
-        </Typography>
+        <Box textAlign="right">
+          <Typography component="p">
+            Quên mật khẩu?{" "}
+            <a href="/#" className={classes.a}>
+              {" "}
+              Nhấn vào đây
+            </a>
+          </Typography>
+        </Box>
         <Box className={classes.groupForm}>
           <Button
             variant="contained"

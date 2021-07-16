@@ -3,6 +3,7 @@ import MainLeft from "./MainLeft";
 import "./style.scss";
 import React, { useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
+
 export const mainExam = React.createContext();
 
 export default function Main() {
@@ -42,7 +43,7 @@ export default function Main() {
   useEffect(() => {
     const fetchQuestion = async () => {
       setIsLoading(true);
-      await sleep(1000);
+      await sleep(500);
       const responseJson = await fetch("http://localhost:5000/question");
       const response = await responseJson.json();
       setDataTest(response);

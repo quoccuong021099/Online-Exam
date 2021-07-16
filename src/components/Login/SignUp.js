@@ -86,7 +86,7 @@ export default function SignUp() {
             ĐĂNG KÝ BẰNG FACEBOOK
           </Button>
         </Box>
-        <Box className={classes.loginOr} padding={2}>
+        <Box className={classes.loginOr} padding="15px 20px">
           <hr />
           <Typography component="h5" className={classes.h5}>
             hoặc

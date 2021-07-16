@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import Logo from "../Image/logo.png";
 import "./style.scss";
 import { Link, useHistory } from "react-router-dom";
@@ -9,9 +9,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Toolbar from "@material-ui/core/Toolbar";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { Box } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 
 export default function Header() {
+  const btnRef = useRef(null);
+
   // context
   const contextOfApp = useContext(contextApp);
 
@@ -106,6 +108,7 @@ export default function Header() {
                 <IconButton
                   className="header__login-icon"
                   onClick={handleProfileMenuOpen}
+                  ref={btnRef}
                 >
                   <span className="header__login-name">
                     {data ? `Hi! ${data.lastname}` : "Đăng nhập"}
