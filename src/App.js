@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import ChooseTopic from "./components/Main/ChooseTopic";
 import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
 import ExamTheme from "./ExamTheme";
+import axios from "axios";
 
 export const contextApp = React.createContext();
 
@@ -26,9 +27,12 @@ function App() {
   };
 
   const fetchCharts = async () => {
-    const responseJson = await fetch("http://localhost:5000/charts");
-    const response = await responseJson.json();
-    setCharts(response);
+    try {
+      let response = await axios.get("http://localhost:5000/charts");
+      setCharts(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Fetch API user

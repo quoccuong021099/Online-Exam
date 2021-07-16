@@ -8,6 +8,7 @@ import { examContainerContext } from "../Main/MainLeft/Exam";
 import { useContext, useEffect, useState } from "react";
 import { contextApp } from "../../App";
 import "../Main/MainLeft/style.scss";
+import axios from "axios";
 
 const useStyleDialog = makeStyles(() => ({
   titleRusult: {
@@ -77,6 +78,7 @@ export default function CustomizedDialogs({ onOpenDone, yourResult }) {
   // POST dữ liệu charts lên API
   const getRank = async () => {
     const sortUp = appContext.charts.find((i) => i.id === user.id);
+    console.log(sortUp);
     if (!sortUp) {
       let data = {
         id: user.id,
@@ -85,17 +87,16 @@ export default function CustomizedDialogs({ onOpenDone, yourResult }) {
         point: totalPoint.toFixed(2),
         time: JSON.stringify(600 - context.timeDown),
       };
-      let result = await fetch("http://localhost:5000/charts", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
-      result = await result.json();
-      localStorage.setItem("charts", JSON.stringify(result));
-      appContext.reset(data);
+      try {
+        axios
+          .post("http://localhost:5000/charts", data)
+          .then(function (response) {
+            localStorage.setItem("charts", JSON.stringify(response.data));
+            appContext.reset(data);
+          });
+      } catch (error) {
+        console.error(error);
+      }
     } else {
       if (
         JSON.parse(sortUp.point) < totalPoint.toFixed(2) ||
@@ -106,17 +107,16 @@ export default function CustomizedDialogs({ onOpenDone, yourResult }) {
         sortUp.firstname = user.firstname;
         sortUp.point = totalPoint.toFixed(2);
         sortUp.time = JSON.stringify(600 - context.timeDown);
-        let result = await fetch(`http://localhost:5000/charts/${sortUp.id}`, {
-          method: "PATCH",
-          body: JSON.stringify(sortUp),
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        });
-        result = await result.json();
-        localStorage.setItem("charts", JSON.stringify(result));
-        appContext.reset(sortUp);
+        try {
+          axios
+            .patch(`http://localhost:5000/charts/${sortUp.id}`, sortUp)
+            .then(function (response) {
+              localStorage.setItem("charts", JSON.stringify(response.data));
+              appContext.reset(sortUp);
+            });
+        } catch (error) {
+          console.error(error);
+        }
       }
     }
   };

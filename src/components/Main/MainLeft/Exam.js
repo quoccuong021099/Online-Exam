@@ -48,8 +48,7 @@ export default function Exam() {
     }
     setTimeout(() => {
       if (count < context.dataTest.length - 1) {
-        const a = count + 1;
-        setCount(a);
+        setCount((count) => count + 1);
       } else return;
     }, 200);
   };
