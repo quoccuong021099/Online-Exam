@@ -77,9 +77,9 @@ export default function CustomizedDialogs({ onOpenDone, yourResult }) {
 
   // POST dữ liệu charts lên API
   const getRank = async () => {
-    const sortUp = appContext.charts.find((i) => i.id === user.id);
-    console.log(sortUp);
-    if (!sortUp) {
+    const sortUpUser = appContext.charts.find((i) => i.id === user.id);
+    console.log(sortUpUser);
+    if (!sortUpUser) {
       let data = {
         id: user.id,
         lastname: user.lastname,
@@ -92,27 +92,27 @@ export default function CustomizedDialogs({ onOpenDone, yourResult }) {
           .post("http://localhost:5000/charts", data)
           .then(function (response) {
             localStorage.setItem("charts", JSON.stringify(response.data));
-            appContext.reset(data);
+            appContext.reset(response.data);
           });
       } catch (error) {
         console.error(error);
       }
     } else {
       if (
-        JSON.parse(sortUp.point) < totalPoint.toFixed(2) ||
-        (JSON.parse(sortUp.point) < totalPoint.toFixed(2) &&
-          sortUp.time >= 600 - context.timeDown)
+        JSON.parse(sortUpUser.point) < totalPoint.toFixed(2) ||
+        (JSON.parse(sortUpUser.point) < totalPoint.toFixed(2) &&
+          sortUpUser.time >= 600 - context.timeDown)
       ) {
-        sortUp.lastname = user.lastname;
-        sortUp.firstname = user.firstname;
-        sortUp.point = totalPoint.toFixed(2);
-        sortUp.time = JSON.stringify(600 - context.timeDown);
+        sortUpUser.lastname = user.lastname;
+        sortUpUser.firstname = user.firstname;
+        sortUpUser.point = totalPoint.toFixed(2);
+        sortUpUser.time = JSON.stringify(600 - context.timeDown);
         try {
           axios
-            .patch(`http://localhost:5000/charts/${sortUp.id}`, sortUp)
+            .patch(`http://localhost:5000/charts/${sortUpUser.id}`, sortUpUser)
             .then(function (response) {
               localStorage.setItem("charts", JSON.stringify(response.data));
-              appContext.reset(sortUp);
+              appContext.reset(sortUpUser);
             });
         } catch (error) {
           console.error(error);

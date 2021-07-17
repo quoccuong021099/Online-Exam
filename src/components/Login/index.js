@@ -12,7 +12,6 @@ import Button from "@material-ui/core/Button";
 import { useStyleLogin } from "./styleLogin";
 
 export default function Login() {
-  
   // validation
   const schema = yup.object().shape({
     username: yup

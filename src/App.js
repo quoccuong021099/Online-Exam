@@ -9,46 +9,35 @@ import ChooseTopic from "./components/Main/ChooseTopic";
 import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
 import ExamTheme from "./ExamTheme";
 import axios from "axios";
+import { useAxios } from "./hooks/useAxios";
 
 export const contextApp = React.createContext();
 
 function App() {
-  const [listUsers, setListUsers] = useState([]);
   const [reFetch, setReFecth] = useState(null);
-  // const [ranks, setRanks] = useState(null);
-  const [charts, setCharts] = useState(null);
 
   // lấy user trong localStorage
   const user = JSON.parse(localStorage.getItem("user-info"));
-
+  const [charts, setCharts] = useState();
   // Hàm refecth lại khi data thay đổi
   const reset = (data) => {
     setReFecth(data);
   };
 
-  const fetchCharts = async () => {
-    try {
-      let response = await axios.get("http://localhost:5000/charts");
-      setCharts(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const { response: responseUser } = useAxios({
+    method: "get",
+    url: "http://localhost:5000/users",
+  });
 
-  // Fetch API user
   useEffect(() => {
-    const fetchQuestion = async () => {
-      const responseJson = await fetch("http://localhost:5000/users");
-      const response = await responseJson.json();
-      setListUsers(response);
-    };
-    fetchQuestion();
-    fetchCharts();
+    axios.get("http://localhost:5000/charts").then(function (response) {
+      setCharts(response.data);
+    });
   }, [reFetch]);
 
   // List context
   const listContextApp = {
-    listUsers: listUsers,
+    listUsers: responseUser,
     reset: reset,
     charts: charts,
   };

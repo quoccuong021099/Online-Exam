@@ -11,6 +11,8 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { useStyleLogin } from "./styleLogin";
 import { Container } from "@material-ui/core";
+import axios from "axios";
+
 // validation
 const schema = yup.object().shape({
   firstname: yup
@@ -53,18 +55,18 @@ export default function SignUp() {
   const onSubmit = async (data) => {
     if (!contextOfApp.listUsers.find((i) => i.username === data.username)) {
       data.id = v4();
-      let result = await fetch("http://localhost:5000/users", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
-      result = await result.json();
-      localStorage.setItem("user-info", JSON.stringify(result));
-      contextOfApp.reset(data);
-      history.push("/");
+      // Send a POST request
+      axios
+        .post("http://localhost:5000/users", data)
+        .then(function (response) {
+          localStorage.setItem("user-info", JSON.stringify(response.data));
+          contextOfApp.reset(data);
+          history.push("/");
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     } else {
       alert("Tên đăng nhập bị trùng");
     }
