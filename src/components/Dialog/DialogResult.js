@@ -155,9 +155,12 @@ export default function CustomizedDialogs({ onOpenDone, yourResult }) {
           <div className={classes.tableResult}>
             {contextExam.selectedRadio.map((i, index) => (
               <span key={index} className={classes.itemTableResult}>
-                {i.result
-                  ? `${i.parent_id.slice(-1)} - Đ`
-                  : `${i.parent_id.slice(-1)} - S`}
+                {`${
+                  i.parent_id.length > 10
+                    ? i.parent_id.slice(-2)
+                    : i.parent_id.slice(-1)
+                } - 
+                  ${i.content_answer.slice(0, 1)}`}
               </span>
             ))}
           </div>
