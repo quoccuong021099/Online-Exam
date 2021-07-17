@@ -53,7 +53,7 @@ export default function SignUp() {
 
   // submit form
   const onSubmit = async (data) => {
-    if (!contextOfApp.listUsers.find((i) => i.username === data.username)) {
+    if (!contextOfApp.listUsers?.find((i) => i.username === data.username)) {
       data.id = v4();
       // Send a POST request
       axios

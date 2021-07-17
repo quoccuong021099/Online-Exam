@@ -37,7 +37,7 @@ export default function Login() {
 
   // submit form
   const onSubmit = (data) => {
-    const duplicateUserName = contextOfApp.listUsers.find(
+    const duplicateUserName = contextOfApp.listUsers?.find(
       (i) => i.username === data.username && i.password === data.password
     );
     if (duplicateUserName) {

@@ -451,6 +451,13 @@
       "username": "444@gmail.com",
       "password": "123",
       "id": "95c979b6-6b57-48a6-97d0-be28bc4ee33a"
+    },
+    {
+      "firstname": "555",
+      "lastname": "555",
+      "username": "555@gmail.com",
+      "password": "123",
+      "id": "1c6da1e8-ae72-478f-8a9c-725cd3798fbf"
     }
   ],
   "charts": [
@@ -460,48 +467,6 @@
       "lastname": "Quốc Cường",
       "point": "10:00",
       "time": "1"
-    },
-    {
-      "id": "809c18ee-a31a-45fc-ad48-1bc3710f771e",
-      "lastname": "Tảo",
-      "firstname": "Huỳnh",
-      "point": "10.00",
-      "time": "11"
-    },
-    {
-      "id": "1450054a-4d08-4a76-a80a-3dfd9cbe5786",
-      "lastname": "Anh Bảo",
-      "firstname": "Nguyễn",
-      "point": "4.00",
-      "time": "7"
-    },
-    {
-      "id": "974ab2c0-b5ac-4ba6-81ff-283cd625ebde",
-      "lastname": "111",
-      "firstname": "111",
-      "point": "5.00",
-      "time": "7"
-    },
-    {
-      "id": "2b9f3eea-4f16-4a84-a05d-d21895d3e3db",
-      "lastname": "222",
-      "firstname": "222",
-      "point": "10.00",
-      "time": "7"
-    },
-    {
-      "id": "3852e28a-c9cf-4015-bc23-99a47abce3c0",
-      "lastname": "3333",
-      "firstname": "3333",
-      "point": "3.00",
-      "time": "3"
-    },
-    {
-      "id": "95c979b6-6b57-48a6-97d0-be28bc4ee33a",
-      "lastname": "444",
-      "firstname": "444",
-      "point": "0.00",
-      "time": "3"
     }
   ]
 }

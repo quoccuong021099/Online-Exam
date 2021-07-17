@@ -39,8 +39,6 @@ export default function Main() {
     return hours + ":" + min + ":" + sec;
   };
 
-  
-
   // fetch API question
   useEffect(() => {
     const fetchQuestion = async () => {
