@@ -78,7 +78,6 @@ export default function CustomizedDialogs({ onOpenDone, yourResult }) {
   // POST dữ liệu charts lên API
   const getRank = async () => {
     const sortUpUser = appContext.charts.find((i) => i.id === user.id);
-    console.log(sortUpUser);
     if (!sortUpUser) {
       let data = {
         id: user.id,

@@ -1,28 +1,38 @@
-import "./App.css";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { createStructuredSelector } from "reselect";
+import "./App.css";
+import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Main from "./components/Main";
 import Login from "./components/Login";
 import SignUp from "./components/Login/SignUp";
-import Footer from "./components/Footer";
+import Main from "./components/Main";
 import ChooseTopic from "./components/Main/ChooseTopic";
-import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
 import ExamTheme from "./ExamTheme";
-import axios from "axios";
 import { useAxios } from "./hooks/useAxios";
+import { makeSelectIsSuccessLogin } from "./redux/selectors/login";
 
 export const contextApp = React.createContext();
 
-function App() {
+function App({ statusFlags }) {
+
+  const [isLoginSuccess, setIsLoginSuccess] = useState(null);
+
+  useEffect(() => {
+    setIsLoginSuccess(statusFlags.isLoginSuccess);
+  }, [statusFlags.isLoginSuccess]);
+
   const [reFetch, setReFecth] = useState(null);
 
-  // lấy user trong localStorage
-  const user = JSON.parse(localStorage.getItem("user-info"));
   const [charts, setCharts] = useState();
   // Hàm refecth lại khi data thay đổi
   const reset = (data) => {
     setReFecth(data);
   };
+
+  useEffect(() => {}, [reFetch]);
 
   const { response: responseUser } = useAxios({
     method: "get",
@@ -53,19 +63,19 @@ function App() {
               <Route
                 path="/exam"
                 render={() => {
-                  return !user ? <Login /> : <Main />;
+                  return !isLoginSuccess ? <Login /> : <Main />;
                 }}
               />
               <Route
                 path="/Login"
                 render={() => {
-                  return !user ? <Login /> : <Redirect to="/" />;
+                  return !isLoginSuccess ? <Login /> : <Redirect to="/" />;
                 }}
               />
               <Route
                 path="/SignUp"
                 render={() => {
-                  return !user ? <SignUp /> : <Redirect to="/" />;
+                  return !isLoginSuccess ? <SignUp /> : <Redirect to="/" />;
                 }}
               />
             </Switch>
@@ -77,4 +87,7 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = createStructuredSelector({
+  statusFlags: makeSelectIsSuccessLogin(),
+});
+export default connect(mapStateToProps, null)(App);

@@ -1,33 +1,28 @@
-import React, { useContext, useRef } from "react";
-import Logo from "../Image/logo.png";
-import "./style.scss";
-import { Link, useHistory } from "react-router-dom";
-import { contextApp } from "../../App";
+import Box from "@material-ui/core/Box";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Toolbar from "@material-ui/core/Toolbar";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import Box from "@material-ui/core/Box";
+import React, { useRef } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { createStructuredSelector } from "reselect";
+import { logoutUser } from "../../redux/actions/login";
+import { makeSelectIsSuccessLogin } from "../../redux/selectors/login";
+import Logo from "../Image/logo.png";
+import "./style.scss";
 
-export default function Header() {
+function Header({ statusFlags, triggerLogout }) {
   const btnRef = useRef(null);
-
-  // context
-  const contextOfApp = useContext(contextApp);
-
-  // history
-  const history = useHistory();
 
   // get item từ localStorage
   const data = JSON.parse(localStorage.getItem("user-info"));
 
   // hàm logout
   const logoutUser = () => {
-    localStorage.removeItem("user-info");
-    contextOfApp.reset("logout");
-    history.push("/login");
+    triggerLogout();
   };
 
   // material-ui
@@ -111,7 +106,9 @@ export default function Header() {
                   ref={btnRef}
                 >
                   <span className="header__login-name">
-                    {data ? `Hi! ${data.lastname}` : "Đăng nhập"}
+                    {statusFlags.isLoginSuccess
+                      ? `Hi! ${data.lastname}`
+                      : "Đăng nhập"}
                   </span>
                   <AccountCircle className="icon" />
                 </IconButton>
@@ -124,3 +121,12 @@ export default function Header() {
     </>
   );
 }
+const mapStateToProps = createStructuredSelector({
+  statusFlags: makeSelectIsSuccessLogin(),
+});
+function mapDispatchToProps(dispatch) {
+  return {
+    triggerLogout: () => dispatch(logoutUser()),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

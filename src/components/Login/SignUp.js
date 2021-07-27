@@ -62,7 +62,6 @@ export default function SignUp() {
           localStorage.setItem("user-info", JSON.stringify(response.data));
           contextOfApp.reset(data);
           history.push("/");
-          console.log(response.data);
         })
         .catch(function (error) {
           console.log(error);
