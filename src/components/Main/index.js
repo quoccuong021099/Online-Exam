@@ -1,8 +1,8 @@
-import MainRight from "./MainRight";
-import MainLeft from "./MainLeft";
-import "./style.scss";
-import React, { useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
+import React, { useEffect, useState } from "react";
+import MainLeft from "./MainLeft";
+import MainRight from "./MainRight";
+import "./style.scss";
 
 export const mainExam = React.createContext();
 

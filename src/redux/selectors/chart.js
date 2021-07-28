@@ -12,10 +12,18 @@ const selectChartDomain = (state) => {
 const makeSelectChart = () =>
   createSelector(selectChartDomain, (substate) => substate.charts);
 
+const makeSelectPostChart = () =>
+  createSelector(makeSelectChart, (substate) => substate.charts);
+
 const makeSelectIsSuccessChart = () =>
   createSelector(selectChartDomain, (substate) => substate.statusFlags);
 
 const makeSelectError = () =>
   createSelector(selectChartDomain, (substate) => substate.logs);
 
-export { makeSelectChart, makeSelectIsSuccessChart, makeSelectError };
+export {
+  makeSelectChart,
+  makeSelectIsSuccessChart,
+  makeSelectError,
+  makeSelectPostChart,
+};

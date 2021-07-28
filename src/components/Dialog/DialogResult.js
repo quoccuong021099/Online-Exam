@@ -3,10 +3,10 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { postChart } from "../../redux/actions/charts";
 import { makeSelectChart } from "../../redux/selectors/chart";
 import { mainExam } from "../Main";
 import { examContainerContext } from "../Main/MainLeft/Exam";
@@ -51,9 +51,14 @@ const useStyleDialog = makeStyles(() => ({
   },
 }));
 
-function CustomizedDialogs({ onOpenDone, yourResult, charts }) {
+function CustomizedDialogs({
+  onOpenDone,
+  yourResult,
+  charts,
+  triggerPostChart,
+}) {
   const classes = useStyleDialog();
-
+  console.log("cahsd ", charts);
   // context
   const context = useContext(mainExam);
   const contextExam = useContext(examContainerContext);
@@ -78,45 +83,13 @@ function CustomizedDialogs({ onOpenDone, yourResult, charts }) {
 
   // POST dữ liệu charts lên API
   const getRank = async () => {
-    const sortUpUser = charts.find((i) => i.id === user.id);
-    if (!sortUpUser) {
-      let data = {
-        id: user.id,
-        lastname: user.lastname,
-        firstname: user.firstname,
-        point: totalPoint.toFixed(2),
-        time: JSON.stringify(600 - context.timeDown),
-      };
-      try {
-        axios
-          .post("http://localhost:5000/charts", data)
-          .then(function (response) {
-            localStorage.setItem("charts", JSON.stringify(response.data));
-          });
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      if (
-        JSON.parse(sortUpUser.point) < totalPoint.toFixed(2) ||
-        (JSON.parse(sortUpUser.point) < totalPoint.toFixed(2) &&
-          sortUpUser.time >= 600 - context.timeDown)
-      ) {
-        sortUpUser.lastname = user.lastname;
-        sortUpUser.firstname = user.firstname;
-        sortUpUser.point = totalPoint.toFixed(2);
-        sortUpUser.time = JSON.stringify(600 - context.timeDown);
-        try {
-          axios
-            .patch(`http://localhost:5000/charts/${sortUpUser.id}`, sortUpUser)
-            .then(function (response) {
-              localStorage.setItem("charts", JSON.stringify(response.data));
-            });
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    }
+    triggerPostChart({
+      id: user.id,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      point: totalPoint.toFixed(2),
+      time: JSON.stringify(600 - context.timeDown),
+    });
   };
   return (
     <Dialog open onClose={onOpenDone}>
@@ -193,4 +166,9 @@ function CustomizedDialogs({ onOpenDone, yourResult, charts }) {
 const mapStateToProps = createStructuredSelector({
   charts: makeSelectChart(),
 });
-export default connect(mapStateToProps, null)(CustomizedDialogs);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    triggerPostChart: (chartInfor) => dispatch(postChart(chartInfor)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CustomizedDialogs);

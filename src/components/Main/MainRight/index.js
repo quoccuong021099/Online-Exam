@@ -22,7 +22,6 @@ const useStyle = makeStyles({
 });
 
 function MainRight({ charts }) {
-  console.log(charts);
   // material
   const classes = useStyle();
   const classesBtn = useButton();
@@ -44,8 +43,10 @@ function MainRight({ charts }) {
   };
 
   const descendingSort = charts
+    .slice()
     ?.sort((a, b) => Number(a.time) - Number(b.time))
-    .sort((a, b) => b.point - a.point);
+    ?.sort((a, b) => b.point - a.point);
+  console.log("log charrts: ", descendingSort);
 
   return (
     <Box className="main__right">
