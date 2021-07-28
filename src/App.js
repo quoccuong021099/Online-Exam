@@ -13,8 +13,6 @@ import ExamTheme from "./ExamTheme";
 import { getChart } from "./redux/actions/charts";
 import { makeSelectIsSuccessLogin } from "./redux/selectors/login";
 
-export const contextApp = React.createContext();
-
 function App({ statusFlags, triggerChart }) {
   useEffect(() => {
     triggerChart();

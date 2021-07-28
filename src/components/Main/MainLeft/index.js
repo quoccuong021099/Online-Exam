@@ -1,17 +1,18 @@
 import Box from "@material-ui/core/Box";
-import React, { useContext } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { makeSelectChart } from "../../../redux/selectors/chart";
+import {
+  makeSelectIsSuccessQuestion,
+  makeSelectQuestion,
+} from "../../../redux/selectors/question";
 import Oclock from "../../Oclock";
 import Spinner from "../../Spinner";
-import { mainExam } from "../index";
 import Exam from "./Exam";
 import "./style.scss";
 
-function MainLeft({ charts }) {
-  // context
-  const mainExamContext = useContext(mainExam);
+function MainLeft({ charts, statusQuestionFlag, listQuestion }) {
   return (
     <Box className="main__left">
       <Box className="main__left-title">
@@ -40,11 +41,11 @@ function MainLeft({ charts }) {
         </Box>
       </Box>
       <Oclock />
-      {mainExamContext.isLoading ? (
+      {statusQuestionFlag.isLoading ? (
         <Spinner />
       ) : (
         <Box className="main__left-content">
-          {mainExamContext.dataTest.length > 0 && <Exam />}
+          {listQuestion.length > 0 && <Exam />}
         </Box>
       )}
     </Box>
@@ -52,5 +53,7 @@ function MainLeft({ charts }) {
 }
 const mapStateToProps = createStructuredSelector({
   charts: makeSelectChart(),
+  statusQuestionFlag: makeSelectIsSuccessQuestion(),
+  listQuestion: makeSelectQuestion(),
 });
 export default connect(mapStateToProps, null)(MainLeft);

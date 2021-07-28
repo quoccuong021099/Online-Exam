@@ -1,25 +1,20 @@
 import Box from "@material-ui/core/Box";
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { getQuestion } from "../../redux/actions/question";
 import MainLeft from "./MainLeft";
 import MainRight from "./MainRight";
 import "./style.scss";
 
 export const mainExam = React.createContext();
 
-export default function Main() {
+function Main({ triggerListQuestion }) {
   // List state
-  const [dataTest, setDataTest] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [pause, setPause] = useState(false);
   const [timeDown, setTimeDown] = useState(0);
   // Hàm lấy thời gian đếm ngược và gắn cho timeDown
   const getTimeDown = (data) => {
     setTimeDown(data);
-  };
-
-  // hàm loading
-  const sleep = (ms) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
   };
 
   // Hàm pause thời gian làm bài
@@ -41,25 +36,15 @@ export default function Main() {
 
   // fetch API question
   useEffect(() => {
-    const fetchQuestion = async () => {
-      setIsLoading(true);
-      await sleep(500);
-      const responseJson = await fetch("http://localhost:5000/question");
-      const response = await responseJson.json();
-      setDataTest(response);
-      setIsLoading(false);
-    };
-    fetchQuestion();
-  }, []);
+    triggerListQuestion();
+  }, [triggerListQuestion]);
 
   // list context
   const listContext = {
-    dataTest: dataTest,
     pauseTime: pauseTime,
     formatTime: formatTime,
     timeDown: timeDown,
     getTimeDown: getTimeDown,
-    isLoading: isLoading,
     pause: pause,
   };
   return (
@@ -73,3 +58,10 @@ export default function Main() {
     </mainExam.Provider>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    triggerListQuestion: () => dispatch(getQuestion()),
+  };
+};
+export default connect(null, mapDispatchToProps)(Main);

@@ -27,13 +27,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ChooseTopic({ handleStart }) {
+export default function ChooseTopic() {
   // Classes
   const classes = useStyles();
 
   // get item từ localStorage
   const user = localStorage.getItem("user-info");
-
   return (
     <Box className="choose-topic">
       <Typography component="h1">Đề thi giữa kỳ, học kỳ</Typography>
@@ -96,7 +95,7 @@ export default function ChooseTopic({ handleStart }) {
       </Box>
       <Box className="choose-topic__step3">
         <Link to={user ? "/exam" : "/login"}>
-          <Button className={classes.Button} size="large" onClick={handleStart}>
+          <Button className={classes.Button} size="large">
             BẮT ĐẦU LÀM BÀI
           </Button>
         </Link>

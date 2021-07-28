@@ -30,8 +30,6 @@ function* chartPostSagaFunc(chartInfo) {
   const response = yield call(fetchChart);
   const chartData = _get(response, "data", []);
   let testChart = _find(chartData, (i) => i.id === chart.id);
-  console.log(chart);
-  console.log(testChart);
   if (!testChart) {
     yield postChart(chart);
     yield put(postChartSuccess(chart));
@@ -41,7 +39,6 @@ function* chartPostSagaFunc(chartInfo) {
       (chart.point === testChart.point &&
         Number(chart.time) < Number(testChart.time))
     ) {
-      console.log("a");
       yield updateChart(chart);
       yield put(updateChartSuccess(chart));
     } else {

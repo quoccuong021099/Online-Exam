@@ -46,7 +46,6 @@ function MainRight({ charts }) {
     .slice()
     ?.sort((a, b) => Number(a.time) - Number(b.time))
     ?.sort((a, b) => b.point - a.point);
-  console.log("log charrts: ", descendingSort);
 
   return (
     <Box className="main__right">

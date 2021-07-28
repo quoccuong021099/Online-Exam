@@ -72,7 +72,6 @@ const chartReducer = (state = initialState, action) =>
         break;
       }
       case UPDATE_CHART_SUCCESS: {
-        console.log(action.payload);
         const findId = state.charts.findIndex(
           (i) => i.id === action.payload.id
         );

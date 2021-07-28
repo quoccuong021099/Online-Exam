@@ -3,10 +3,13 @@ import Done from "./Done";
 import ExamContainer from "./ExamContainer";
 import { mainExam } from "../index";
 import DialogResult from "../../Dialog/DialogResult";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { makeSelectQuestion } from "../../../redux/selectors/question";
 
 export const examContainerContext = React.createContext();
 
-export default function Exam() {
+function Exam({ listQuestion }) {
   // Get context
   let context = useContext(mainExam);
 
@@ -47,7 +50,7 @@ export default function Exam() {
       setSelectedRadio([...selectedRadio, data]);
     }
     setTimeout(() => {
-      if (count < context.dataTest.length - 1) {
+      if (count < listQuestion.length - 1) {
         setCount((count) => count + 1);
       } else return;
     }, 200);
@@ -82,14 +85,14 @@ export default function Exam() {
 
   // hàm chuyển trang
   const nextPagination = () => {
-    if (count < context.dataTest.length) {
+    if (count < listQuestion.length) {
       setCount((count) => count + 1);
     }
   };
 
   // hàm chuyển trang
   const prevPagination = () => {
-    if (count <= 0 || count > context.dataTest.length) {
+    if (count <= 0 || count > listQuestion.length) {
       return;
     } else {
       setCount((count) => count - 1);
@@ -146,3 +149,8 @@ export default function Exam() {
     </>
   );
 }
+const mapStateToProps = createStructuredSelector({
+  listQuestion: makeSelectQuestion(),
+});
+
+export default connect(mapStateToProps, null)(Exam);

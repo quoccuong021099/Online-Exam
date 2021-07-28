@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { postChart } from "../../redux/actions/charts";
 import { makeSelectChart } from "../../redux/selectors/chart";
+import { makeSelectQuestion } from "../../redux/selectors/question";
 import { mainExam } from "../Main";
 import { examContainerContext } from "../Main/MainLeft/Exam";
 import "../Main/MainLeft/style.scss";
@@ -56,9 +57,9 @@ function CustomizedDialogs({
   yourResult,
   charts,
   triggerPostChart,
+  listQuestion,
 }) {
   const classes = useStyleDialog();
-  console.log("cahsd ", charts);
   // context
   const context = useContext(mainExam);
   const contextExam = useContext(examContainerContext);
@@ -72,14 +73,14 @@ function CustomizedDialogs({
   // hàm trả về đáp án đúng của bộ đề
   useEffect(() => {
     const result = [];
-    context.dataTest.map((item) =>
+    listQuestion.map((item) =>
       item.answers.map((i) => i.result === true && result.push(i))
     );
     setResultFinal(result);
-  }, [context.dataTest]);
+  }, [listQuestion]);
 
   // Tổng điểm
-  const totalPoint = (10 / context.dataTest.length) * yourResult.result_True;
+  const totalPoint = (10 / listQuestion.length) * yourResult.result_True;
 
   // POST dữ liệu charts lên API
   const getRank = async () => {
@@ -165,6 +166,7 @@ function CustomizedDialogs({
 
 const mapStateToProps = createStructuredSelector({
   charts: makeSelectChart(),
+  listQuestion: makeSelectQuestion(),
 });
 const mapDispatchToProps = (dispatch) => {
   return {

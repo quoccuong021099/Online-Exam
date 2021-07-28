@@ -5,7 +5,6 @@ import DialogCustom from "./DialogCustom";
 
 export default function DialogWarningTimeout({ doneExam }) {
   // context
-  // const context = useContext(mainExam);
   const contextExam = useContext(examContainerContext);
 
   return (

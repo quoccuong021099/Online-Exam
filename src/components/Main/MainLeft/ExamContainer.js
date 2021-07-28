@@ -14,6 +14,9 @@ import Checkbox from "@material-ui/core/Checkbox";
 import DialogWarning from "../../Dialog/DialogWarning";
 import DialogWarningTimeout from "../../Dialog/DialogWarningTimeout";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import { createStructuredSelector } from "reselect";
+import { makeSelectQuestion } from "../../../redux/selectors/question";
+import { connect } from "react-redux";
 
 const useStyle = makeStyles({
   Button: {
@@ -32,7 +35,8 @@ const useStyle = makeStyles({
   },
 });
 
-export default function ExamContainer({
+function ExamContainer({
+  listQuestion,
   flagListQuestion,
   handleFlagListQuestion,
   handleChangeChecked,
@@ -52,10 +56,10 @@ export default function ExamContainer({
 
   // context
   let context = useContext(mainExam);
-  
+
   return (
     <form onSubmit={doneExam}>
-      {context.dataTest.map(
+      {listQuestion.map(
         (item, index) =>
           index === count && (
             <Question key={`question${item.id}`} dataItem={item} />
@@ -77,7 +81,7 @@ export default function ExamContainer({
             >
               NỘP BÀI
             </Button>
-            {context.dataTest.map(
+            {listQuestion.map(
               (item, index) =>
                 index === count && (
                   <FormControlLabel
@@ -108,7 +112,7 @@ export default function ExamContainer({
               className={clsx(classesBtn.Button, classes.ButtonNav)}
               size="small"
               onClick={nextPagination}
-              disabled={count < context.dataTest.length - 1 ? false : true}
+              disabled={count < listQuestion.length - 1 ? false : true}
             >
               <ArrowRightIcon />
             </Button>
@@ -123,7 +127,7 @@ export default function ExamContainer({
         </Box>
         {flagListQuestion && (
           <Box className="choose-question__list">
-            {context.dataTest.map((item, index) => (
+            {listQuestion.map((item, index) => (
               <Typography
                 component="span"
                 id={reviews.includes(item.id) ? "active" : ""}
@@ -140,3 +144,8 @@ export default function ExamContainer({
     </form>
   );
 }
+const mapStateToProps = createStructuredSelector({
+  listQuestion: makeSelectQuestion(),
+});
+
+export default connect(mapStateToProps, null)(ExamContainer);
