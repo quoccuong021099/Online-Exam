@@ -1,13 +1,15 @@
-import { useContext, useState } from "react";
-import { contextApp } from "../../../App";
-import { useButton } from "../../../common/Btn";
-import { mainExam } from "../index";
-import RatingItem from "./RatingItem";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
+import { useContext, useState } from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { useButton } from "../../../common/Btn";
+import { makeSelectChart } from "../../../redux/selectors/chart";
+import { mainExam } from "../index";
+import RatingItem from "./RatingItem";
 import "./style.scss";
 
 const useStyle = makeStyles({
@@ -19,13 +21,13 @@ const useStyle = makeStyles({
   },
 });
 
-export default function MainRight() {
+function MainRight({ charts }) {
+  console.log(charts);
   // material
   const classes = useStyle();
   const classesBtn = useButton();
 
   // context
-  const appContext = useContext(contextApp);
   const mainExamContext = useContext(mainExam);
 
   // list state
@@ -41,7 +43,7 @@ export default function MainRight() {
     setNumber(3);
   };
 
-  const descendingSort = appContext.charts
+  const descendingSort = charts
     ?.sort((a, b) => Number(a.time) - Number(b.time))
     .sort((a, b) => b.point - a.point);
 
@@ -97,3 +99,8 @@ export default function MainRight() {
     </Box>
   );
 }
+const mapStateToProps = createStructuredSelector({
+  charts: makeSelectChart(),
+});
+
+export default connect(mapStateToProps, null)(MainRight);

@@ -1,14 +1,16 @@
-import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
+import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { makeSelectChart } from "../../redux/selectors/chart";
 import { mainExam } from "../Main";
 import { examContainerContext } from "../Main/MainLeft/Exam";
-import { useContext, useEffect, useState } from "react";
-import { contextApp } from "../../App";
 import "../Main/MainLeft/style.scss";
-import axios from "axios";
 
 const useStyleDialog = makeStyles(() => ({
   titleRusult: {
@@ -49,13 +51,12 @@ const useStyleDialog = makeStyles(() => ({
   },
 }));
 
-export default function CustomizedDialogs({ onOpenDone, yourResult }) {
+function CustomizedDialogs({ onOpenDone, yourResult, charts }) {
   const classes = useStyleDialog();
 
   // context
   const context = useContext(mainExam);
   const contextExam = useContext(examContainerContext);
-  const appContext = useContext(contextApp);
 
   // state
   const [resultFinal, setResultFinal] = useState([]);
@@ -77,7 +78,7 @@ export default function CustomizedDialogs({ onOpenDone, yourResult }) {
 
   // POST dữ liệu charts lên API
   const getRank = async () => {
-    const sortUpUser = appContext.charts.find((i) => i.id === user.id);
+    const sortUpUser = charts.find((i) => i.id === user.id);
     if (!sortUpUser) {
       let data = {
         id: user.id,
@@ -91,7 +92,6 @@ export default function CustomizedDialogs({ onOpenDone, yourResult }) {
           .post("http://localhost:5000/charts", data)
           .then(function (response) {
             localStorage.setItem("charts", JSON.stringify(response.data));
-            appContext.reset(response.data);
           });
       } catch (error) {
         console.error(error);
@@ -111,7 +111,6 @@ export default function CustomizedDialogs({ onOpenDone, yourResult }) {
             .patch(`http://localhost:5000/charts/${sortUpUser.id}`, sortUpUser)
             .then(function (response) {
               localStorage.setItem("charts", JSON.stringify(response.data));
-              appContext.reset(sortUpUser);
             });
         } catch (error) {
           console.error(error);
@@ -119,7 +118,6 @@ export default function CustomizedDialogs({ onOpenDone, yourResult }) {
       }
     }
   };
-
   return (
     <Dialog open onClose={onOpenDone}>
       <Box>
@@ -191,3 +189,8 @@ export default function CustomizedDialogs({ onOpenDone, yourResult }) {
     </Dialog>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  charts: makeSelectChart(),
+});
+export default connect(mapStateToProps, null)(CustomizedDialogs);

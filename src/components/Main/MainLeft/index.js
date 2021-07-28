@@ -1,16 +1,17 @@
+import Box from "@material-ui/core/Box";
 import React, { useContext } from "react";
-import Exam from "./Exam";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { makeSelectChart } from "../../../redux/selectors/chart";
 import Oclock from "../../Oclock";
-import "./style.scss";
 import Spinner from "../../Spinner";
 import { mainExam } from "../index";
-import Box from "@material-ui/core/Box";
-import { contextApp } from "../../../App";
+import Exam from "./Exam";
+import "./style.scss";
 
-export default function MainLeft() {
+function MainLeft({ charts }) {
   // context
   const mainExamContext = useContext(mainExam);
-  const appContext = useContext(contextApp);
   return (
     <Box className="main__left">
       <Box className="main__left-title">
@@ -34,7 +35,7 @@ export default function MainLeft() {
         <Box className="num-attempt">
           <span>
             <i className="fa fa-user" aria-hidden="true"></i>
-            {appContext.charts?.length} lượt thi
+            {charts?.length} lượt thi
           </span>
         </Box>
       </Box>
@@ -49,3 +50,7 @@ export default function MainLeft() {
     </Box>
   );
 }
+const mapStateToProps = createStructuredSelector({
+  charts: makeSelectChart(),
+});
+export default connect(mapStateToProps, null)(MainLeft);

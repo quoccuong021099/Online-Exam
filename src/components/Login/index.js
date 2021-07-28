@@ -13,10 +13,13 @@ import { Link, useHistory } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import * as yup from "yup";
 import { loginUser } from "../../redux/actions/login";
-import { makeSelectError } from "../../redux/selectors/login";
+import {
+  makeSelectError,
+  makeSelectIsSuccessLogin,
+} from "../../redux/selectors/login";
 import { useStyleLogin } from "./styleLogin";
 
-function Login({ triggeLogin, logs }) {
+function Login({ triggeLogin, logs, isLoginSuccess }) {
   // validation
   const schema = yup.object().shape({
     username: yup
@@ -44,7 +47,7 @@ function Login({ triggeLogin, logs }) {
   // submit form
   const onSubmit = (data) => {
     triggeLogin(data);
-    if (!logs) {
+    if (isLoginSuccess.isLoginSuccess) {
       history.push("/");
     } else {
       setOpen(true);
@@ -52,9 +55,14 @@ function Login({ triggeLogin, logs }) {
   };
   return (
     <Container maxWidth="md">
-      <Snackbar open={open}>
-        <Alert onClose={handleClose} severity="warning">
-          Sai tên đăng nhập hoặc mật khẩu
+      <Snackbar
+        open={open}
+        onClose={handleClose}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert onClose={handleClose} severity="error">
+          {logs.err}
         </Alert>
       </Snackbar>
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
@@ -134,6 +142,7 @@ function Login({ triggeLogin, logs }) {
 
 const mapStateToProps = createStructuredSelector({
   logs: makeSelectError(),
+  isLoginSuccess: makeSelectIsSuccessLogin(),
 });
 
 const mapDispatchToProps = (dispatch) => {

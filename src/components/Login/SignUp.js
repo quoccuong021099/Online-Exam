@@ -1,17 +1,20 @@
-import { useForm } from "react-hook-form";
-import { useHistory } from "react-router";
-import { v4 } from "uuid";
-import { contextApp } from "../../App";
-import { useContext } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { Container, Snackbar } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import { Alert } from "@material-ui/lab";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { connect } from "react-redux";
+import { useHistory } from "react-router";
+import { createStructuredSelector } from "reselect";
+import { v4 } from "uuid";
+import * as yup from "yup";
+import { signupUser } from "../../redux/actions/login";
+import { makeSelectError, makeSelectSignup } from "../../redux/selectors/login";
 import { useStyleLogin } from "./styleLogin";
-import { Container } from "@material-ui/core";
-import axios from "axios";
 
 // validation
 const schema = yup.object().shape({
@@ -36,10 +39,13 @@ const schema = yup.object().shape({
     .max(30, "Mật khẩu phải từ 3-30 ký tự"),
 });
 
-export default function SignUp() {
+function SignUp({ triggerSignup, statusFlags, logs }) {
   const classes = useStyleLogin();
-  // list context
-  const contextOfApp = useContext(contextApp);
+
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   // use history
   const history = useHistory();
@@ -53,26 +59,27 @@ export default function SignUp() {
 
   // submit form
   const onSubmit = async (data) => {
-    if (!contextOfApp.listUsers?.find((i) => i.username === data.username)) {
-      data.id = v4();
-      // Send a POST request
-      axios
-        .post("http://localhost:5000/users", data)
-        .then(function (response) {
-          localStorage.setItem("user-info", JSON.stringify(response.data));
-          contextOfApp.reset(data);
-          history.push("/");
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    data.id = v4();
+    await triggerSignup(data);
+    if (statusFlags.isSignupSuccess) {
+      history.push("/");
     } else {
-      alert("Tên đăng nhập bị trùng");
+      setOpen(true);
     }
   };
 
   return (
     <Container maxWidth="md">
+      <Snackbar
+        open={open}
+        onClose={handleClose}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert onClose={handleClose} severity="error">
+          {logs.err}
+        </Alert>
+      </Snackbar>
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
         <Typography component="h2" className={classes.h2}>
           Đăng Ký
@@ -161,3 +168,15 @@ export default function SignUp() {
     </Container>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  statusFlags: makeSelectSignup(),
+  logs: makeSelectError(),
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    triggerSignup: (userInfor) => dispatch(signupUser(userInfor)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

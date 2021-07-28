@@ -12,9 +12,17 @@ const selectLoginDomain = (state) => {
 const makeSelectLogin = () =>
   createSelector(selectLoginDomain, (substate) => substate.users);
 
+const makeSelectSignup = () =>
+  createSelector(selectLoginDomain, (substate) => substate.users);
+
 const makeSelectIsSuccessLogin = () =>
   createSelector(selectLoginDomain, (substate) => substate.statusFlags);
 const makeSelectError = () =>
   createSelector(selectLoginDomain, (substate) => substate.logs);
 
-export { makeSelectLogin, makeSelectIsSuccessLogin, makeSelectError };
+export {
+  makeSelectLogin,
+  makeSelectIsSuccessLogin,
+  makeSelectError,
+  makeSelectSignup,
+};

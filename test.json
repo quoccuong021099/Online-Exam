@@ -320,144 +320,18 @@
       "password": "123"
     },
     {
-      "firstname": "Huỳnh",
-      "lastname": "Tảo",
-      "username": "tao123@gmail.com",
+      "firstname": "thai",
+      "lastname": "thai",
+      "username": "thai@gmail.com",
       "password": "123",
-      "id": "809c18ee-a31a-45fc-ad48-1bc3710f771e"
-    },
-    {
-      "firstname": "Hồ Xuân",
-      "lastname": "Anh",
-      "username": "anh123@gmail.com",
-      "password": "123",
-      "id": "019fcec9-4f9a-4813-8d81-3113cf421e61"
-    },
-    {
-      "firstname": "Nguyễn",
-      "lastname": "Anh Bảo",
-      "username": "bao123@gmail.com",
-      "password": "123",
-      "id": "1450054a-4d08-4a76-a80a-3dfd9cbe5786"
-    },
-    {
-      "firstname": "Lê Công",
-      "lastname": "Hòa",
-      "username": "hoa123@gmail.com",
-      "password": "123",
-      "id": "63d59ef5-264b-4c6e-b297-d21b673262c3"
-    },
-    {
-      "firstname": "321321",
-      "lastname": "3213213",
-      "username": "bao123312321312321321321@gmail.com",
-      "password": "123213213123",
-      "id": "833d4962-dfef-48f8-8bf4-84c2f91a9330"
-    },
-    {
-      "firstname": "hòa ",
-      "lastname": "lê công",
-      "username": "lehoa@gmail.com",
-      "password": "123",
-      "id": "f0ab3862-0195-41a0-8c97-3731b98dc9a3"
-    },
-    {
-      "firstname": "21312",
-      "username": "le@gmail.com",
-      "password": "123",
-      "lastname": "Hòa lê",
-      "id": "14e18daf-0563-452c-ada6-dfa329f8379c"
-    },
-    {
-      "firstname": "dâsdasdasd",
-      "lastname": "dâsdasđá",
-      "username": "ahihi@gmail.com",
-      "password": "123",
-      "id": "13e06465-141c-4d71-ba27-802e1628937a"
-    },
-    {
-      "firstname": "321",
-      "lastname": "21312",
-      "username": "321321321@gmai.com",
-      "password": "123",
-      "id": "460cbd6c-eb60-47cf-bbbd-82f37b776391"
+      "id": "302c3df4-85f4-44cd-a7ff-eb1c929fe862"
     },
     {
       "firstname": "123",
       "lastname": "123",
-      "username": "123@gmail.com",
+      "username": "bao123@gmail.com",
       "password": "123",
-      "id": "c6d6d120-d019-48ae-83f4-966f16bfaf47"
-    },
-    {
-      "firstname": "dsadasd",
-      "lastname": "ádasdasdasd",
-      "username": "bao1231@gmail.com",
-      "password": "12321312123",
-      "id": "685b9a7b-2122-4735-bf21-f538ad7657cf"
-    },
-    {
-      "firstname": "3213",
-      "lastname": "213213",
-      "username": "213213@mail.com",
-      "password": "12323123",
-      "id": "36633d07-cbdb-45cd-8bca-f9583015525a"
-    },
-    {
-      "firstname": "zdasda",
-      "lastname": "đâsdas",
-      "username": "dsadasd@gmail.com",
-      "password": "123",
-      "id": "56863039-02d6-4883-85d3-28d88e95ce5c"
-    },
-    {
-      "firstname": "aaa",
-      "lastname": "aaa",
-      "username": "aaa@gmail.com",
-      "password": "123",
-      "id": "381fabd2-788e-4333-8fc0-2577f73884a3"
-    },
-    {
-      "firstname": "bbb",
-      "lastname": "bbb",
-      "username": "bbb@gmail.com",
-      "password": "123",
-      "id": "40c5978e-2c70-4d1f-8c67-bbbf89aad328"
-    },
-    {
-      "firstname": "111",
-      "lastname": "111",
-      "username": "111@gmail.com",
-      "password": "123",
-      "id": "974ab2c0-b5ac-4ba6-81ff-283cd625ebde"
-    },
-    {
-      "firstname": "222",
-      "lastname": "222",
-      "username": "222@gmail.com",
-      "password": "123",
-      "id": "2b9f3eea-4f16-4a84-a05d-d21895d3e3db"
-    },
-    {
-      "firstname": "3333",
-      "lastname": "3333",
-      "username": "333@gmail.com",
-      "password": "123",
-      "id": "3852e28a-c9cf-4015-bc23-99a47abce3c0"
-    },
-    {
-      "firstname": "444",
-      "lastname": "444",
-      "username": "444@gmail.com",
-      "password": "123",
-      "id": "95c979b6-6b57-48a6-97d0-be28bc4ee33a"
-    },
-    {
-      "firstname": "555",
-      "lastname": "555",
-      "username": "555@gmail.com",
-      "password": "123",
-      "id": "1c6da1e8-ae72-478f-8a9c-725cd3798fbf"
+      "id": "7e9b0f5f-c6b2-4cbd-9bab-edd820dd8ccf"
     }
   ],
   "charts": [
@@ -467,20 +341,6 @@
       "lastname": "Quốc Cường",
       "point": "10:00",
       "time": "1"
-    },
-    {
-      "id": "1c6da1e8-ae72-478f-8a9c-725cd3798fbf",
-      "lastname": "555",
-      "firstname": "555",
-      "point": "1.00",
-      "time": "5"
-    },
-    {
-      "id": "1450054a-4d08-4a76-a80a-3dfd9cbe5786",
-      "lastname": "Anh Bảo",
-      "firstname": "Nguyễn",
-      "point": "1.00",
-      "time": "2"
     }
   ]
 }
