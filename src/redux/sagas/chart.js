@@ -14,15 +14,18 @@ import { CHART, POST_CHART, UPDATE_CHART } from "../constants/charts";
 function fetchChart() {
   return axios({
     method: "GET",
-    url: "http://localhost:5000/charts",
+    url: "https://611885519bcfb4001716882c.mockapi.io/charts",
   });
 }
 
 function postChart(chartInfo) {
-  axios.post("http://localhost:5000/charts", chartInfo);
+  axios.post("https://611885519bcfb4001716882c.mockapi.io/charts", chartInfo);
 }
 function updateChart(chartInfo) {
-  axios.patch(`http://localhost:5000/charts/${chartInfo.id}`, chartInfo);
+  axios.patch(
+    `https://611885519bcfb4001716882c.mockapi.io/charts/${chartInfo.id}`,
+    chartInfo
+  );
 }
 
 function* chartPostSagaFunc(chartInfo) {

@@ -8,7 +8,7 @@ import { GET_QUESTION } from "../constants/question";
 function fetchQuestion() {
   return axios({
     method: "GET",
-    url: "http://localhost:5000/question",
+    url: "https://611885519bcfb4001716882c.mockapi.io/question",
   });
 }
 

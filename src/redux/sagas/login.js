@@ -13,11 +13,11 @@ import {
 function fetchUser() {
   return axios({
     method: "GET",
-    url: "http://localhost:5000/users",
+    url: "https://611885519bcfb4001716882c.mockapi.io/users",
   });
 }
 function postUser(userInfor) {
-  axios.post("http://localhost:5000/users", userInfor);
+  axios.post("https://611885519bcfb4001716882c.mockapi.io/users", userInfor);
 }
 
 function* loginSagaFunc(userInfo) {
